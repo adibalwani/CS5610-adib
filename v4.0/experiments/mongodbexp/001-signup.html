@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SignUp Modal</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>SignUp Modal</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/mongodb/001-signup.html" target="_blank">SignUp Modal</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            <b>Username: adib Password: adib123</b>
+            This experiment demonstrates the use of ui-bootstrap an Angular JS module for modal which 
+            is like a pop up used for signup form. Whenever a button click event is generated modal is open 
+            and used to display a form of signup. Also, various checking are added in the experiment for 
+            form validation. This doesn't send a request to the server to save. Next, experiment shows that.
+        </p>
+
+        <span id="text">
+            <pre>
+    $scope.signUp = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'partials-001/signup.html',
+            controller: 'SignupController'
+        });
+    }
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/001-signup.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/comment.html"
+           target="_blank">View Comment Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/signup.html"
+           target="_blank">View SignUp Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/js/001-signup.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+
+</body>
+</html>

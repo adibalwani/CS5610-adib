@@ -1,0 +1,5 @@
+﻿000-clientApp.html			CRUD Operation
+001-profile.html			Callback for Service
+002-save.html				Save JSON to server
+003-comment.html			Local Comment Box
+004-commentsave.html		Comment Box sync with server

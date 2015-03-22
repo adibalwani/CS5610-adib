@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Digital Clock with Alarm</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/002-time.css" />
+    <script src="jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="js/002-time.js"></script>
+</head>
+<body>
+    <h1>Digital Clock with Alarm</h1>
+    <hr />
+
+    <h3>Please increase your volume level if you want to hear the alarm ring</h3>
+    Current Time: <span id="time"></span>
+    <div>
+        <label for="hour">Hour: </label>
+        <select id="hour" name="hour"></select>
+
+        <label for="minute">Minute: </label>
+        <select id="minute" name="minute"></select>
+
+        <label for="second">Second: </label>
+        <select id="second" name="second"></select>
+    </div>
+    <div>
+        <button class="btn btn-primary" id="submit" onclick="setAlarm()">Set Alarm</button>
+        <button class="btn btn-primary" id="stop" onclick="stopAlarm()">Stop Alarm</button>
+    </div>
+    <audio class="alarm" preload="none">
+        <source src="alarm.mp3" type="audio/mp3" />
+    </audio>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates use of JavaScript/jQuery for displaying the current time.
+            Also I have implemented Alarm system that plays music when the alarm goes off.
+            The options for the selecting time are added using JS. setInterval function doesn't work
+            properly when it is called multiple times. This took me a whole day to debug. 
+            My advice never use it. Instead use its alternative setTimeout. getTime() function in my
+            script file is used to get the current time. appendZero() is used to append zero to any
+            time ranging between 0 to 9 so as to have consistent two digit number.
+        </p>
+
+        <span id="text">
+            <pre>
+function setAlarm() {
+    var hour = $(&quot;#hour&quot;).val();
+    var minute = $(&quot;#minute&quot;).val();
+    var second = $(&quot;#second&quot;).val();
+    var time = (hour * 3600) + (minute * 60) + second; //second
+    time = time * 1000; //millisecond
+    
+    $(&quot;.alarm&quot;).trigger(&apos;load&apos;);
+    clearTimeout(timer_id);
+    timer_id = setTimeout(&quot;soundAlarm()&quot;, time);
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/002-time.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/css/002-time.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/js/002-time.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.javatpoint.com" target="_blank">JavaTpoint</a>
+    </div>
+</body>
+</html>

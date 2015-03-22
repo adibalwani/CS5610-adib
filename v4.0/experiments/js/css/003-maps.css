@@ -1,0 +1,24 @@
+﻿#map-canvas {
+    height: 500px;
+    width: 100%;
+}
+
+body {
+    background-color: azure;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+#text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#doc {
+    text-align: center;
+    font-size: large;
+}
+

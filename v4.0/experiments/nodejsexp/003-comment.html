@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Local Comment Box</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>Local Comment Box</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/nodejs/003-comment.html" target="_blank">Local Comment Box</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p><b>Username: adib Password: adib</b></p>
+        <p><b>Username: root Password: root</b></p>
+        <p><b>Username: admin Password: admin</b></p>
+        <p>
+            This experiment adds comment feature to the existing one. It is a non-persistent one 
+            meaning once the page is refreshed the data is vanished. For storage I define an array of 
+            JSON 'comments' and any new comments are pushed on this array along with username to be displayed 
+            on the table.
+        </p>
+
+        <span id="text">
+            <pre>
+app.controller(&quot;CommentController&quot;, function ($scope, LoginService, $routeParams) {
+    var username = $routeParams.username;
+    var comments = [];
+    $scope.add = function (text) {
+        var obj = { username: username, text: text };
+        comments.push(obj);
+        $scope.comments = comments;
+        $scope.text = null;
+    };
+});
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/003-comment.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/comment.html"
+           target="_blank">View Comment Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/js/003-comment.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Angular JS</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="angular.min.js"></script>
+    <script src="js/001-angular.js"></script>
+</head>
+<body ng-app="myapp">
+    <h1>AngularJS Basics</h1>
+    <h3>Binding in Angular JS</h3>
+    <div ng-controller="cntl">
+        <label for="text">Type text</label>
+        <input ng-model="hello" id="text" />
+        {{hello}}
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            Angular JS features two way binding between HTML and JS. It follows MVC pattern in which 
+            change to model is reflected immediately on the view and vice-versa. This experiment demonstrates 
+            this feature in which hello is changed by controller in JS file. Whenever an input is entered 
+            view changes as they are binded.
+        </p>
+
+        <span id="text">
+            <pre>
+var app = angular.module(&quot;myapp&quot;, []);
+
+app.controller(&quot;cntl&quot;, function ($scope) {
+    $scope.hello = &quot;Hi from Angular JS&quot;;
+});
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/001-angular.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/js/001-angular.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Wednesday's Lecture
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Save JSON to server</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>Save JSON to server</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/nodejs/002-save.html" target="_blank">Save JSON to server</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p><b>Username: adib Password: adib</b></p>
+        <p><b>Username: root Password: root</b></p>
+        <p><b>Username: admin Password: admin</b></p>
+        <p>
+            This experiments saves the data edited by user in the server and assuming server never 
+            crashes, the data remains persistent. Also, I have set the limit of bodyParser size to 
+            50MB so that it can accomodate the size of images on the server. From the client a post 
+            request is sent to the server whihc responds with the updated CurrentUser profile
+        </p>
+
+        <span id="text">
+            <pre>
+    var updateCurrentUser = function (password, email, firstName, lastName) {
+        currentUser.password = password;
+        currentUser.email = email;
+        currentUser.firstName = firstName;
+        currentUser.lastName = lastName;
+        $http.post(&quot;/002-update&quot;, currentUser)
+        .success(function (response) {
+            currentUser = response;
+        });
+    }
+
+    app.use(express.bodyParser({ limit: &apos;50mb&apos; })); //save images
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/002-save.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-001/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-001/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-001/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/js/002-save.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+
+</body>
+</html>

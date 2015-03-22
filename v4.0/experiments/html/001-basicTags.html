@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Basic Tags1</title>
+    <link rel="stylesheet" href="css/001-style.css" />
+</head>
+<body id="top">
+    <h1>HTML Basic Tags1</h1>
+    <hr />
+
+    <!-- HTML Heading section -->
+    <h3>1. HTML Heading</h3>
+    <p>The following are the six posssible tags starting from &lt;h1&gt; to &lt;h6&gt;</p>
+    <h1 id="defh1">Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3 id="defh3">Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+
+    <!-- HTML Text Formatting Section -->
+    <h3>2. HTML Text Formatting</h3>
+    <p>&lt;p&gt; This is a paragraph. Any empty line is added before and after a paragraph.
+    Any number of spaces and new lines, count as one space.</p>
+    <p>&lt;br&gt; If you want a line break without starting a new paragraph. Example:<br />
+    I am in the same paragraph</p>
+    <p>I am in new paragraph</p>
+    <p>&lt;pre&gt; Defines a block of pre-formatted text. It keeps spacings and line-breaks intact.
+    Example:</p>
+    <pre>This space                 is maintained
+                along with line-break</pre>
+    <p>&lt;b&gt; <b>This is a bold text</b></p>
+    <p>&lt;strong&gt; <strong>This is a strong text with semantic importance</strong></p>
+    <p>&lt;i&gt; <i>This is an italic text</i></p>
+    <p>&lt;em&gt; <em>This is an emphasised text with semantic importance</em></p>
+    <p>&lt;mark&gt; <mark>This is a marked text</mark></p>
+    <p>&lt;abbr&gt; Abbrevate: <abbr title="Northeastern University">NEU</abbr></p>
+    <p>&lt;address&gt; Address: <div><address>Example.com</address></div>
+        <div><address>Box 564, Disneyland</address></div>
+        <div><address>USA</address></div></p>
+    <p>&lt;code&gt; Coding Example:</p>
+    <code>
+        <pre>
+#include &lt;stdio.h&gt; //Don't why I need to format &lt; &gt; even in code tag. HTML!!!!!!!!!
+
+void main() {
+
+    printf("Hello World");
+
+}
+        </pre>
+    </code>
+
+    <!-- HTML Style Section -->
+    <h3>3. HTML Styles</h3>
+    <p>Style is an attribute. It has the form style="property:value". Use semicolon (;) to seperate
+    multiple style</p>
+
+    <!-- HTML Hyperlink Section -->
+    <h3>4. HTML Styles</h3>
+    <p>
+        Use &lt;a&gt; tag along with href attribute to specify link to a page/id
+    </p>
+    <div>
+        <a href="http://www.google.com" target="_blank">Click to Google</a>
+    </div>
+    <div>
+        <a href="http://www.google.com" target="_blank">
+            <img src="../html/google.jpg" alt="Google" />
+        </a>
+    </div>
+    <div>
+        <a href="#top">[TOP]</a>
+    </div>
+
+    <!-- HTML Table Section -->
+    <h3>5. HTML Tables</h3>
+    <p>&lt;table&gt; is used to define a table</p>
+    <p>&lt;tr&gt; is used to define a table row</p>
+    <p>&lt;td&gt; is used to define a table row data</p>
+    <p>&lt;th&gt; is used to define a table heading</p>
+
+    <table border="1">
+        <caption>Student Data1</caption>
+        <tr>
+            <th>Name</th>
+            <th colspan="2">Telephone</th>
+        </tr>
+        <tr>
+            <td>Adib Alwani</td>
+            <td>111 222 333</td>
+            <td>333 222 111</td>
+        </tr>
+    </table>
+
+    <table border="1">
+        <caption>Student Data2</caption>
+        <tr>
+            <th>Name</th>
+            <td>Adib Alwani</td>
+        </tr>
+        <tr>
+            <th rowspan="2">Telephone</th>
+            <td>111 222 333</td>
+        </tr>
+        <tr>
+            <td>333 222 111</td>
+        </tr>
+    </table>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/html/001-basicTags.html"
+           target="_blank"> View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/html/css/001-style.css"
+           target="_blank"> View CSS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.w3schools.com/htmL/" target="_blank">W3Schools</a>
+    </div>
+
+</body>
+</html>

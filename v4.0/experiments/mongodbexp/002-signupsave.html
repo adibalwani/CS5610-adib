@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SignUp</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>SignUp</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/mongodb/002-signupsave.html" target="_blank">SignUp</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment follows previous experiment and saves data on the mongodb server to enable login for 
+            the registered user. Once, the form is filled an HTTP Post request is sent to the server which 
+            validates username clash and if it was able to accept the request; it responds with true else it 
+            responds with false.
+        </p>
+
+        <span id="text">
+            <pre>
+    var signUp = function (username, password, email, firstName, lastName, photo, callback) {
+        var user = {
+            username: username,
+            password: password,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            photo: photo
+        };
+        $http.post(&quot;/mongodb/002-signup&quot;, user)
+        .success(function (response) {
+            if (response.response == &apos;false&apos;)
+                callback(false);
+            else
+                callback(true);
+        });
+    }
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/002-signupsave.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/comment.html"
+           target="_blank">View Comment Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/signup.html"
+           target="_blank">View SignUp Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/js/002-signupsave.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+
+</body>
+</html>

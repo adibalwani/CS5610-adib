@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Local Storage</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/003-localstorage.css" />
+    <script src="jquery-1.11.2.js"></script>
+    <script src="jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+    <script src="js/003-localstorage.js"></script>
+</head>
+<body>
+    <h1>Local Storage</h1>
+    <hr />
+
+    <p id="existing"></p>
+    <input type="text" id="input" />
+    <button onclick="load()">Load</button>
+    <button onclick="save()">Save</button>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates use of local storage on browser to save and load data.
+            localStorage's setItem() function is used to store a value and it takes input a key value pair.
+            getItem() is used to get a value by providing the key.
+        </p>
+
+        <span id="text">
+            <pre>
+function save() {
+    var val = $(&quot;#input&quot;).val();
+    localStorage.setItem(&quot;data&quot;, val);
+}
+function load() {
+    $(&quot;#existing&quot;).text(localStorage.getItem(&quot;data&quot;));
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/003-localstorage.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/css/003-localstorage.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/js/003-localstorage.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.w3schools.com" target="_blank">W3Schools</a>
+    </div>
+</body>
+</html>

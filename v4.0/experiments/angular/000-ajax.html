@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AJAX</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="jquery-1.11.2.js"></script>
+    <script src="js/000-ajax.js"></script>
+</head>
+<body>
+    <h1>AJAX with JSONP</h1>
+    <h3>Please wait some time if you have slow internet</h3>
+    <div>
+        <label for="movie">Enter movie name</label>
+        <input id="movie" />
+    </div>
+    <button id="getMovie">Get Top 10</button>
+
+    <ul id="movie_list"></ul>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            An asynchronous request doesn’t block the client i.e. browser is responsive.
+            At that time, user can perform another operations also.
+            In such case, javascript engine of the browser is not blocked.
+            This experiment demonstrates use of AJAX to get JSONP data from IMDB and display it on
+            user screen.
+        </p>
+
+        <span id="text">
+            <pre>
+$.ajax({
+    url: &quot;http://www.myapifilms.com/imdb?title=&quot; + $(&quot;#movie&quot;).val() +
+        &quot;&amp;format=JSONP&amp;aka=0&amp;business=0&amp;seasons=0&amp;seasonYear=0&amp;technical=0&amp;
+        filter=N&amp;exactFilter=0&amp;limit=10&amp;lang=en-us&amp;actors=N&amp;biography=0&amp;trailer=0&amp;
+        uniqueName=0&amp;filmography=0&amp;bornDied=0&amp;starSign=0&amp;actorActress=0&amp;actorTrivia=0&amp;
+        movieTrivia=0&amp;awards=0&amp;moviePhotos=N&amp;movieVideos=N&quot;,
+    dataType: &quot;jsonp&quot;,
+    success: renderMovies
+});
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/000-ajax.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/js/000-ajax.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Wednesday's Lecture
+    </div>
+    <div id="doc">
+        <a href="http://www.myapifilms.com/" target="_blank">MyAPIFilms</a>
+    </div>
+
+</body>
+</html>

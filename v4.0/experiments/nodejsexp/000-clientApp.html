@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CRUD Operation</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>CRUD Operation</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/nodejs/000-clientApp.html" target="_blank">CRUD Operation</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiments demonstrates use of Node JS to serve request of clients. There can different 
+            types of request based on CRUD operations. For Create we use post, for read we use get, for 
+            update we use put and for delete we use delete. These standards are followed in RestAPI. Also, 
+            depending upon the hierarachy, we can request JSON object starting with root followed by index 
+            number if we want specific object. 
+        </p>
+
+        <span id="text">
+            <pre>
+    $http.get(&quot;/login&quot;)
+    .success(function (response) {
+        $scope.login = response;
+    });
+
+    $scope.update = function (login) {
+        $http.put(&quot;/login/&quot; + $scope.index, login)
+        .success(function (response) {
+            $scope.login = response;
+        });
+    };
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/000-clientApp.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/js/000-clientApp.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Wednesday's Lecture
+    </div>
+
+</body>
+</html>

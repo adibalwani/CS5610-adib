@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/000-basicng.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/angular-route.min.js"></script>
+    <script src="js/003-profile.js"></script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="NavController">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#home">Project name</a>
+                </div>
+
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li ng-show="currentUser"><a href="#profile/{{currentUser.username}}">Profile</a></li>
+                    </ul>
+
+                    <form ng-show="!currentUser" class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="text" ng-model="username" placeholder="Username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" ng-model="password" placeholder="Password" class="form-control">
+                        </div>
+                        <button type="submit" class="{{color}}" ng-click="login()">Sign in</button>
+                    </form>
+
+                    <form ng-show="currentUser" class="navbar-form navbar-right">
+                        <button type="submit" ng-click="logout()" class="btn btn-success">Sign out</button>
+                    </form>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div ng-view></div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p><b>Username: adib Password: adib</b></p>
+        <p><b>Username: root Password: root</b></p>
+        <p><b>Username: admin Password: admin</b></p>
+        <p>
+            This experiment adds the ability to edit profile. The only detail that cannot be edited is 
+            username. User data is fetched from JSON object and inserted into the form-fields. An edit 
+            in the form field will change data in JSON object once clicked on the save button. Cancel 
+            button resets all the changes. updateCurrentUser is the function in LoginService that is 
+            used to update JSON data.
+        </p>
+
+        <span id="text">
+            <pre>
+    $scope.saveChanges = function () {
+        var password = $scope.password_edit;
+        var repassword = $scope.repassword_edit;
+        var email = $scope.email_edit;
+        var firstName = $scope.firstname_edit;
+        var lastName = $scope.lastname_edit;
+        if (password != repassword) {
+            $scope.match = true;
+            $scope.save = false;
+        } else {
+            $scope.match = false;
+            $scope.save = true;
+            LoginService.updateCurrentUser(password, email, firstName, lastName);
+        }
+    }
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/003-profile.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/partials-003/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/partials-003/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/partials-003/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/js/003-profile.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Friday's Lecture
+    </div>
+
+</body>
+</html>

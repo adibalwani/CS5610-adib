@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JSON data from WebServer</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/000-jsonbasics.css" />
+    <script src="jquery-1.11.2.js"></script>
+    <script src="js/000-jsonbasics.js"></script>
+</head>
+<body>
+    <h1>JSON data from WebServer</h1>
+    <hr />
+
+    <table id="link" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demostrates basic JSON use to read data from webserver, and display
+            the data in a webpage. JSON is a syntax for storing and exchanging data. It is easier
+            and better to use than XML. Here, JSON.parse() is used to get JS object from JSON text.
+            JSON data is stored in a text file and it is an array of objects having property: print
+            and url. Bootstrap is used for table formatting.
+        </p>
+
+        <span id="text">
+            <pre>
+$(function () {
+    var xmlhttp = new XMLHttpRequest();
+    var url = &quot;000-jsonbasics.txt&quot;;
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {
+            var arr = JSON.parse(xmlhttp.responseText);
+            display(arr);
+        }
+    }
+    xmlhttp.open(&quot;GET&quot;, url, true);
+    xmlhttp.send();
+})            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/000-jsonbasics.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/css/000-jsonbasics.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/js/000-jsonbasics.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/000-jsonbasics.txt"
+           target="_blank">View JSON text</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.w3schools.com" target="_blank">W3Schools</a>
+    </div>
+</body>
+</html>

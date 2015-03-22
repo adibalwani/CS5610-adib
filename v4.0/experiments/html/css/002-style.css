@@ -1,0 +1,30 @@
+﻿body {
+    background-color: azure;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+h3 {
+    color: blue;
+}
+
+span {
+    color: red;
+}
+
+iframe {
+    background-color: brown;
+    width: 200px;
+}
+
+#doc {
+    text-align: center;
+    font-size: large;
+}

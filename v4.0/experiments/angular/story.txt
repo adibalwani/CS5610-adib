@@ -1,0 +1,5 @@
+﻿000-ajax.html				AJAX to fetch IMDB data
+001-angular.html			Basic Angular JS
+002-imdb.html				Angular JS to fetch IMDB data
+003-table.html				Angular JS to fetch/modify IMDB data
+004-favorite.html			Angular JS to fetch/modify IMDB data and to save favorite

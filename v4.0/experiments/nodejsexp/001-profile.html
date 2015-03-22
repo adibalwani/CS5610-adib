@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Callback for Service</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>Callback for Service</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/nodejs/001-profile.html" target="_blank">Callback for Service</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p><b>Username: adib Password: adib</b></p>
+        <p><b>Username: root Password: root</b></p>
+        <p><b>Username: admin Password: admin</b></p>
+        <p>
+            <b>Note: Only Login feature is enabled in this experiment.</b>
+            This experiments demonstrates use of service in Node JS for common data sharing between 
+            different controllers. Since, after an HTTP request it immediately returns without waiting for 
+            the success status, I registered a callback function that is called whenever we get success from 
+            server. Thus, login feature is achieved using this.
+        </p>
+
+        <span id="text">
+            <pre>
+    $scope.login = function () {
+        LoginService.login($scope.user, callback);
+    }
+
+    function callback() {
+        $scope.currentUser = LoginService.getCurrentUser();
+        if ($scope.currentUser)
+            $scope.color = &quot;btn btn-success&quot;;
+        else
+            $scope.color = &quot;btn btn-danger&quot;;
+    }
+
+    var login = function (user, callback) {
+        $http.post(&quot;/001-login&quot;, user)
+        .success(function (response) {
+            currentUser = response;
+            callback();
+        });
+    }
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/001-profile.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-001/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-001/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-001/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/js/001-profile.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://stackoverflow.com" />StackOverflow</a>
+    </div>
+
+</body>
+</html>

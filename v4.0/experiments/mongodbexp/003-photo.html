@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Load photo on profile</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>Load photo on profile</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/mongodb/003-photo.html" target="_blank">Load photo on profile</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment is supposed to display an image immediately upon completion of upload on the 
+            signup modal page but it somehow cannot activate the change event on the file upload. This issue 
+            has been raised in piazza and once I find an answer to this problem, I'll update my experiment.
+        </p>
+
+        <span id="text">
+            <pre>
+app.controller(&quot;SignupController&quot;, function ($scope, $modalInstance, LoginService, $http) {
+    $scope.loc = &quot;//placehold.it/100&quot;;
+    $scope.fail = false;
+    var photo = &quot;&quot;;
+...
+LoginService.signUp(username, password, email, firstName, lastName, photo, callback);
+...
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/003-photo.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/comment.html"
+           target="_blank">View Comment Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-001/signup.html"
+           target="_blank">View SignUp Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/js/003-photo.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+
+</body>
+</html>

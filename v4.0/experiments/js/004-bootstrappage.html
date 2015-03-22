@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Change Background</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/004-bootstrappage.css" />
+    <script src="js/004-bootstrappage.js"></script>
+</head>
+<body>
+    <h1>Change Background</h1>
+    <hr />
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol id="mi" class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div id="list" class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="back1.jpg" />
+            </div>
+
+            <div class="item">
+                <img src="back2.jpg" />
+            </div>
+
+            <div class="item">
+                <img src="back3.jpg" />
+            </div>
+
+            <div class="item">
+                <img src="back4.jpg" />
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div id="but">
+        <button class="btn-primary" onclick="changeBackground()">Make this background</button>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiments demonstrates the use of carousel in Bootstrap framework. Carousel is used
+            for displaying various images to choose for the background. Once the user decides
+            which image to choose he clicks button to set that as the background image for that user.
+            User can rechange the background as many times the user wants. For retriving the current
+            image as active I use div.active and then I get the image source via few more functions.
+        </p>
+
+        <span id="text">
+            <pre>
+function changeBackground() {
+    var image = $(&apos;div.active&apos;).html();
+    image = $(image).attr(&quot;src&quot;);
+    $(&quot;body&quot;).attr(&quot;style&quot;, &quot;background-image:url(&quot; + image + &quot;)&quot;); //change background
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/004-bootstrappage.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/css/004-bootstrappage.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/js/004-bootstrappage.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.getbootstrap.com" target="_blank">Bootstrap</a>
+    </div>
+</body>
+</html>

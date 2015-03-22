@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>UI Effect</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/004-ui.css" />
+    <script src="jquery-1.11.2.js"></script>
+    <script src="jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+    <script src="js/004-ui.js"></script>
+</head>
+<body>
+    <h1>UI Effect</h1>
+    <hr />
+
+    <div>
+        <div id="effect">
+            <h3>Effect</h3>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+    </div>
+    <select id="type">
+        <option value="blind">Blind</option>
+        <option value="bounce">Bounce</option>
+        <option value="clip">Clip</option>
+        <option value="drop">Drop</option>
+        <option value="explode">Explode</option>
+        <option value="fade">Fade</option>
+        <option value="fold">Fold</option>
+        <option value="highlight">Highlight</option>
+        <option value="puff">Puff</option>
+        <option value="pulsate">Pulsate</option>
+        <option value="shake">Shake</option>
+        <option value="slide">Slide</option>
+    </select>
+    <button id="button">Run Effect</button>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates use of effect in jQuery UI. effect() function takes four 
+            arguments: <br />
+            1. effect: A string indicating which effect to use for the transition. <br />
+            2. options: Effect-specific settings and easing. <br />
+            3. duration: A string or number determining how long the animation will run. <br />
+            4. complete: A function to call once the animation is complete. <br />
+            Here we have provided a callback function to be called when effect is completed.
+        </p>
+
+        <span id="text">
+            <pre>
+function callback_fn() {
+    setTimeout(function () {
+    $(&quot;#effect&quot;).removeAttr(&quot;style&quot;).hide().fadeIn();
+    }, 500);
+};
+    
+$(&quot;#button&quot;).click(function () {
+    var effect = $(&quot;#type&quot;).val();
+    var options = {};
+    $(&quot;#effect&quot;).effect(effect, options, 500, callback_fn);
+});
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/004-ui.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/css/004-ui.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/js/004-ui.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://jqueryui.com/" target="_blank">jQuery UI</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/001-formvalidate.css" />
+    <script src="../bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+    <script src="jquery-1.11.2.js"></script>
+    <script src="js/001-formvalidate.js"></script>
+</head>
+<body>
+    <h1>Form Validation</h1>
+    <hr />
+
+    <form class="form-horizontal" action="#">
+        <div class="form-group">
+            <label for="username" class="col-sm-1 control-label">Username</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="username" placeholder="Enter Username">
+            </div>
+            <span id="username_msg"></span>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-1 control-label">Password</label>
+            <div class="col-sm-2">
+                <input type="password" class="form-control" id="password" placeholder="Enter Password">
+            </div>
+            <span id="password_msg"></span>
+        </div>
+        <div class="form-group">
+            <label for="dob" class="col-sm-1 control-label">DOB</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control" id="dob">
+            </div>
+            <span id="dob_msg"></span>
+        </div>
+    </form>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates use of JavaScript/jQuery for validation of form on client
+            side itself, thereby increasing efficiency. Whenever a key event occurs for any input
+            field its corresponding validation method is called. Date picker responds to mouse picker too
+            For username, the length of input is checked to be greater than five. For password, along with
+            the condition of having length greater than five, a digit is required too. Regural expression
+            comes handy in forming such conditions. Current date is compared with the input date for DOB and
+            if such date doesnot exist error is thrown. Bootstrap is used for styling the form.
+        </p>
+
+        <span id="text">
+            <pre>
+function validateUsername() {
+    var username = $(&quot;#username&quot;).val();
+    if (username == null || username == &quot;&quot; || username.length &lt; 6) {
+        $(&quot;#username_msg&quot;).html(&quot;&lt;img src=&apos;incorrect.png&apos; width=&apos;20&apos; height=&apos;20&apos;/&gt;&quot; +
+          &quot; Username must be at least 6 char long&quot;);
+        return false;
+    } else {
+        $(&quot;#username_msg&quot;).html(&quot;&lt;img src=&apos;correct.png&apos; width=&apos;20&apos; height=&apos;20&apos;/&gt;&quot;);
+        return true;
+    }
+}
+
+function validatePassword() {
+    var password = $(&quot;#password&quot;).val();
+    if (password == null || password == &quot;&quot; || password.length &lt; 6 ||
+        !password.match(/[a-zA-Z]/) || !password.match(/[0-9]/)) { ...
+
+function validateDOB() {
+    var dob = $(&quot;#dob&quot;).val();
+    
+    var date = dob.substring(8, 11);
+    date = parseInt(date);
+    var month = dob.substring(5, 7);
+    month = parseInt(month);
+    var year = dob.substring(0, 4);
+    year = parseInt(year);
+    var given_date = new Date(year, month - 1, date, 0, 0, 0, 0);
+    if (given_date &gt; new Date() || dob == null || dob == &quot;&quot;) { ...
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/001-formvalidate.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/css/001-formvalidate.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/js/js/001-formvalidate.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.javatpoint.com" target="_blank">JavaTpoint</a>
+    </div>
+</body>
+</html>

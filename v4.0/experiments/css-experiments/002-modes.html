@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Modes</title>
+    <link rel="stylesheet" href="css/002-style.css" />
+</head>
+<body>
+    <h1>Display device specific Image</h1>
+    <hr />
+    <h3>Adjust the browser width to see changes in the image</h3>
+    <img id="desktop" src="images/desktop.jpg" />
+    <img id="tablet" src="images/tablet.jpg" />
+    <img id="mobile" src="images/mobile.jpg" />
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates ability to reshape/adjust according to dimension
+            of display. Here, I have considered three devices mainly desktop, tablet and mobile.
+            This is achieved using CSS's @media attribute. Width of value greater than 600px
+            is considered to be screen of Desktop computer. Width of value between 400px and 600px
+            is considered to be of tablet and width less than 400px is of mobile devices.
+        </p>
+
+        <span>
+            <pre>
+@media screen and (min-width: 600px) {
+    #tablet {
+        display: none;
+    }
+    #mobile {
+        display: none;
+    }
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/css-experiments/002-modes.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/css-experiments/css/002-style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+
+</body>
+</html>

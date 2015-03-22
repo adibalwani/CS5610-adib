@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Animated Menu</title>
+    <link rel="stylesheet" href="css/001-style.css" />
+</head>
+<body>
+    <h1>Animated Menu</h1>
+    <hr />
+
+    <h3>Hover over the Home to display its content</h3>
+    <div id="option">
+        <span id="rotate">
+            HOME
+        </span>
+    </div>
+    <div id="home">
+        <p>
+            Welcome to the home tab.
+            The transition effect is performed for each menu option.
+        </p>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment is used to display menu when mouse hovers over the menu tag.
+            The transition effect is obtained by using hover in CSS. The details to be displayed
+            are kept hidden with opacity of 0 and when he mouse hovers over the menu tab, the opacity
+            is made to 1. The transition setting is kept to two seconds.
+        </p>
+
+        <span id="text">
+            <pre>
+#home {
+    opacity: 0;
+    transition: opacity 1s linear;
+}
+
+#option:hover + #home {
+    opacity: 1;
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/css-experiments/001-transition.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/css-experiments/css/001-style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.stackoverflow.com/" target="_blank">Stack Overflow</a>
+    </div>
+
+</body>
+</html>

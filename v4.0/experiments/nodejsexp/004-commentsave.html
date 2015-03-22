@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Comment Box sync with server</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>Comment Box sync with server</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/nodejs/004-commentsave.html" target="_blank">Comment Box sync with server</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p><b>Username: adib Password: adib</b></p>
+        <p><b>Username: root Password: root</b></p>
+        <p><b>Username: admin Password: admin</b></p>
+        <p>
+            This experiment adds comment feature to the existing one but instead of storing it locally, we 
+            persist the data on the server. Hence, after refreshing or resign in the data is still there. 
+            Here, an add function sends an HTTP post request to server that contains an array of JSON 
+            containing username and comment. This new data is pushed into this array and a new response 
+            containing the whole array is returned.
+        </p>
+
+        <span id="text">
+            <pre>
+app.controller(&quot;CommentController&quot;, function ($scope, $routeParams, $http) {
+    var username = $routeParams.username;
+    $http.get(&quot;/004-comment&quot;)
+    .success(function (response) {
+        $scope.comments = response;
+    });
+    
+    $scope.add = function (text) {
+        var obj = { username: username, text: text };
+        $scope.text = null;
+        $http.post(&quot;/004-comment&quot;, obj)
+        .success(function (response) {
+            $scope.comments = response;
+        });
+    };
+});
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/004-commentsave.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/partials-003/comment.html"
+           target="_blank">View Comment Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/nodejs/js/004-commentsave.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>IMDB Movies</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="angular.min.js"></script>
+    <script src="js/002-imdb.js"></script>
+</head>
+<body ng-app="myapp">
+    <h1>AngularJS for IMDB</h1>
+    <div ng-controller="cntl">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchByTitle" placeholder="Search for Movies">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="searchMovies()" type="button">Search</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <br />
+        <br />
+        <ul>
+            <li ng-repeat="m in movies">
+                <p>{{m.title}}</p>
+                <p>{{m.plot}}</p>
+                <img ng-src="{{m.urlPoster}}" />
+            </li>
+        </ul>
+    </div>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates use of myapifilms WebAPI to get IMDB data and display it
+            using Angular JS. ng-repeat is like for-each in Java. movies is updated by controller
+            on click and it is displayed in an unordered list. $http is a magic variable just like
+            $index or $scope and is used for HTTP connection.
+        </p>
+
+        <span id="text">
+            <pre>
+$scope.searchMovies = function () {
+    var title = $scope.searchByTitle;
+    $http.jsonp(&quot;http://www.myapifilms.com/imdb?title=&quot; + title + &quot;&amp;format=JSONP&amp;aka=0&amp;business=0&amp;seasons=0&amp;seasonYear=0&amp;technical=0&amp;filter=N&amp;exactFilter=0&amp;limit=10&amp;lang=en-us&amp;actors=N&amp;biography=0&amp;trailer=0&amp;uniqueName=0&amp;filmography=0&amp;bornDied=0&amp;starSign=0&amp;actorActress=0&amp;actorTrivia=0&amp;movieTrivia=0&amp;awards=0&amp;moviePhotos=N&amp;movieVideos=N&amp;callback=JSON_CALLBACK&quot;)
+    .success(function (response) {
+        $scope.movies = response;
+    });
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/002-imdb.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/js/002-imdb.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Wednesday's Lecture
+    </div>
+    <div id="doc">
+        <a href="http://www.myapifilms.com/" target="_blank">MyAPIFilms</a>
+    </div>
+
+</body>
+</html>

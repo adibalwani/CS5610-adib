@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Load photo</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>Load photo</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/mongodb/003-preview.html" target="_blank">Load photo</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates selecting file and having an immediatepreview for that file. 
+            An event handler is installed for change event and once there is any change in the file upload 
+            handleFileSelect function is called that first converts file into base64 format and then displays 
+            it using ng-model binded in the HTML file.
+        </p>
+
+        <span id="text">
+            <pre>
+    var handleFileSelect = function (evt) {
+        var files = evt.target.files;
+        var file = files[0];
+        if (files &amp;&amp; file) {
+            var reader = new FileReader();
+            reader.onload = function (readerEvt) {
+                var binaryString = readerEvt.target.result;
+                $scope.loc = &quot;data:image/jpeg;base64,&quot; + btoa(binaryString);
+                $scope.$apply();
+            };
+            reader.readAsBinaryString(file);
+        }
+    };
+    if (window.File &amp;&amp; window.FileReader &amp;&amp; window.FileList &amp;&amp; window.Blob) {
+        $(&apos;#filePicker&apos;).change(handleFileSelect);
+    } else {
+        alert(&apos;The File APIs are not fully supported in this browser.&apos;);
+    }
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/003-preview.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/js/003-preview.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+
+</body>
+</html>

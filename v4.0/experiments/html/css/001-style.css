@@ -1,0 +1,35 @@
+﻿body {
+    background-color: azure;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+h3 {
+    color: blue;
+}
+
+#doc {
+    text-align: center;
+    font-size: large;
+}
+
+#defh1 {
+    text-align: start;
+    color: black;
+}
+
+#defh3 {
+    color: black;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,29 @@
+﻿body {
+    background-color: azure;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+#text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#doc {
+    text-align: center;
+    font-size: large;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 70%;
+    height: 650px;
+    margin: auto;
+}
+
+#but {
+    text-align: center;
+}

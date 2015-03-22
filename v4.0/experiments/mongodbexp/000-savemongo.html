@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sync with MongoDB</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <h1>Sync with MongoDB</h1>
+    <h3>Please choose the link to see the experiment:</h3>
+    <a href="http://ide-adib.rhcloud.com/mongodb/000-savemongo.html" target="_blank">Sync with MongoDB</a>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            <b>Username: adib Password: adib123</b>
+            This experiment demonstrates developing schema for user and comment schema for collections 
+            using mongoose. First connection is made with mongodb server using mongoose.connect(URL) method. 
+            Then, schema is created and a model is made for that schema. Now, depending upon different requests 
+            the data is either fetched/stored in the mongodb server.
+        </p>
+
+        <span id="text">
+            <pre>
+var userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    email: String,
+    firstName: String,
+    lastName: String,
+    photo: String
+}, { collection: &apos;user&apos; });
+
+var commentSchema = new mongoose.Schema({
+    username: String,
+    text: String
+}, { collection: &apos;comment&apos; });
+
+var userModel = mongoose.model(&quot;UserModel&quot;, userSchema);
+var commentModel = mongoose.model(&quot;CommentModel&quot;, commentSchema);
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/000-savemongo.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-000/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-000/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-000/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/partials-000/comment.html"
+           target="_blank">View Comment Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/public/mongodb/js/000-savemongo.js"
+           target="_blank">View Client JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ide/server.js"
+           target="_blank">View Server JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Wednesday's Lecture
+    </div>
+
+</body>
+</html>

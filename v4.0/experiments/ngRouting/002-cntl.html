@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Profile Controller</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/000-basicng.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/angular-route.min.js"></script>
+    <script src="js/002-cntl.js"></script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="NavController">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#home">Project name</a>
+                </div>
+
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li ng-show="currentUser"><a href="#profile/{{currentUser.username}}">Profile</a></li>
+                    </ul>
+
+                    <form ng-show="!currentUser" class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="text" ng-model="username" placeholder="Username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" ng-model="password" placeholder="Password" class="form-control">
+                        </div>
+                        <button type="submit" class="{{color}}" ng-click="login()">Sign in</button>
+                    </form>
+
+                    <form ng-show="currentUser" class="navbar-form navbar-right">
+                        <button type="submit" ng-click="logout()" class="btn btn-success">Sign out</button>
+                    </form>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div ng-view></div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p><b>Username: adib Password: adib</b></p>
+        <p><b>Username: root Password: root</b></p>
+        <p><b>Username: admin Password: admin</b></p>
+        <p>
+            This experiment adds profile controller to handle model and view of the profile page. 
+            This controller can access the shared LoginService and also accesses the parameters passed 
+            when invoking the page using $routeParams. There are two possible ways to obtain username i.e. 
+            via passed parameter or via LoginService
+        </p>
+
+        <span id="text">
+            <pre>
+app.controller(&quot;ProfileController&quot;, function ($scope, LoginService, $routeParams) {
+    var username = $routeParams.username;
+    $scope.username = username;
+});
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/002-cntl.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/partials-002/home.html"
+           target="_blank">View Home Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/partials-002/profile.html"
+           target="_blank">View Profile Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/partials-002/about.html"
+           target="_blank">View About Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/ngRouting/js/002-cntl.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Wednesday's Lecture
+    </div>
+
+</body>
+</html>

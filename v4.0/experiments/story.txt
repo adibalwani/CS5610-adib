@@ -1,0 +1,9 @@
+﻿../story/whatisnext.htm?../experiments/story.txt					What is next?
+../story/index.htm?../experiments/html/story.txt					Week 01 - HTML Experiments
+../story/index.htm?../experiments/css-experiments/story.txt			Week 02 - CSS Experiments
+../story/index.htm?../experiments/js/story.txt						Week 03 - JavaScript/JQuery and Bootstrap Experiments
+../story/index.htm?../experiments/json/story.txt					Week 04 - JSON Experiments
+../story/index.htm?../experiments/angular/story.txt					Week 05 - Angular JS Experiments
+../story/index.htm?../experiments/ngRouting/story.txt				Week 06 - Angular Routing Experiments
+../story/index.htm?../experiments/nodejsexp/story.txt				Week 07 - Node JS Experiments
+../story/index.htm?../experiments/mongodbexp/story.txt				Week 08 - MongoDB Experiments

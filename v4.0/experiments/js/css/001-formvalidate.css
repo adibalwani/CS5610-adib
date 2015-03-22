@@ -1,0 +1,19 @@
+﻿body {
+    background-color: azure;
+    overflow-x:hidden;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+#text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#doc {
+    text-align: center;
+    font-size: large;
+}

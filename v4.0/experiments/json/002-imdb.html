@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>IMDB JSON</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/002-imdb.css" />
+    <script src="jquery-1.11.2.js"></script>
+    <script src="jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+    <script src="js/002-imdb.js"></script>
+</head>
+<body>
+    <h1>IMDB JSON/DRAGGING</h1>
+    <hr />
+
+    <h3>Drag image on the square</h3>
+
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+    <img id="drag1" src="img_logo.gif" draggable="true"
+         ondragstart="drag(event)" width="336" height="69">
+
+    <h3>IMDB JSON object</h3>
+
+    <p id="para"></p>
+    <a href="http://www.myapifilms.com/imdb/top?format=JSONP&start=1&end=10&data=S" target="_blank">Get Top 10 films</a>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates JSONP to access JSON object from web server that is other
+            than the origin of the page. CORS allows to access JSON data on other site without the
+            need for being the same page where response wass generated.
+            Also, I have experimented on dragging one DOM object over other. 
+        </p>
+
+        <span id="text">
+            <pre>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+function drag(ev) {
+    ev.dataTransfer.setData(&quot;text&quot;, ev.target.id);
+}
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData(&quot;text&quot;);
+    ev.target.appendChild(document.getElementById(data));
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/002-imdb.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/css/002-imdb.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/json/js/002-imdb.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.w3schools.com" target="_blank">W3Schools</a>
+    </div>
+    <div id="doc">
+        <a href="http://www.myapifilms.com" target="_blank">MyAPIFilms</a>
+    </div>
+</body>
+</html>

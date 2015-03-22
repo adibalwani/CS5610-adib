@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Index Page</title>
+    <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="Libraries/angular.min.js"></script>
+    <script src="Libraries/angular-route.min.js"></script>
+    <script src="js/clientApp.js"></script>
+</head>
+<body ng-app="ServerApp">
+    <div class="container" ng-controller="MyCntl">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><input ng-model="logins.username" placeholder="UserName"/></th>
+                    <th><input ng-model="logins.password" placeholder="Password"/></th>
+                    <th>
+                        <button ng-click="add(logins)" class="btn btn-success pull-right">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                        <button ng-click="update(logins)" class="btn btn-primary pull-right">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="name in login">
+                    <td>{{name.username}}</td>
+                    <td>{{name.password}}</td>
+                    <td>
+                        <button ng-click="remove($index)" class="btn btn-danger pull-right">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <button ng-click="edit($index)" class="btn btn-warning pull-right">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Form</title>
+    <link rel="stylesheet" href="css/003-style.css" />
+</head>
+<body>
+    <h1>HTML Form</h1>
+    <hr />
+
+    <form>
+        <div>
+            <label for="name">Name: </label>
+            <input id="name" name="name" />
+        </div>
+        <div>
+            <label for="sex">Sex: </label>
+            <input type="radio" name="sex" value="male" />Male
+            <input type="radio" name="sex" value="female" />Female
+        </div>
+        <div>
+            <label for="university">University: </label>
+            <input id="university" list="universities" name="university" />
+            <datalist id="universities">
+                <option value="Northeastern University" />
+                <option value="Harvard University" />
+                <option value="Massachusetts Institute of Technology" />
+                <option value="Boston University" />
+                <option value="Boston College" />
+            </datalist>
+        </div>
+        <div>
+            <label for="dos">Date of Start: </label>
+            <input id="dos" type="datetime-local" name="dos"/>
+        </div>
+        <div>
+            <input type="submit" />
+        </div>
+    </form>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment is used to obtain user data. It also demonstrates the data-time picker
+            of HTML5. Label element is used to focus on associated element of it and also give a label
+            to that element. Date is chosen using datetime-local type introduced in HTML5. Datalist of
+            universities is created.
+        </p>
+
+        <span>
+            <pre>
+&lt;div>
+    &lt;label for="dos">Date of Start: &lt;/label>
+    &lt;input id="dos" type="datetime-local" name="dos" />
+&lt;/div>
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/html/003-form.html" target="_blank"> View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/html/css/003-style.css" target="_blank"> View CSS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.w3schools.com/htmL/" target="_blank">W3Schools</a>
+    </div>
+
+</body>
+</html>

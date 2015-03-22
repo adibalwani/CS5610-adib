@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Basic Tags2</title>
+    <link rel="stylesheet" href="css/002-style.css" />
+</head>
+<body>
+    <h1>HTML Basic Tags2</h1>
+    <hr />
+
+    <!-- HTML List section -->
+    <h3>1. HTML List</h3>
+    <table border="1">
+        <tr>
+            <th>Unordered List &lt;ul&gt;</th>
+            <th>Ordered List &lt;ol&gt;</th>
+            <th>Descrition List &lt;dl&gt;</th>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                <ul>
+                <li>Coffee</li>
+                <li>Tea</li>
+                </ul>
+            </td>
+            <td rowspan="2">
+                <ol type="i">
+                    <li>Coffee</li>
+                    <li>Tea</li>
+                </ol>
+            </td>
+            <td rowspan="2">
+                <dl>
+                    <dt>Coffee</dt>
+                    <dd>Coffee Beans</dd>
+                    <dt>Tea</dt>
+                    <dd>Tea leaves</dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+
+    <!-- HTML Block Element section -->
+    <h3>2. HTML Block Element</h3>
+    <p>Block level elements normally start (and end) with a new line, when displayed in a browser.
+        Inline elements are normally displayed without line breaks</p>
+    <p>&lt;div&gt; It is a block level element and can be used as a container for other elements</p>
+    <p>&lt;span&gt; It is an inline element and can be used for 
+    <span>text</span> highlighting</p>
+
+    <!-- HTML Iframe section -->
+    <h3>3. HTML Iframe</h3>
+    <p>
+        Iframe is used to display other HTML page. It is like embedding that page
+        inside the current one.
+    </p>
+    <code>
+        <pre>
+&lt;iframe name="iframe_a">&lt;/iframe>
+&lt;p>
+    &lt;a href="000-helloworld.html" target="iframe_a">Click to Hello World&lt;/a>
+&lt;/p>
+        </pre>
+    </code>
+    <iframe name="iframe_a"></iframe>
+    <p>
+        <a href="000-helloworld.html" target="iframe_a">Click to Hello World</a>
+    </p>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/html/002-basicTags.html" target="_blank"> View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/html/css/002-style.css" target="_blank"> View CSS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://www.w3schools.com/htmL/" target="_blank">W3Schools</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Favorite Movies</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/003-table.css" />
+    <script src="angular.min.js"></script>
+    <script src="js/004-favorite.js"></script>
+</head>
+<body ng-app="myapp">
+    <h1>AngularJS for IMDB with editing and favorite movie</h1>
+    <div ng-controller="cntl">
+
+        <h3 ng-show="visible_details">Details</h3>
+        <p>{{details.languages}}</p>
+        <p>{{details.genre}}</p>
+        <p>{{details.rated}}</p>
+        <p>{{details.runtime}}</p>
+        <p>{{details.simpleplot}}</p>
+        <p>{{details.votes}}</p>
+
+        <h3 ng-show="visible_favorite">Favorite Movies</h3>
+        <table class="table table-striped">
+            <tbody>
+                <tr ng-repeat="m in favoriteMovies">
+                    <td>{{m.title}}</td>
+                    <td>{{m.year}}</td>
+                    <td>{{m.rating}}</td>
+                    <td>
+                        <img class="poster" ng-src="{{m.urlPoster}}" width="50" />
+                        {{m.plot}}
+                    </td>
+                    <td>
+                        <button ng-click="removeFavoriteMovie(m)" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <button ng-click="detailsMovie(m)" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Search Movies</h3>
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchByTitle" placeholder="Search for Title">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="searchMovies()" type="button">Search</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <br />
+        <br />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Rating</th>
+                    <th>Plot</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr>
+                    <th><input ng-model="movie.title" class="form-control" /></th>
+                    <th><input ng-model="movie.year" class="form-control" /></th>
+                    <th><input ng-model="movie.rating" class="form-control" /></th>
+                    <th><input ng-model="movie.plot" class="form-control" /></th>
+                    <th>
+                        <button ng-click="addMovie()" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="m in movies">
+                    <td>{{m.title}}</td>
+                    <td>{{m.year}}</td>
+                    <td>{{m.rating}}</td>
+                    <td>
+                        <img class="poster" ng-src="{{m.urlPoster}}" width="50" />
+                        {{m.plot}}
+                    </td>
+                    <td>
+                        <button ng-click="removeMovies(m)" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <button ng-click="selectMovie(m)" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button ng-click="addToFavorites(m)" class="btn btn-info">
+                            <span class="glyphicon glyphicon-star"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment is an extension of previous experiment. In this experiment I have 
+            added a favorite feature so user can save their favorite movies. Also, there is a details 
+            button by which user can view the details of the movie. It is done using the same mechanism as 
+            the previous experiment were.
+        </p>
+
+        <span id="text">
+            <pre>
+$scope.addToFavorites = function (movie) {
+    $scope.visible_favorite = true;
+    $scope.favoriteMovies.push(movie);
+}
+
+$scope.removeFavoriteMovie = function (movie) {
+    var index = $scope.favoriteMovies.indexOf(movie);
+    $scope.favoriteMovies.splice(index, 1);
+}
+            </pre>
+        </span>
+
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/004-favorite.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/angular/js/004-favorite.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        Friday's Lecture
+    </div>
+    <div id="doc">
+        <a href="http://www.myapifilms.com/" target="_blank">MyAPIFilms</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿body {
+    background-color: azure;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+h3 {
+    color: blue;
+}
+
+#doc {
+    text-align: center;
+    font-size: large;
+}
