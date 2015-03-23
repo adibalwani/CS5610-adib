@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Angular Unit Testing</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div>
+        <h1>Configuring Karma</h1>
+        <p>Note: This experiment demonstrates configuration only. The actual testing cannot be demonstrated here</p>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates how to configure karma for unit testing of angular 
+            application. The framework used is Jasmine. Each attribute has a comment that explains the 
+            use of that.
+        </p>
+
+        <span id="text">
+            <pre>
+// Karma configuration
+// Generated on Wed Mar 18 2015 01:50:08 GMT-0400 (Eastern Daylight Time)
+module.exports = function(config) {
+  config.set({
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    basePath: &apos;&apos;,
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: [&apos;jasmine&apos;],
+    // list of files / patterns to load in the browser
+    files: [
+      { pattern: &apos;app/lib/angular.min.js&apos;, included: true },
+      { pattern: &apos;app/js/*.js&apos;, included: true },
+      { pattern: &apos;test/*.js&apos;, included: true }
+    ],
+    // list of files to exclude
+    exclude: [
+    ],
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+    },
+    // test results reporter to use
+    // possible values: &apos;dots&apos;, &apos;progress&apos;
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    reporters: [&apos;progress&apos;],
+    // web server port
+    port: 9876,
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: [&apos;Chrome&apos;],
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: true
+  });
+};
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/004-karmaconfig.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://karma-runner.github.io/0.8/config/configuration-file.html" target="_blank">Karma Config</a>
+    </div>
+</body>
+</html>

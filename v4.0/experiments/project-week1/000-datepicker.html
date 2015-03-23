@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Date picker</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="js/000-datepicker.js"></script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="MyCntl">
+        <h1>Date Picker</h1>
+        <hr />
+        <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates use of ui.bootstrap module in angular to display date.
+            User can navigate through months and years. The datepicker shows dates that come from
+            other than the main month being displayed. These other dates are also selectable. Also,
+            a min date as current date is set.
+        </p>
+
+        <span id="text">
+            <pre>
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.minDate = $scope.minDate ? null : new Date();
+        $scope.opened = true;
+    };
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/000-datepicker.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/js/000-datepicker.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://angular-ui.github.io/bootstrap/" target="_blank">Angular UI</a>
+    </div>
+</body>
+</html>

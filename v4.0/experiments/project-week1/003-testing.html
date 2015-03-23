@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Angular Unit Testing</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="js/003-testing.js"></script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="MyCntl">
+        <h1>Angular Unit Testing</h1>
+        <p>Note: Here, we cannot show unit testing as it requires command line.</p>
+        <hr />
+        <input ng-model="number1" ng-change="change()" type="number" /> +
+        <input ng-model="number2" ng-change="change()" type="number" /> =
+        <input ng-model="answer" />
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            1) Install Karma and Jasmine
+            The following link is used for installation:
+            <a href="http://karma-runner.github.io/0.12/intro/installation.html">Karma</a>
+
+            2) In the command line inside the app folder enter : karma start
+            Here the browser selected is Chrome. You can change it in karma.conf.js file
+
+            3) testing.html file in the app folder is the page for adding two numbers
+        </p>
+
+        <span id="text">
+            <pre>
+describe(&apos;AddController&apos;, function () {
+    beforeEach(module(&apos;Add&apos;));
+    var $controller;
+    beforeEach(inject(function (_$controller_) {
+        $controller = _$controller_;
+    }));
+    describe(&apos;Test suite for adding two number&apos;, function () {
+        var $scope, controller;
+        beforeEach(function () {
+            $scope = {};
+            controller = $controller(&apos;AddController&apos;, { $scope: $scope });
+        });
+        it(&apos;Add two positive numbers&apos;, function () {
+            $scope.number1 = 20;
+            $scope.number2 = 10;
+            $scope.change();
+            expect($scope.answer).toEqual(30);
+        });
+...
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/003-testing.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/js/003-testing.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/js/test.js"
+           target="_blank">View Test Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://docs.angularjs.org/guide/unit-testing" target="_blank">Angular Unit Testing</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Find Current Address</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/001-findlocation.js"></script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="MyCntl">
+        <h1>Find Current Address</h1>
+        <hr />
+        <input type="text" ng-model="origin" name="from" placeholder="Commute from:" />
+        <span class="input-group-btn">
+            <button>
+                <img src="img/findIcon.png" alt="findIcon" width="50" height="50" ng-click="locate()" />
+            </button>
+        </span>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            When you click on Get Location button the control goes to getLocation() function 
+            which first checks if the browser supports GeoLocation API by checking navigator.geolocation 
+            object, if that object is not null that means browser supports GeoLocation and we ask 
+            browser for current location by calling navigator.geolocation.getCurrentPosition() with 
+            displayCurrentLocation() as a call back function if the current location lookup was successful. 
+            The browser calls displayCurrentLocation() function with current location using position object, 
+            which has longitude and latitude as properties.
+        </p>
+
+        <span id="text">
+            <pre>
+    $scope.locate = function () {
+        if (navigator.geolocation) {    //browser supports maps
+            navigator.geolocation.getCurrentPosition(
+            displayCurrentLocation,
+            displayError,
+            {
+                maximumAge: 3000,
+                timeout: 5000,
+                enableHighAccuracy: true
+            });
+        } else {
+            alert(&quot;oops, no geolocation support&quot;);
+        }
+    };
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/001-findlocation.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/js/001-findlocation.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="http://wpcertification.blogspot.com/2012/05/getting-address-of-current-location.html" target="_blank">BlogSpot</a>
+    </div>
+</body>
+</html>
