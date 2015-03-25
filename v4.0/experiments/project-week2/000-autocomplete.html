@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Address Auto Complete</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/ngAutocomplete.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="js/000-autocomplete.js"></script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="MyCntl">
+        <h1>Address Auto Complete</h1>
+        <hr />
+        <input ng-autocomplete ng-model="origin" type="text" name="from" placeholder="Commute from:" />
+        <input ng-autocomplete ng-model="dest" type="text" name="to" placeholder="Commute to:" />
+        <button ng-click="click()">Search</button>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates uses of ngAutocomplete module that fetches address 
+            as you type and is therefore used for user to search origin and destination address 
+            in my project.
+        </p>
+
+        <span id="text">
+            <pre>
+                &lt;input ng-autocomplete ng-model=&quot;origin&quot; type=&quot;text&quot; name=&quot;from&quot; placeholder=&quot; placeholder=&quot;Commute from:&quot; /&gt;
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/002-autocomplete.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week1/js/002-autocomplete.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://github.com/wpalahnuk/ngAutocomplete" target="_blank">ngAutocomplete</a>
+    </div>
+</body>
+</html>

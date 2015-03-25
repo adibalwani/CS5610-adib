@@ -1,6 +1,29 @@
 ﻿var app = angular.module('CarpoolApp', ['ngAutocomplete', 'ui.bootstrap']);
 
-app.controller("HomeController", function ($scope) {
+app.controller("HomeController", function ($scope, $location) {
+
+    /*Add URL for login*/
+    var index_page = "http://localhost:61854/project/index.html";
+    $("#login").attr("href", "https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=" + index_page);
+
+    /*Hide Login once given access_token*/
+    $scope.access_token = $location.url().substr(1).split("&")[0];
+
+    /*Donot display*/
+    $scope.signup = false;
+    $scope.login = false;
+
+    /*Display signup page*/
+    $scope.openSignUp = function () {
+        $scope.signup = true;
+        $scope.login = false;
+    };
+
+    /*Display login page*/
+    $scope.openLogin = function () {
+        $scope.login = true;
+        $scope.signup = false;
+    };
 
     /*Date Picker*/
     $scope.open = function ($event) {
