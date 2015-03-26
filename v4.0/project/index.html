@@ -96,53 +96,51 @@
             <div class="intro-text">
                 <div class="intro-lead-in">It's better together!</div>
                 <div class="intro-heading">Thanks for a greener tomorrow</div>
-                
+
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="" novalidate>
-                            <div class="row">
-                                <div class="col-md-1"></div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Commute from:" required>
-                                            <div class="input-group-addon">
-                                                <img src="img/icons/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
-                                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Commute from:" required>
+                                        <div class="input-group-addon">
+                                            <img src="img/icons/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" ng-autocomplete ng-model="destination" placeholder="Commute to:" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Date" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                                            <div class="input-group-addon">
-                                                <span ng-click="open($event)" class="glyphicon glyphicon-calendar"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary form-control">Search</button>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-1"></div>
                             </div>
-                        </form>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" ng-autocomplete ng-model="destination" placeholder="Commute to:" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Date" datepicker-popup="{{format}}" ng-model="date" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                        <div class="input-group-addon">
+                                            <span ng-click="open($event)" class="glyphicon glyphicon-calendar"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <button class="btn btn-primary form-control" ng-click="search()">Search</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1"></div>
+                        </div>
                     </div>
                 </div>
-                
+
                 <!--<a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>-->
                 <!--<a id="login" class="page-scroll btn btn-xl">Login</a>-->
             </div>
@@ -788,7 +786,7 @@
     </div>
 
     <!-- jQuery -->
-    <script src="lib/jquery.js"></script>
+    <script src="lib/jquery.js" type="text/javascript"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="lib/bootstrap.min.js"></script>
@@ -806,6 +804,7 @@
     <script src="lib/angular-route.min.js"></script>
     <script src="lib/ngAutocomplete.js"></script>
     <script src="lib/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 
     <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>

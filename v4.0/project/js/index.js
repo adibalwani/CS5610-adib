@@ -1,6 +1,39 @@
 ﻿var app = angular.module('CarpoolApp', ['ngAutocomplete', 'ui.bootstrap']);
 
-app.controller("HomeController", function ($scope, $location) {
+app.controller("HomeController", function ($scope, $location, $http) {
+
+    /*Miles <-> Meters*/
+    function getMiles(i) {
+        return i * 0.000621371192;
+    }
+
+    function getMeters(i) {
+        return i * 1609.344;
+    }
+
+    /*Search click*/
+    $scope.search = function () {
+        new google.maps.Geocoder().geocode({ 'address': $scope.origin }, function (results, status) {
+            /*Origin address to LatLon*/
+            if (status == google.maps.GeocoderStatus.OK) {
+                var origin_latitude = results[0].geometry.location.lat();
+                var origin_longitude = results[0].geometry.location.lng();
+
+                new google.maps.Geocoder().geocode({ 'address': $scope.destination }, function (results, status) {
+                    /*Destination address to LatLon*/
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var dest_latitude = results[0].geometry.location.lat();
+                        var dest_longitude = results[0].geometry.location.lng();
+
+                        $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($scope.date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE&userFields=FULL_PUBLIC")
+                        .success(function (response) {
+                            console.log(response);
+                        });
+                    }
+                });
+            }
+        });
+    };
 
     /*Add URL for login*/
     var index_page = "http://localhost:61854/project/index.html";

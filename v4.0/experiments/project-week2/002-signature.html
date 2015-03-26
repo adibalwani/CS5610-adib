@@ -5,20 +5,16 @@
     <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
     <script src="../Libraries/angular.min.js"></script>
-    <script src="../Libraries/ngAutocomplete.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="js/000-autocomplete.js"></script>
+    <script src="js/002-signature.js"></script>
 </head>
 <body ng-app="MyApp">
     <div ng-controller="MyCntl">
         <h1>Address Auto Complete</h1>
         <hr />
-        <input ng-autocomplete ng-model="origin" type="text" name="from" placeholder="Commute from:" />
-        <input ng-autocomplete ng-model="dest" type="text" name="to" placeholder="Commute to:" />
-        <input ng-model="date" type="date" placeholder="Date:" />
-        <button ng-click="click()">Search</button>
+        <a href="https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=http://localhost:61854/experiments/project-week2/001-login.html">Login</a>
+        {{access_token}}
     </div>
 
     <div>
