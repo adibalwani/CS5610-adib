@@ -11,6 +11,45 @@ app.controller("HomeController", function ($scope, $location, $http) {
         return i * 1609.344;
     }
 
+    /*Get Favorites*/
+    $scope.getFavorite = function () {
+        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+
+        $http.get("https://api-dev.car.ma/v1/users/SELF/favouriteUsers?userFields=ALIAS&pageSize=20&pageNum=1")
+        .success(function (response) {
+            console.log(response);
+        });
+    }
+
+    /*Add to favorite click*/
+    $scope.addFavorite = function (index) {
+        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+        
+        //console.log($scope.searchResults[index].ownerUid);
+        //$http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/add")
+        $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/1485767212/add")
+        .success(function (response) {
+            console.log(response);
+        })
+    };
+
+    /*Remove from favorite click*/
+    $scope.removeFavorite = function (index) {
+        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+        console.log("remove");
+        //console.log($scope.searchResults[index].ownerUid);
+        $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/remove")
+        .success(function (response) {
+            console.log("removed");
+            console.log(response);
+        })
+    };
+
+    /*View detailed profile*/
+    $scope.viewProfile = function (index) {
+
+    };
+
     /*Search click*/
     $scope.search = function () {
         new google.maps.Geocoder().geocode({ 'address': $scope.origin }, function (results, status) {
@@ -24,6 +63,8 @@ app.controller("HomeController", function ($scope, $location, $http) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var dest_latitude = results[0].geometry.location.lat();
                         var dest_longitude = results[0].geometry.location.lng();
+
+                        $http.defaults.headers.common.Authorization = "";
 
                         $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($scope.date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
                         .success(function (response) {
@@ -49,7 +90,6 @@ app.controller("HomeController", function ($scope, $location, $http) {
                                     response.trips[i].userRole = "Driver";
                                 }
                                 
-
                                 /*Convert metres to miles*/
                                 response.trips[i].distance = Math.round(getMiles(response.trips[i].distance) * 10) / 10;
                             }
@@ -73,8 +113,12 @@ app.controller("HomeController", function ($scope, $location, $http) {
     var index_page = "http://localhost:61854/project/index.html";
     $("#login").attr("href", "https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=" + index_page);
 
+    /*Add URL for signup*/
+    $("#signuphref").attr("href", "https://rtr-dev.car.ma/signup");
+
     /*Hide Login once given access_token*/
-    $scope.access_token = $location.url().substr(1).split("&")[0];
+    //$scope.access_token = $location.url();
+    $scope.access_token = $location.url().substr(14).split("&")[0];
 
     /*Donot display*/
     $scope.signup = false;
