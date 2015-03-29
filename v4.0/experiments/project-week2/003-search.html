@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Search Trips</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/ngAutocomplete.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="js/003-search.js"></script>
+</head>
+<body ng-app="MyApp" class="container">
+    <div ng-controller="MyCntl">
+        <h1>Search Trips</h1>
+        <hr />
+        <input ng-autocomplete ng-model="origin" type="text" name="from" placeholder="Commute from:" />
+        <input ng-autocomplete ng-model="destination" type="text" name="to" placeholder="Commute to:" />
+        <button class="btn btn-primary form-control" ng-click="search()">Search</button>
+
+        <div ng-repeat="result in searchResults">
+            <div class="row">
+                <div class="col-md-3">
+                    <img ng-src="{{result.owner.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
+                </div>
+
+                <div class="col-md-9">
+                    <div>
+                        {{result.owner.alias}}
+                        {{result.schedule.hours}}:{{result.schedule.minutes}} {{result.schedule.ampm}}
+                        {{result.userRole}}
+                    </div>
+                    <div>
+                        From: {{result.origin.address}}
+                        {{result.estimatedCost.formattedAmount}}
+                    </div>
+                    <div>
+                        To: {{result.destination.address}}
+                        {{result.distance}} Miles
+                    </div>
+                    <div>
+                        <span ng-show="{{result.schedule.daysOfOperation[0]}}"><b>S</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[0]}}">S</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[1]}}"><b>M</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[1]}}">M</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[2]}}"><b>T</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[3]}}">T</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[3]}}"><b>W</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[3]}}">W</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[4]}}"><b>T</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[4]}}">T</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[5]}}"><b>F</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[5]}}">F</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[6]}}"><b>S</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[6]}}">S</span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates uses of Carma API search trip feature. As a parameter we pass the 
+            origin/destination latlon values. We print user details using ng-repeat. we modify the JSON 
+            response to suit our needs using doing calculations like timeconversion, metres to miles 
+            conversion(Irish system), etc. Search is the main functionality of my project
+        </p>
+
+        <span id="text">
+            <pre>
+                $http.get(&quot;https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&amp;originLon=&quot; + origin_longitude + &quot;&amp;originLat=&quot; + origin_latitude + &quot;&amp;destinationLon=&quot; + dest_longitude + &quot;&amp;destinationLat=&quot; + dest_latitude + &quot;&amp;&amp;&amp;tripType=RIDE_OR_DRIVE&amp;departureTimeStart=-1&amp;departureTimeEnd=-1&amp;onlineSince=-1&amp;originRadius=10000.0&amp;destinationRadius=10000.0&amp;searchBoxPaddingDistance=10000.0&amp;&amp;adherence=1.0&amp;sortBy=START_TIME_ORIGIN_DISTANCE&amp;pageNum=1&amp;pageSize=20&amp;tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&amp;userFields=FULL_PUBLIC&quot;)
+                        .success(function (response) {
+                            console.log(response);
+                            for (var i in response.trips) {
+                                /*Convert startMinutes to Hours and Minutes of Local Time*/
+                                var hours = Math.floor(response.trips[i].schedule.startMinutes / 60);
+                                var minutes = response.trips[i].schedule.startMinutes % 60;
+                                if (hours &gt; 12) {
+                                    var ampm = &quot;PM&quot;;
+                                    hours = hours - 12;
+                                } else {
+                                    var ampm = &quot;AM&quot;;
+                                }
+                                response.trips[i].schedule.hours = appendZero(hours);
+                                response.trips[i].schedule.minutes = appendZero(minutes);
+                                response.trips[i].schedule.ampm = ampm;
+                                /*Change user role*/
+                                if (response.trips[i].userRole == &quot;RIDE&quot;) {
+                                    response.trips[i].userRole = &quot;Rider&quot;;
+                                } else {
+                                    response.trips[i].userRole = &quot;Driver&quot;;
+                                }
+                                /*Convert metres to miles*/
+                                response.trips[i].distance = Math.round(getMiles(response.trips[i].distance) * 10) / 10;
+                            }
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/003-search.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/js/003-search.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://api-dev.car.ma" target="_blank">Carma API</a>
+    </div>
+</body>
+</html>

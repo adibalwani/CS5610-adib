@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Send Email</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="js/004-email.js"></script>
+</head>
+<body ng-app="MyApp" class="container">
+    <div ng-controller="MyCntl">
+        <h1>Send Email</h1>
+        <hr />
+        <h3>My developer Id is not yet given production access so this experiment will work in localhost only</h3>
+        <h3>Please Login and then send an email</h3>
+        <h3>The mail is sent on my email</h3>
+        <a href="https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=http://net4.ccs.neu.edu/home/adib/experiments/project-week2/004-email.html">Login</a>
+        {{access_token}}
+        <div>
+            <input type="text" ng-model="title" placeholder="Title:"/>
+            <input type="text" ng-model="Body" placeholder="Body: (limit to 200 words)" />
+            <button ng-click="send()">Send</button>
+        </div>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            Developer Access:
+            <b>Email: alwani.adib@gmail.com</b>
+            <b>Password: alwani.adib</b>
+            This experiment demonstrates uses Carma API to send Email to any registered user. Here, I 
+            have embedded my user_id but this can easily be extended to any user across the system. 
+            An Authorization header is appended containing the bearer token and body is kept in the 
+            POST request. Email is used for sending a ride request to the driver in my project.
+        </p>
+
+        <span id="text">
+            <pre>
+    $http.defaults.headers.common.Authorization = &quot;Bearer &quot; + $scope.access_token;
+        $http.post(&quot;https://api-dev.car.ma:443/v1/users/250110403/user-messages&quot;,
+            {
+                &quot;body&quot;: $scope.body,
+                &quot;title&quot;: $scope.title,
+                &quot;messageType&quot;: &quot;USER_TEXT&quot;
+            })
+        .success(function (response) {
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/004-email.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/js/004-email.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://api-dev.car.ma" target="_blank">Carma API</a>
+    </div>
+</body>
+</html>

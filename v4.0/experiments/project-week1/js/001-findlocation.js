@@ -20,6 +20,7 @@ app.controller("MyCntl", function ($scope) {
 
     /*Display current location*/
     function displayCurrentLocation(position) {
+        
         var geocoder = new google.maps.Geocoder();
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 

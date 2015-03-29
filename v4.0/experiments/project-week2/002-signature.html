@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Address Auto Complete</title>
+    <title>Generate Hash Signature</title>
     <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -9,26 +9,32 @@
     <script src="../Libraries/angular.min.js"></script>
     <script src="js/002-signature.js"></script>
 </head>
-<body ng-app="MyApp">
+<body ng-app="MyApp" class="container">
     <div ng-controller="MyCntl">
-        <h1>Address Auto Complete</h1>
+        <h1>Generate Hash Signature</h1>
         <hr />
-        <a href="https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=http://localhost:61854/experiments/project-week2/001-login.html">Login</a>
-        {{access_token}}
+        Hash Signature: {{signature}}
     </div>
 
     <div>
         <hr />
         <h1>About the Experiment</h1>
         <p>
-            This experiment demonstrates uses of ngAutocomplete module that fetches address 
-            as you type and is therefore used for user to search origin and destination address 
-            in my project.
+            Some Carma API calls require a signature to be generated in order to identify the calling client. 
+            Hash the full url (the one matching the api documentation NOT one that may be rewritten), the 
+            portion of the body if applicable (e.g. for post/put) and your oauth client secret using SHA-256. 
+            Take the hex string representation of this hash. Hashing is used in various API calls for my project.
         </p>
 
         <span id="text">
             <pre>
-                &lt;input ng-autocomplete ng-model=&quot;origin&quot; type=&quot;text&quot; name=&quot;from&quot; placeholder=&quot; placeholder=&quot;Commute from:&quot; /&gt;
+    var sha256 = CryptoJS.algo.SHA256.create();
+    
+    sha256.update(api_url);
+    sha256.update(body);
+    sha256.update(client_secret);
+    hash = sha256.finalize();
+    hash = hash.toString(CryptoJS.enc.Hex);                
             </pre>
         </span>
     </div>
@@ -37,21 +43,21 @@
 
     <h1>Source Code</h1>
     <div id="doc">
-        <a href="../../fileview/Default.aspx?~/experiments/project-week1/002-autocomplete.html"
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/002-signature.html"
            target="_blank">View Source Code</a>
     </div>
     <div id="doc">
-        <a href="../../fileview/Default.aspx?~/experiments/project-week1/css/style.css"
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/css/style.css"
            target="_blank">View CSS Code</a>
     </div>
     <div id="doc">
-        <a href="../../fileview/Default.aspx?~/experiments/project-week1/js/002-autocomplete.js"
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/js/002-signature.js"
            target="_blank">View JS Code</a>
     </div>
     <hr />
     <h1>Reference</h1>
     <div id="doc">
-        <a href="https://github.com/wpalahnuk/ngAutocomplete" target="_blank">ngAutocomplete</a>
+        <a href="https://engineering.car.ma/2015/02/11/generating-the-client-signature/" target="_blank">Carma API</a>
     </div>
 </body>
 </html>

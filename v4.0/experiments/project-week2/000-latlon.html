@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Address to LatLon</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/ngAutocomplete.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="js/000-latlon.js"></script>
+</head>
+<body ng-app="MyApp" class="container">
+    <div ng-controller="MyCntl">
+        <h1>Address to LatLon</h1>
+        <hr />
+        <input ng-autocomplete ng-model="origin" type="text" name="from" placeholder="Commute from:" />
+        <input ng-autocomplete ng-model="dest" type="text" name="to" placeholder="Commute to:" />
+        <button ng-click="click()">Search</button>
+        <div>
+            Origin Latitude: {{origin_lat}} Origin Longitude: {{origin_lon}} 
+            Destination Latitude: {{dest_lat}} Destination Longitude: {{dest_lon}}
+        </div>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates uses of Google Maps API to convert an address location to 
+            its corresponding latitude and longitude. Here, the destination latlon conversion is 
+            dependent on successful conversion of origin location. This is used in my experiment to fetch 
+            search data from the API.
+        </p>
+
+        <span id="text">
+            <pre>
+    new google.maps.Geocoder().geocode({ &apos;address&apos;: $scope.origin }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var origin_latitude = results[0].geometry.location.lat();
+                var origin_longitude = results[0].geometry.location.lng();
+                new google.maps.Geocoder().geocode({ &apos;address&apos;: $scope.dest }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var dest_latitude = results[0].geometry.location.lat();
+                        var dest_longitude = results[0].geometry.location.lng();
+    ...
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/000-latlon.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/js/000-latlon.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://developers.google.com/maps/" target="_blank">Google Maps</a>
+    </div>
+</body>
+</html>

@@ -8,16 +8,16 @@ app.controller("MyCntl", function ($scope, $http) {
 
     //var body = {
     //    "lastName": "Alwani",
-    //    "password": "#Gdmo0577",
+    //    "password": "xxxxxxxx",
     //    "email": "adib.alwani@hotmail.com",
     //    "gender": "m",
     //    "firstName": "Adib"
     //}
-
+    //console.log(JSON.stringify(body));
     var body = "adib.alwani@hotmail.com";
 
     var sha256 = CryptoJS.algo.SHA256.create();
-    //console.log(JSON.stringify(body));
+    
     sha256.update(api_url);
     sha256.update(body);
     sha256.update(client_secret);
@@ -25,5 +25,6 @@ app.controller("MyCntl", function ($scope, $http) {
     hash = sha256.finalize();
 
     hash = hash.toString(CryptoJS.enc.Hex);
-    console.log(hash);
+    $scope.signature = hash;
+    //console.log(hash);
 });
