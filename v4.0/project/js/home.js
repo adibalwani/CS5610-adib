@@ -1,4 +1,4 @@
-﻿app.controller("HomeController", function ($scope, $location, $http) {
+﻿app.controller("HomeController", function ($scope, $location, $http, $rootScope) {
 
     /*Miles <-> Meters*/
     function getMiles(i) {
@@ -30,6 +30,11 @@
             console.log(response);
         })
     };
+
+    /*Logout function*/
+    $scope.logout = function () {
+        $rootScope.access_token = null;
+    }
 
     /*Remove from favorite click*/
     $scope.removeFavorite = function (index) {
@@ -108,14 +113,11 @@
     }
 
     /*Add URL for login*/
-    var index_page = "http://localhost:61854/project/index.html#/access_token";
+    var index_page = "http://localhost:61854/project/index.html#/access_token/";
     $("#login").attr("href", "https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=" + index_page);
 
     /*Add URL for signup*/
     $("#signuphref").attr("href", "https://rtr-dev.car.ma/signup");
-
-    ///*Hide Login once given access_token*/
-    //$scope.access_token = $location.url().substr(14).split("&")[0];
 
     /*Donot display*/
     $scope.signup = false;

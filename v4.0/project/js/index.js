@@ -2,19 +2,24 @@
 
 app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider.
-      when('/home', {
-          templateUrl: 'partials/home.html',
-          controller: 'HomeController'
-      }).
-      when('/search', {
-          templateUrl: 'partials/search.html',
-          controller: 'HomeController'
-      }).
-      when('/access_token', {
-          templateUrl: 'partials/home.html',
-          controller: 'TokenController'
-      }).
-      otherwise({
-          redirectTo: '/home'
-      });
+        when('/', {
+            templateUrl: 'partials/home.html',
+            controller: 'HomeController'
+        }).
+        when('/home', {
+            templateUrl: 'partials/home.html',
+            controller: 'HomeController'
+        }).
+        when('/search', {
+            templateUrl: 'partials/search.html',
+            controller: 'HomeController'
+        }).
+        when('/signup', {
+            templateUrl: 'partials/home.html',
+            controller: 'TokenController'
+        }).
+        otherwise({
+           templateUrl: 'partials/home.html',
+           controller: 'TokenController'
+       })
 }]);
