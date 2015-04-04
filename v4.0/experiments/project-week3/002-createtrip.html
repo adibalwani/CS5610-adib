@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Generate Hash Signature</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="js/000-register.js"></script>
+</head>
+<body ng-app="MyApp" class="container">
+    <div ng-controller="MyCntl">
+        <h1>Generate Hash Signature</h1>
+        <hr />
+        Hash Signature: {{signature}}
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            Some Carma API calls require a signature to be generated in order to identify the calling client. 
+            Hash the full url (the one matching the api documentation NOT one that may be rewritten), the 
+            portion of the body if applicable (e.g. for post/put) and your oauth client secret using SHA-256. 
+            Take the hex string representation of this hash. Hashing is used in various API calls for my project.
+        </p>
+
+        <span id="text">
+            <pre>
+    var sha256 = CryptoJS.algo.SHA256.create();
+    
+    sha256.update(api_url);
+    sha256.update(body);
+    sha256.update(client_secret);
+    hash = sha256.finalize();
+    hash = hash.toString(CryptoJS.enc.Hex);                
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/002-signature.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week2/js/002-signature.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://engineering.car.ma/2015/02/11/generating-the-client-signature/" target="_blank">Carma API</a>
+    </div>
+</body>
+</html>

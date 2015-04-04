@@ -1,138 +1,65 @@
-﻿app.controller("HomeController", function ($scope, $location, $http, $rootScope) {
+﻿app.controller("HomeController", function ($scope, $location, $http, $rootScope, $modal) {
 
-    /*Miles <-> Meters*/
-    function getMiles(i) {
-        return i * 0.000621371192;
-    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Trip Module*/
 
-    function getMeters(i) {
-        return i * 1609.344;
-    }
+    /*CreateTrip click*/
+    $scope.trip = function () {
+        $location.path('/trip');
+    };
 
-    /*Get Favorites*/
-    $scope.getFavorite = function () {
-        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*User Module - login, logout, register*/
 
-        $http.get("https://api-dev.car.ma/v1/users/SELF/favouriteUsers?userFields=ALIAS&pageSize=20&pageNum=1")
+    /*Login function*/
+    $scope.login = function () {
+        //$modal.open({
+        //    templateUrl: 'partials/login.html',
+        //    controller: 'LoginController'
+        //});
+
+        /*Temporary Login Bypass*/
+        var body = {
+            "client_id": "ext-adib-alwani",
+            "client_secret": "2EF3313BABACC399ED2618E437CF2",
+            "username": "alwani.a@husky.neu.edu",
+            "password": "#Gdmo0577",
+            "grant_type": "password",
+            "scope": "rtr"
+        };
+        
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+        $http.post("https://api-dev.car.ma:443/security/oauth/token/pw", $.param(body))
         .success(function (response) {
+            $rootScope.access_token = response.access_token;
+        })
+        .error(function (response) {
             console.log(response);
         });
-    }
+        /*Temporary Login Bypass*/
 
-    /*Add to favorite click*/
-    $scope.addFavorite = function (index) {
-        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
-
-        //console.log($scope.searchResults[index].ownerUid);
-        //$http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/add")
-        $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/1485767212/add")
-        .success(function (response) {
-            console.log(response);
-        })
     };
 
     /*Logout function*/
     $scope.logout = function () {
         $rootScope.access_token = null;
-    }
-
-    /*Remove from favorite click*/
-    $scope.removeFavorite = function (index) {
-        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
-        console.log("remove");
-        //console.log($scope.searchResults[index].ownerUid);
-        $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/remove")
-        .success(function (response) {
-            console.log("removed");
-            console.log(response);
-        })
     };
 
-    /*View detailed profile*/
-    $scope.viewProfile = function (index) {
-
+    /*Signup click - Redirect to signup page*/
+    $scope.signUp = function () {
+        $location.path('/signup');
     };
 
-    /*Search click*/
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Search Module*/
+
+    /*Search click - set parameters and redirect*/
     $scope.search = function () {
-        new google.maps.Geocoder().geocode({ 'address': $scope.origin }, function (results, status) {
-            /*Origin address to LatLon*/
-            if (status == google.maps.GeocoderStatus.OK) {
-                var origin_latitude = results[0].geometry.location.lat();
-                var origin_longitude = results[0].geometry.location.lng();
-
-                new google.maps.Geocoder().geocode({ 'address': $scope.destination }, function (results, status) {
-                    /*Destination address to LatLon*/
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var dest_latitude = results[0].geometry.location.lat();
-                        var dest_longitude = results[0].geometry.location.lng();
-
-                        $http.defaults.headers.common.Authorization = "";
-
-                        $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($scope.date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
-                        .success(function (response) {
-                            console.log(response);
-                            for (var i in response.trips) {
-                                /*Convert startMinutes to Hours and Minutes of Local Time*/
-                                var hours = Math.floor(response.trips[i].schedule.startMinutes / 60);
-                                var minutes = response.trips[i].schedule.startMinutes % 60;
-                                if (hours > 12) {
-                                    var ampm = "PM";
-                                    hours = hours - 12;
-                                } else {
-                                    var ampm = "AM";
-                                }
-                                response.trips[i].schedule.hours = appendZero(hours);
-                                response.trips[i].schedule.minutes = appendZero(minutes);
-                                response.trips[i].schedule.ampm = ampm;
-
-                                /*Change user role*/
-                                if (response.trips[i].userRole == "RIDE") {
-                                    response.trips[i].userRole = "Rider";
-                                } else {
-                                    response.trips[i].userRole = "Driver";
-                                }
-
-                                /*Convert metres to miles*/
-                                response.trips[i].distance = Math.round(getMiles(response.trips[i].distance) * 10) / 10;
-                            }
-                            $scope.searchResults = response.trips;
-                        });
-                    }
-                });
-            }
-        });
-    };
-
-    /*Append zero to time*/
-    function appendZero(i) {
-        if (i < 10) {
-            i = "0" + i;
-        }
-        return i;
-    }
-
-    /*Add URL for login*/
-    var index_page = "http://localhost:61854/project/index.html#/access_token/";
-    $("#login").attr("href", "https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=" + index_page);
-
-    /*Add URL for signup*/
-    $("#signuphref").attr("href", "https://rtr-dev.car.ma/signup");
-
-    /*Donot display*/
-    $scope.signup = false;
-    $scope.login = false;
-
-    /*Display signup page*/
-    $scope.openSignUp = function () {
-        $scope.signup = true;
-        $scope.login = false;
-    };
-
-    /*Display login page*/
-    $scope.openLogin = function () {
-        $scope.login = true;
-        $scope.signup = false;
+        $location.search('origin', $scope.origin);
+        $location.search('destination', $scope.destination);
+        $location.search('date', $scope.date);
+        $location.path('/search');
     };
 
     /*Date Picker*/
@@ -181,8 +108,9 @@
                 alert("Geocode was not successful for the following reason: " + status);
             }
         });
-    }
+    };
 
+    /*Error on failure of Maps API*/
     function displayError(error) {
         var errorType = {
             0: "Unknown error",
@@ -195,5 +123,8 @@
             errorMessage = errorMessage + "  " + error.message;
         }
         alert("Error Message " + errorMessage);
-    }
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
 });

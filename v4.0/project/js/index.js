@@ -12,14 +12,17 @@ app.config(["$routeProvider", function ($routeProvider) {
         }).
         when('/search', {
             templateUrl: 'partials/search.html',
-            controller: 'HomeController'
+            controller: 'SearchController'
         }).
         when('/signup', {
-            templateUrl: 'partials/home.html',
-            controller: 'TokenController'
+            templateUrl: 'partials/signup.html',
+            controller: 'SignUpController'
+        }).
+        when('/trip', {
+            templateUrl: 'partials/trip.html',
+            controller: 'TripController'
         }).
         otherwise({
-           templateUrl: 'partials/home.html',
-           controller: 'TokenController'
+            redirectTo: '/'
        })
 }]);
