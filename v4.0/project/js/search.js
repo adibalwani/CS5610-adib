@@ -33,9 +33,12 @@
                     var dest_latitude = results[0].geometry.location.lat();
                     var dest_longitude = results[0].geometry.location.lng();
 
+                    $http.defaults.headers.post["Content-Type"] = "application/json";
                     $http.defaults.headers.common.Authorization = "";
 
                     $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($location.search().date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
+                    //$http.get("https://api-dev.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($location.search().date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
+                    //$http.get("https://api-dev.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=-71.058880&originLat=42.360082&&&&&tripType=RIDE_OR_DRIVE&departureTimeStart=1428185044&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&&")
                     .success(function (response) {
                         console.log(response);
                         for (var i in response.trips) {
@@ -83,16 +86,29 @@
     }
 
     /*Add to favorite click*/
-    $scope.addFavorite = function (index) {
-        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+    //$scope.addFavorite = function (index) {
+    //    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
 
-        //console.log($scope.searchResults[index].ownerUid);
-        //$http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/add")
-        $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/1485767212/add")
+    //    //console.log($scope.searchResults[index].ownerUid);
+    //    //$http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/add")
+    //    $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/1485767212/add")
+    //    .success(function (response) {
+    //        console.log(response);
+    //    })
+    //};
+
+    $scope.addFavorite = function (index) {
+        var body = {
+            userId: "SELF",
+            userIdFavorite: $scope.searchResults[index].ownerUid
+        };
+        
+        $http.post("/v1/users/favorite", body)
         .success(function (response) {
             console.log(response);
-        })
+        });
     };
+
 
     /*Remove from favorite click*/
     $scope.removeFavorite = function (index) {

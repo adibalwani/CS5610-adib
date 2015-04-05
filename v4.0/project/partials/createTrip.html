@@ -10,65 +10,93 @@
 
         <form class="form-horizontal" role="form">
             <div class="form-group">
-                <div class="col-lg-6 text-center">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-3 text-center">
                     <a href="" class="page-scroll btn btn-xl" ng-click="setRoundTrip()">Round trip</a>
                 </div>
-                <div class="col-lg-6 text-center">
+                <div class="col-lg-3 text-center">
                     <a href="" class="page-scroll btn btn-xl" ng-click="setOneWayTrip()">One way</a>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-3 control-label">Title:</label>
-                <div class="col-lg-8">
-                    <input ng-model="title" class="form-control" type="text">
+                <div class="col-lg-5"></div>
                 </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Title:</label>
+                <div class="col-lg-9">
+                    <input ng-model="title" placeholder="Enter a title:" class="form-control" type="text">
+                </div>
+                <div class="col-lg-1"></div>
             </div>
             <div class="form-group">
-                <div class="input-group">
-                    <label class="col-lg-3 control-label">From?</label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Enter a location:" required>
+                <label class="col-lg-2 control-label">From?</label>
+                <div class="col-lg-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Enter origin:">
                         <div class="input-group-addon">
                             <img src="img/icons/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-1"></div>
             </div>
             <div class="form-group">
-                <div class="input-group">
-                    <label class="col-lg-3 control-label">Where to?</label>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" ng-autocomplete ng-model="destination" placeholder="Enter a location:" required>
-                    </div>
+                <label class="col-lg-2 control-label">Where to?</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" ng-autocomplete ng-model="destination" placeholder="Enter destination:">
                 </div>
+                <div class="col-lg-1"></div>
             </div>
             <div class="form-group">
-                <div class="input-group">
-                    <label class="col-lg-3 control-label">Time</label>
-                    <div class="col-lg-8">
-                        <input type="time" class="form-control" ng-model="originTime" required>
-                    </div>
+                <label class="col-lg-2 control-label">Time</label>
+                <div class="col-lg-4">
+                    <timepicker ng-model="originTime" hour-step="1" minute-step="5" show-meridian="true"></timepicker>
                 </div>
-            </div>
-            <div class="form-group" ng-show="roundTrip">
-                <div class="input-group">
-                    <label class="col-lg-3 control-label">Returning time</label>
-                    <div class="col-lg-8">
-                        <input type="time" class="form-control" ng-model="destinationTime" required>
-                    </div>
+                <label class="col-lg-3 control-label" ng-show="roundTrip">Return time</label>
+                <div class="col-lg-4" ng-show="roundTrip">
+                    <timepicker ng-model="destinationTime" hour-step="1" minute-step="5" show-meridian="true"></timepicker>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-group">
-                    <div class="col-lg-6 text-center">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3 text-center">
                         <a href="" class="page-scroll btn btn-xl" ng-click="setDriver()">Driver</a>
                     </div>
-                    <div class="col-lg-6 text-center">
+                    <div class="col-lg-3 text-center">
                         <a href="" class="page-scroll btn btn-xl" ng-click="setRider()">Rider</a>
                     </div>
+                    <div class="col-lg-5"></div>
                 </div>
             </div>
-            <!-- Add Recuring days later -->
+            <div class="form-group">
+                <div class="form-group">
+                    <div class="col-lg-1">
+                        <button ng-click="setSunday()">Sunday</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-click="setMonday()">Monday</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-click="setTuesday()">Tuesday</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-click="setWednesday()">Wednesday</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-click="setThursday()">Thursday</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-click="setFriday()">Friday</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-click="setSaturday()">Saturday</button>
+                    </div>
+                    <div class="col-lg-5"></div>
+                </div>
+            </div>
+            <div>
+                {{daysOfOperation[0]}}{{daysOfOperation[1]}}{{daysOfOperation[2]}}{{daysOfOperation[3]}}
+                {{daysOfOperation[4]}}{{daysOfOperation[5]}}{{daysOfOperation[6]}}{{driver}}
+            </div>
         </form>
     </div>
 </div>
