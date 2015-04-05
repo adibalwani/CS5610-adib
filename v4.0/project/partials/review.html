@@ -1,0 +1,30 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Add Review</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div ng-show="fail" class="alert alert-info alert-dismissable">
+            <i class="fa fa-coffee"></i>
+            {{fail_msg}}
+        </div>
+
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Review:</label>
+                <div class="col-lg-9">
+                    <input ng-model="review" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Rating:</label>
+                <div class="col-lg-8">
+                    <rating ng-model="rating" max="5" readonly=false></rating>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="submit()">Submit</button>
+    <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</div>

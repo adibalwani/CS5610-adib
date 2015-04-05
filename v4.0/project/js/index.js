@@ -22,6 +22,10 @@ app.config(["$routeProvider", function ($routeProvider) {
             templateUrl: 'partials/trip.html',
             controller: 'TripController'
         }).
+        when('/review', {
+            templateUrl: 'partials/review.html',
+            controller: 'ReviewController'
+        }).
         otherwise({
             redirectTo: '/'
        })

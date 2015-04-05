@@ -81,7 +81,7 @@ app.get('/v1/:userId/favorite', function (req, res) {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
-/*Favorite Module*/
+/*Review Module*/
 
 /*Add Review*/
 app.post('/v1/:userId/review/:userIdReview/add', function (req, res) {
@@ -115,7 +115,7 @@ app.post('/v1/:userId/review/:userIdReview/remove', function (req, res) {
 
 /*Get Review*/
 app.get('/v1/:userId/review', function (req, res) {
-    favoriteModel.find({ userId: req.params.userId }, function (err, data) {
+    reviewModel.find({ userIdReview: req.params.userId }, function (err, data) {
         if (data.length > 0) {
             res.status(200).json(data);
         } else {

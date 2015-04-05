@@ -1,4 +1,4 @@
-﻿app.controller("SearchController", function ($scope, $http, $location, $rootScope) {
+﻿app.controller("SearchController", function ($scope, $http, $location, $rootScope, $modal) {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Search Module*/
@@ -109,40 +109,42 @@
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Review Module*/
 
-    ///*Get Favorites*/
-    //$scope.getFavorite = function () {
-    //    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+    /*Get Review*/
+    $scope.getReview = function () {
+        $http.get("http://localhost:3000/v1/" + $scope.uid + "/review")
+        .success(function (response) {
+            console.log(response);
+        })
+        .error(function (response) {
+            console.log(response);
+        });
+    }
 
-    //    $http.get("https://api-dev.car.ma/v1/users/SELF/favouriteUsers?userFields=ALIAS&pageSize=20&pageNum=1")
-    //    .success(function (response) {
-    //        console.log(response);
-    //    });
-    //}
+    /*Add review click*/
+    $scope.addReview = function (index) {
+        $modal.open({
+            templateUrl: 'partials/review.html',
+            controller: 'ReviewController',
+            resolve: {
+                ownerUid: function () {
+                    return $scope.searchResults[index].ownerUid;
+                }
+            }
+        });
+    };
 
-    /*Add to favorite click*/
-    //$scope.addFavorite = function (index) {
-    //    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
-
-    //    //console.log($scope.searchResults[index].ownerUid);
-    //    //$http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/add")
-    //    $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/1485767212/add")
-    //    .success(function (response) {
-    //        console.log(response);
-    //    })
-    //};
-
-    /*Remove from favorite click*/
-    //$scope.removeFavorite = function (index) {
-    //    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
-    //    console.log("remove");
-    //    //console.log($scope.searchResults[index].ownerUid);
-    //    $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/remove")
-    //    .success(function (response) {
-    //        console.log("removed");
-    //        console.log(response);
-    //    })
-    //};
+    /*Remove review click*/
+    $scope.removeReview = function (index) {
+        $http.post("http://localhost:3000/v1/" + $scope.uid + "/review/" + $scope.searchResults[index].ownerUid + "/remove")
+        .success(function (response) {
+            console.log(response);
+        })
+        .error(function (response) {
+            console.log(response);
+        });
+    };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Profile Module*/
