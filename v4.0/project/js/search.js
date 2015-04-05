@@ -77,13 +77,48 @@
 
     /*Get Favorites*/
     $scope.getFavorite = function () {
-        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
-
-        $http.get("https://api-dev.car.ma/v1/users/SELF/favouriteUsers?userFields=ALIAS&pageSize=20&pageNum=1")
+        $http.get("http://localhost:3000/v1/" + $scope.uid + "/favorite")
         .success(function (response) {
+            console.log(response);
+        })
+        .error(function (response) {
             console.log(response);
         });
     }
+
+    /*Add to favorite click*/
+    $scope.addFavorite = function (index) {
+        $http.post("http://localhost:3000/v1/" + $scope.uid +"/favorite/" + $scope.searchResults[index].ownerUid + "/add")
+        .success(function (response) {
+            console.log(response);
+        })
+        .error(function (response) {
+            console.log(response);
+        });
+    };
+
+    /*Remove from favorite click*/
+    $scope.removeFavorite = function (index) {
+        $http.post("http://localhost:3000/v1/" + $scope.uid + "/favorite/" + $scope.searchResults[index].ownerUid + "/remove")
+        .success(function (response) {
+            console.log(response);
+        })
+        .error(function (response) {
+            console.log(response);
+        });
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///*Get Favorites*/
+    //$scope.getFavorite = function () {
+    //    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+
+    //    $http.get("https://api-dev.car.ma/v1/users/SELF/favouriteUsers?userFields=ALIAS&pageSize=20&pageNum=1")
+    //    .success(function (response) {
+    //        console.log(response);
+    //    });
+    //}
 
     /*Add to favorite click*/
     //$scope.addFavorite = function (index) {
@@ -97,30 +132,17 @@
     //    })
     //};
 
-    $scope.addFavorite = function (index) {
-        var body = {
-            userId: "SELF",
-            userIdFavorite: $scope.searchResults[index].ownerUid
-        };
-        
-        $http.post("/v1/users/favorite", body)
-        .success(function (response) {
-            console.log(response);
-        });
-    };
-
-
     /*Remove from favorite click*/
-    $scope.removeFavorite = function (index) {
-        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
-        console.log("remove");
-        //console.log($scope.searchResults[index].ownerUid);
-        $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/remove")
-        .success(function (response) {
-            console.log("removed");
-            console.log(response);
-        })
-    };
+    //$scope.removeFavorite = function (index) {
+    //    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+    //    console.log("remove");
+    //    //console.log($scope.searchResults[index].ownerUid);
+    //    $http.post("https://api-dev.car.ma/v1/users/SELF/favouriteUsers/" + $scope.searchResults[index].ownerUid + "/remove")
+    //    .success(function (response) {
+    //        console.log("removed");
+    //        console.log(response);
+    //    })
+    //};
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Profile Module*/

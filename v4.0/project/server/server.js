@@ -12,7 +12,14 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
 
-app.use(express.static(__dirname + '../'));
+app.use(express.static(__dirname + '/public'));
+
+/*Allow CORS request*/
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+});
 
 /**************************************mongodb/000-savemongo************************************/
 
@@ -21,16 +28,103 @@ var favoriteSchema = new mongoose.Schema({
     userIdFavorite: String
 }, { collection: 'favorite' });
 
-var favoriteModel = mongoose.model("FavoriteModel", favoriteSchema);
+var reviewSchema = new mongoose.Schema({
+    userId: String,
+    userIdReview: String,
+    rating: String,
+    review: String
+}, { collection: 'review' });
 
-app.post('/v1/users/favorite', function (req, res) {
-    var favorite = new FavoriteModel(req.body);
-    favorite.save(function () {
-        FavoriteModel.find(function (err, data) {
-            res.json(data);
-        });
+var favoriteModel = mongoose.model("FavoriteModel", favoriteSchema);
+var reviewModel = mongoose.model("ReviewModel", reviewSchema);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/*Favorite Module*/
+
+/*Add to Favorites*/
+app.post('/v1/:userId/favorite/:userIdFavorite/add', function (req, res) {
+    var favorite = new favoriteModel({
+        userId: req.params.userId,
+        userIdFavorite: req.params.userIdFavorite
+    });
+    favoriteModel.find({ userId: req.params.userId, userIdFavorite: req.params.userIdFavorite }, function (err, data) {
+        if (data.length == 0) {
+            favorite.save(function () {
+                res.status(200).json(favorite);
+            });
+        } else {
+            res.status(422).json({error: "User is already favorited"});
+        }
     });
 });
+
+/*Remove from Favorites*/
+app.post('/v1/:userId/favorite/:userIdFavorite/remove', function (req, res) {
+    favoriteModel.remove({ userId: req.params.userId, userIdFavorite: req.params.userIdFavorite }, function (err, data) {
+        if (data > 0) {
+            res.status(200).json({ message: "Successfully Removed" });
+        } else {
+            res.status(404).json({ error: "No relationship found" });
+        }
+    });
+});
+
+/*Get Favorites*/
+app.get('/v1/:userId/favorite', function (req, res) {
+    favoriteModel.find({ userId: req.params.userId }, function (err, data) {
+        if (data.length > 0) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).json({ error: "User has not favorited anyone" });
+        }
+    });
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/*Favorite Module*/
+
+/*Add Review*/
+app.post('/v1/:userId/review/:userIdReview/add', function (req, res) {
+    var review = new reviewModel({
+        userId: req.params.userId,
+        userIdReview: req.params.userIdReview,
+        review: req.body.review,
+        rating: req.body.rating
+    });
+    reviewModel.find({ userId: req.params.userId, userIdReview: req.params.userIdReview }, function (err, data) {
+        if (data.length == 0) {
+            review.save(function () {
+                res.status(200).json(review);
+            });
+        } else {
+            res.status(422).json({ error: "User has already reviewed" });
+        }
+    });
+});
+
+/*Remove Review*/
+app.post('/v1/:userId/review/:userIdReview/remove', function (req, res) {
+    reviewModel.remove({ userId: req.params.userId, userIdReview: req.params.userIdReview }, function (err, data) {
+        if (data > 0) {
+            res.status(200).json({ message: "Successfully Removed" });
+        } else {
+            res.status(404).json({ error: "No relationship found" });
+        }
+    });
+});
+
+/*Get Review*/
+app.get('/v1/:userId/review', function (req, res) {
+    favoriteModel.find({ userId: req.params.userId }, function (err, data) {
+        if (data.length > 0) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).json({ error: "User has not been reviewed" });
+        }
+    });
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 //var commentModel = mongoose.model("CommentModel", commentSchema);
 

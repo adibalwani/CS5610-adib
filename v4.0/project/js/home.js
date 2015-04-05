@@ -33,6 +33,7 @@
         $http.post("https://api-dev.car.ma:443/security/oauth/token/pw", $.param(body))
         .success(function (response) {
             $rootScope.access_token = response.access_token;
+            $rootScope.uid = response.uid;
         })
         .error(function (response) {
             console.log(response);
