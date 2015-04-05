@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login using OAuth</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/jquery-1.11.2.js"></script>
+    <script src="js/001-login.js"></script>
+</head>
+<body ng-app="MyApp">
+    <div ng-controller="Controller">
+        <h1>Login using OAuth</h1>
+        <hr />
+        <div class="row">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input ng-model="email" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Password:</label>
+                    <div class="col-lg-8">
+                        <input ng-model="password" class="form-control" type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Login:</label>
+                    <div class="col-lg-8">
+                        <button class="btn btn-primary" ng-click="login()">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            This experiment demonstrates uses of OAuth to fetch access_token from the API website. 
+            We need to provide client_id and the response obtained contains information like access_token, 
+            user_id, token_type, etc. in the URL. It is used in my project to login user. Previously, I 
+            implemented login using implicit OAuth but since it doesn't support proper logout, I needed to 
+            redesign my login module so as to use this explicit OAuth way.
+        </p>
+
+        <span id="text">
+            <pre>
+        var body = {
+            &quot;client_id&quot;: &quot;ext-adib-alwani&quot;,
+            &quot;client_secret&quot;: &quot;2EF3313BABACC399ED2618E437CF2&quot;,
+            &quot;username&quot;: $scope.email,
+            &quot;password&quot;: $scope.password,
+            &quot;grant_type&quot;: &quot;password&quot;,
+            &quot;scope&quot;: &quot;rtr&quot;
+        };
+        $http.defaults.headers.post[&quot;Content-Type&quot;] = &quot;application/x-www-form-urlencoded&quot;;
+        $http.post(&quot;https://api-dev.car.ma:443/security/oauth/token/pw&quot;, $.param(body))
+        .success(function (response) {
+        ...
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/001-login.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/js/001-login.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://api-dev.car.ma/apidoc/ref/index.html" target="_blank">Carma API</a>
+    </div>
+
+</body>
+</html>

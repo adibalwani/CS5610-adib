@@ -1,40 +1,166 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Generate Hash Signature</title>
+    <title>Create Trip</title>
     <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+    <script src="../Libraries/jquery-1.11.2.js"></script>
     <script src="../Libraries/angular.min.js"></script>
-    <script src="js/000-register.js"></script>
+    <script src="../Libraries/ngAutocomplete.js"></script>
+    <script src="../Libraries/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="js/002-createtrip.js"></script>
 </head>
 <body ng-app="MyApp" class="container">
     <div ng-controller="MyCntl">
-        <h1>Generate Hash Signature</h1>
+        <h1>Create Trip</h1>
         <hr />
-        Hash Signature: {{signature}}
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-3 text-center">
+                <a href="" class="page-scroll btn btn-xl" ng-click="setRoundTrip()">Round trip</a>
+            </div>
+            <div class="col-lg-3 text-center">
+                <a href="" class="page-scroll btn btn-xl" ng-click="setOneWayTrip()">One way</a>
+            </div>
+            <div class="col-lg-5"></div>
+        </div>
+        <div class="row">
+            <label class="col-lg-2 control-label">Title:</label>
+            <div class="col-lg-9">
+                <input ng-model="title" placeholder="Enter a title:" class="form-control" type="text">
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+        <div class="row">
+            <label class="col-lg-2 control-label">From?</label>
+            <div class="col-lg-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Enter origin:">
+                    <div class="input-group-addon">
+                        <img src="img/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+        <div class="row">
+            <label class="col-lg-2 control-label">Where to?</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" ng-autocomplete ng-model="destination" placeholder="Enter destination:">
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+        <div class="row">
+            <label class="col-lg-2 control-label">Time</label>
+            <div class="col-lg-4">
+                <timepicker ng-model="originTime" hour-step="1" minute-step="5" show-meridian="true"></timepicker>
+            </div>
+            <label class="col-lg-3 control-label" ng-show="roundTrip">Return time</label>
+            <div class="col-lg-4" ng-show="roundTrip">
+                <timepicker ng-model="destinationTime" hour-step="1" minute-step="5" show-meridian="true"></timepicker>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-2">Role:</div>
+                <div class="col-lg-3 text-center">
+                    <a href="" class="page-scroll btn btn-xl" ng-click="setDriver()">Driver</a>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <a href="" class="page-scroll btn btn-xl" ng-click="setRider()">Rider</a>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-2">
+                    Drive on:
+                </div>
+                <div class="col-lg-1">
+                    <button ng-click="setSunday()">Sunday</button>
+                </div>
+                <div class="col-lg-1">
+                    <button ng-click="setMonday()">Monday</button>
+                </div>
+                <div class="col-lg-1">
+                    <button ng-click="setTuesday()">Tuesday</button>
+                </div>
+                <div class="col-lg-1">
+                    <button ng-click="setWednesday()">Wednesday</button>
+                </div>
+                <div class="col-lg-1">
+                    <button ng-click="setThursday()">Thursday</button>
+                </div>
+                <div class="col-lg-1">
+                    <button ng-click="setFriday()">Friday</button>
+                </div>
+                <div class="col-lg-1">
+                    <button ng-click="setSaturday()">Saturday</button>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            S:{{daysOfOperation[0]}} M:{{daysOfOperation[1]}} T:{{daysOfOperation[2]}} W:{{daysOfOperation[3]}} 
+            T:{{daysOfOperation[4]}} F:{{daysOfOperation[5]}} S:{{daysOfOperation[6]}} Role:{{driver}}
+        </div>
+        <div class="row">
+            <button ng-click="createTrip()" class="btn btn-primary">Create Trip</button>
+        </div>
     </div>
 
     <div>
         <hr />
         <h1>About the Experiment</h1>
         <p>
-            Some Carma API calls require a signature to be generated in order to identify the calling client. 
-            Hash the full url (the one matching the api documentation NOT one that may be rewritten), the 
-            portion of the body if applicable (e.g. for post/put) and your oauth client secret using SHA-256. 
-            Take the hex string representation of this hash. Hashing is used in various API calls for my project.
+            Creates a trip (schedule) using the supplied details. This is uses in my project for creating 
+            a new ride/drive trip depending on the user preference. The UI for this module is still not 
+            well built. It uses Google Maps API for location to lat/lon and viceversa. Also it uses 
+            ngAutoComplete as shown in previous experiments. Moment JS is used to convert input time to 
+            epoch timestamp. Also, I have bypassed login so this trip would be created for demo user.
         </p>
 
         <span id="text">
             <pre>
-    var sha256 = CryptoJS.algo.SHA256.create();
-    
-    sha256.update(api_url);
-    sha256.update(body);
-    sha256.update(client_secret);
-    hash = sha256.finalize();
-    hash = hash.toString(CryptoJS.enc.Hex);                
+            new google.maps.Geocoder().geocode({ &apos;address&apos;: $scope.origin }, function (results, status) {
+            /*Origin address to LatLon*/
+            if (status == google.maps.GeocoderStatus.OK) {
+                var origin_latitude = results[0].geometry.location.lat();
+                var origin_longitude = results[0].geometry.location.lng();
+                new google.maps.Geocoder().geocode({ &apos;address&apos;: $scope.destination }, function (results, status) {
+                    /*Destination address to LatLon*/
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var dest_latitude = results[0].geometry.location.lat();
+                        var dest_longitude = results[0].geometry.location.lng();
+                        var body = {
+                            &quot;enabled&quot;: true,
+                            &quot;schedule&quot;: {
+                                &quot;startMinutes&quot;: moment(new Date($scope.originTime).getTime()).unix(),
+                                &quot;daysOfOperation&quot;: $scope.daysOfOperation,
+                                &quot;type&quot;: &quot;REPEATING_WEEKLY&quot;
+                            },
+                            &quot;alias&quot;: $scope.title,
+                            &quot;origin&quot;: {
+                                &quot;address&quot;: $scope.origin,
+                                &quot;longitude&quot;: origin_longitude,
+                                &quot;latitude&quot;: origin_latitude
+                            },
+                            &quot;type&quot;: $scope.driver,
+                            &quot;destination&quot;: {
+                                &quot;address&quot;: $scope.destination,
+                                &quot;longitude&quot;: dest_longitude,
+                                &quot;latitude&quot;: dest_latitude
+                            }
+                        };
+                        $http.defaults.headers.post[&quot;Content-Type&quot;] = &quot;application/json&quot;;
+                        $http.defaults.headers.common.Authorization = &quot;Bearer &quot; + $scope.access_token;
+                        $http.post(&quot;https://api-dev.car.ma:443/v3/users/SELF/trips&quot;, body)
+                        ...
             </pre>
         </span>
     </div>
@@ -43,21 +169,21 @@
 
     <h1>Source Code</h1>
     <div id="doc">
-        <a href="../../fileview/Default.aspx?~/experiments/project-week2/002-signature.html"
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/002-createtrip.html"
            target="_blank">View Source Code</a>
     </div>
     <div id="doc">
-        <a href="../../fileview/Default.aspx?~/experiments/project-week2/css/style.css"
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/css/style.css"
            target="_blank">View CSS Code</a>
     </div>
     <div id="doc">
-        <a href="../../fileview/Default.aspx?~/experiments/project-week2/js/002-signature.js"
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/js/002-createtrip.js"
            target="_blank">View JS Code</a>
     </div>
     <hr />
     <h1>Reference</h1>
     <div id="doc">
-        <a href="https://engineering.car.ma/2015/02/11/generating-the-client-signature/" target="_blank">Carma API</a>
+        <a href="https://api-dev.car.ma/apidoc/ref/index.html" target="_blank">Carma API</a>
     </div>
 </body>
 </html>

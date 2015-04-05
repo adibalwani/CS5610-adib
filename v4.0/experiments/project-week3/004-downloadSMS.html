@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SMS Download Link</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="js/004-downloadSMS.js"></script>
+</head>
+<body ng-app="MyApp" class="container">
+    <div ng-controller="MyCntl">
+        <h1>SMS Download Link</h1>
+        <hr />
+        <div class="container">
+            <div class="row">
+                <input type="tel" placeholder="Mobile Number:" ng-model="phoneNumber" />
+            </div>
+            <div class="row">
+                <div class="clearfix"></div>
+                <div class="col-lg-12 text-center">
+                    <div id="success"></div>
+                    <button type="submit" class="btn btn-xl" ng-click="signUp()">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            Request a text containing app download information to a telephone number. This feature was asked for 
+            by the API developer, so I will be including a download link for their APP in my homepage. This 
+            uses Carma API's smsAppDownloadLinks endpoint for sending text to particular number.
+        </p>
+
+        <span id="text">
+            <pre>
+        var body = {
+            &quot;phoneNumber&quot;: $scope.phoneNumber,
+            &quot;locale&quot;: &quot;en_US&quot;,
+            &quot;clientId&quot;: &quot;ext-adib-alwani&quot;,
+            &quot;country&quot;: &quot;USA&quot;
+        };
+        $http.post(&quot;https://api-dev.car.ma:443/v1/users/smsAppDownloadLinks?client_id=ext-adib-alwani&quot;, body)
+        .success(function (response) {
+        ....
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/004-downloadSMS.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/js/004-downloadSMS.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://api-dev.car.ma/apidoc/ref/index.html" target="_blank">Carma API</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>User Trips</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap-3.3.2-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../Libraries/jquery-1.11.2.js"></script>
+    <script src="../Libraries/angular.min.js"></script>
+    <script src="../Libraries/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="js/003-usertrips.js"></script>
+</head>
+<body ng-app="MyApp" class="container">
+    <div ng-controller="MyCntl">
+        <h1>User Trips</h1>
+        <hr />
+        <h3>Please Login to see User Trips(from previous experiment)</h3>
+        <h3>Email: adib@adib.com</h3>
+        <h3>Password: adibalwani</h3>
+        <div class="row">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input ng-model="email" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Password:</label>
+                    <div class="col-lg-8">
+                        <input ng-model="password" class="form-control" type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Login:</label>
+                    <div class="col-lg-8">
+                        <button class="btn btn-primary" ng-click="login()">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Trip</h2>
+            </div>
+        </div>
+
+        <div ng-repeat="result in tripResults">
+            <div class="row">
+                <div class="col-md-3">
+
+                </div>
+
+                <div class="col-md-9">
+                    <div>
+                        From: {{result.origin.address}}
+                        {{result.userRole}}
+                    </div>
+                    <div>
+                        To: {{result.destination.address}}
+                        {{result.distance}} Miles
+                    </div>
+                    <div>
+                        <span ng-show="{{result.schedule.daysOfOperation[0]}}"><b>S</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[0]}}">S</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[1]}}"><b>M</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[1]}}">M</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[2]}}"><b>T</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[3]}}">T</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[3]}}"><b>W</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[3]}}">W</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[4]}}"><b>T</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[4]}}">T</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[5]}}"><b>F</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[5]}}">F</span>
+                        <span ng-show="{{result.schedule.daysOfOperation[6]}}"><b>S</b></span>
+                        <span ng-hide="{{result.schedule.daysOfOperation[6]}}">S</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <hr />
+        <h1>About the Experiment</h1>
+        <p>
+            Retrieves the trips for a particular user. Here access_token obtained by login is required so 
+            as to fetch that users trips. This will be used in my experiment for displaying the user trips 
+            under "My Trips". The data repsonded from API is forst modified e.g. convert metres to miles, etc. 
+            and is then rendered for display in the HTML.
+        </p>
+
+        <span id="text">
+            <pre>
+            $http.defaults.headers.common.Authorization = &quot;Bearer &quot; + $scope.access_token;
+            $http.get(&quot;https://api-dev.car.ma:443/v2/users/SELF/trips?client_id=ext-adib-alwani&amp;&amp;tripFields=LOCATION_ADDRESSES%2CUSER_ROLE%2CDISTANCE%2CSCHEDULE&quot;)
+            .success(function (response) {
+                console.log(response);
+                for (var i in response.trips) {
+                    /*Change user role*/
+                    if (response.trips[i].userRole == &quot;RIDE&quot;) {
+                        response.trips[i].userRole = &quot;Rider&quot;;
+                    } else if (response.trips[i].userRole == &quot;DRIVE&quot;) {
+                        response.trips[i].userRole = &quot;Driver&quot;;
+                    } else {
+                        response.trips[i].userRole = &quot;Rider/Driver&quot;;
+                    }
+                    /*Convert metres to miles*/
+                    response.trips[i].distance = Math.round(getMiles(response.trips[i].distance) * 10) / 10;
+                }
+                $scope.tripResults = response.trips;
+            })
+            ...
+            </pre>
+        </span>
+    </div>
+
+    <hr />
+
+    <h1>Source Code</h1>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/003-usertrips.html"
+           target="_blank">View Source Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/css/style.css"
+           target="_blank">View CSS Code</a>
+    </div>
+    <div id="doc">
+        <a href="../../fileview/Default.aspx?~/experiments/project-week3/js/003-usertrips.js"
+           target="_blank">View JS Code</a>
+    </div>
+    <hr />
+    <h1>Reference</h1>
+    <div id="doc">
+        <a href="https://api-dev.car.ma/apidoc/ref/index.html" target="_blank">Carma API</a>
+    </div>
+</body>
+</html>

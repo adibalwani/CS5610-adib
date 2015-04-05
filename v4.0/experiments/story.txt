@@ -9,3 +9,4 @@
 ../story/index.htm?../experiments/mongodbexp/story.txt				Week 08 - MongoDB Experiments
 ../story/index.htm?../experiments/project-week1/story.txt			Week 09 - API/Testing Experiments
 ../story/index.htm?../experiments/project-week2/story.txt			Week 10 - API/Hashing Experiments
+../story/index.htm?../experiments/project-week3/story.txt			Week 11 - API/Express Experiments
