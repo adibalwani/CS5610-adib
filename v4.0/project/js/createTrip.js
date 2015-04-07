@@ -1,4 +1,4 @@
-﻿app.controller("CreateTripController", function ($scope, $http, $modalInstance, $rootScope, $location) {
+﻿app.controller("CreateTripController", function ($scope, $http, $modalInstance, $location, $cookieStore) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module - create*/
@@ -125,7 +125,7 @@
                         };
                         console.log(body);
                         $http.defaults.headers.post["Content-Type"] = "application/json";
-                        $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+                        $http.defaults.headers.common.Authorization = "Bearer " + $cookieStore.get('access_token');
 
                         $http.post("https://api-dev.car.ma:443/v3/users/SELF/trips", body)
                         .success(function (response) {

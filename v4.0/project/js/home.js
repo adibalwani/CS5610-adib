@@ -1,4 +1,4 @@
-﻿app.controller("HomeController", function ($scope, $location, $http, $rootScope, $modal) {
+﻿app.controller("HomeController", function ($scope, $location, $http, $modal, $cookieStore) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module*/
@@ -11,11 +11,18 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*User Module - login, logout, register*/
 
+    /*Check if already logged in*/
+    $scope.access_token = $cookieStore.get('access_token');
+
     /*Login function*/
     $scope.login = function () {
-        //$modal.open({
+        //var modalInstance = $modal.open({
         //    templateUrl: 'partials/login.html',
         //    controller: 'LoginController'
+        //});
+
+        //modalInstance.result.then(function () {
+        //    $scope.access_token = $cookieStore.get('access_token');
         //});
 
         /*Temporary Login Bypass*/
@@ -32,19 +39,20 @@
 
         $http.post("https://api-dev.car.ma:443/security/oauth/token/pw", $.param(body))
         .success(function (response) {
-            $rootScope.access_token = response.access_token;
-            $rootScope.uid = response.uid;
+            $cookieStore.put('access_token', response.access_token);
+            $cookieStore.put('uid', response.uid);
+            $scope.access_token = $cookieStore.get('access_token');
         })
         .error(function (response) {
             console.log(response);
         });
         /*Temporary Login Bypass*/
-
     };
 
     /*Logout function*/
     $scope.logout = function () {
-        $rootScope.access_token = null;
+        $cookieStore.remove('access_token');
+        $scope.access_token = $cookieStore.get('access_token');
     };
 
     /*Signup click - Redirect to signup page*/

@@ -1,0 +1,143 @@
+﻿<!-- Header -->
+<header style="background-image: url(img/profile_background.jpg)">
+    <div class="container">
+        <div class="intro-text" style="padding-bottom: 0px; padding-top: 50px">
+            <div class="intro-lead-in" style="padding-bottom: 0px">
+                <img ng-src="{{photoUrl}}" width="200" height="200" class="avatar img-circle" alt="avatar">
+            </div>
+            <div class="intro-heading" style="font-size: 30px; margin-bottom: 0px; height: 20px;">{{alias}}</div>
+            <div class="intro-heading" style="font-size: 15px; margin-bottom: 0px; height: 40px;">{{homeCity}}, {{country}}</div>
+            <div class="intro-heading" style="font-size: 20px">
+                Want to carpool with {{firstName}}?
+                <a class="page-scroll btn btn-xl" style="padding: 7px 10px;" ng-click="download()">Download</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="row bg-light-gray text-center" style="height: 50px; padding-top: 13px">
+    <span class="text-muted" style="vertical-align: middle">Joined {{registrationTime}} weeks ago</span>
+</div>
+
+<!-- Trips Section -->
+<section id="trip" style="padding-top: 120px">
+    <div class="container">
+        <div class="row" style="padding-bottom: 10px">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">{{firstName}}'s Trips</h2>
+            </div>
+        </div>
+        <div class="row" ng-repeat="result in tripResults" style="padding-bottom: 20px">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 bg-light-gray" style="height: 80px">
+                <div class="row">
+                    <div class="col-md-6 text-muted pull-left" style="padding-top: 17px">
+                        <div>{{result.origin.address}}</div>
+                        <div><span style="color: palevioletred">To:</span> {{result.destination.address}}</div>
+                    </div>
+                    <div class="col-md-6 text-muted" style="padding-top: 10px; text-align: right">
+                        <div>{{result.schedule.hours}}:{{result.schedule.minutes}} {{result.schedule.ampm}}</div>
+                        <div>
+                            <span ng-show="{{result.schedule.daysOfOperation[0]}}"><b>S</b></span>
+                            <span ng-hide="{{result.schedule.daysOfOperation[0]}}">S</span>
+                            <span ng-show="{{result.schedule.daysOfOperation[1]}}"><b>M</b></span>
+                            <span ng-hide="{{result.schedule.daysOfOperation[1]}}">M</span>
+                            <span ng-show="{{result.schedule.daysOfOperation[2]}}"><b>T</b></span>
+                            <span ng-hide="{{result.schedule.daysOfOperation[2]}}">T</span>
+                            <span ng-show="{{result.schedule.daysOfOperation[3]}}"><b>W</b></span>
+                            <span ng-hide="{{result.schedule.daysOfOperation[3]}}">W</span>
+                            <span ng-show="{{result.schedule.daysOfOperation[4]}}"><b>T</b></span>
+                            <span ng-hide="{{result.schedule.daysOfOperation[4]}}">T</span>
+                            <span ng-show="{{result.schedule.daysOfOperation[5]}}"><b>F</b></span>
+                            <span ng-hide="{{result.schedule.daysOfOperation[5]}}">F</span>
+                            <span ng-show="{{result.schedule.daysOfOperation[6]}}"><b>S</b></span>
+                            <span ng-hide="{{result.schedule.daysOfOperation[6]}}">S</span>
+                        </div>
+                        <div>{{result.distance}} Miles</div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Review Section -->
+<section id="review" style="padding-top: 120px" class="bg-light-gray">
+    <div class="container">
+        <div class="row" style="padding-bottom: 10px">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">{{firstName}}'s Reviews</h2>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px" ng-show="noReview">
+            <!-- Do when no review present -->
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="height: 80px">
+                {{firstName}} has no reviews
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row" ng-repeat="result in reviewResults" style="padding-bottom: 20px">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="background-color: white">
+                <div class="row">
+                    <div class="col-md-3 text-muted text-center">
+                        <div>
+                            <img ng-src="{{result.reviewer.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
+                        </div>
+                        <div><a href="" ng-click="viewProfile($index)">{{result.reviewer.alias}}</a></div>
+                        <div>Favored by {{result.reviewerNumberOfFavorite}} people</div>
+                        <div># of reviews: {{result.reviewerNumberOfReview}}</div>
+                    </div>
+                    <div class="col-md-9 text-muted text-center">
+                        <div style="text-align: right; padding-top: 2px"><rating ng-model="result.rating" max="5" readonly=true></rating></div>
+                        <div style="text-align: left">{{result.review}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Favorite Section -->
+<section id="review" style="padding-top: 120px">
+    <div class="container">
+        <div class="row" style="padding-bottom: 10px">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">{{firstName}}'s Favorites</h2>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px" ng-show="noReview">
+            <!-- Do when no favorite     present -->
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="height: 80px">
+                {{firstName}} has no reviews
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row" ng-repeat="result in reviewResults" style="padding-bottom: 20px">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 bg-light-gray">
+                <div class="row">
+                    <div class="col-md-6 text-muted text-center" ng-show="noFavorite">
+                        <div>No Favorite</div>
+                    </div>
+                    <div class="col-md-6 text-muted text-center" ng-repeat="favorite in favoriteResults">
+                        <div>
+                            <img ng-src="{{favorite.reviewer.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-muted text-center" ng-repeat="favored in favoredResults">
+                        <div>Blah Print</div>
+                        <div>
+                            <img ng-src="{{favored.favorite.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</section>

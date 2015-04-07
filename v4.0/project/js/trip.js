@@ -1,4 +1,4 @@
-﻿app.controller("TripController", function ($scope, $http, $rootScope, $modal) {
+﻿app.controller("TripController", function ($scope, $http, $modal, $cookieStore) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module*/
@@ -11,10 +11,9 @@
         });
 
         modalInstance.result.then(function () {
-            console.log("after result");
 
             /*Display existing Trips*/
-            $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+            $http.defaults.headers.common.Authorization = "Bearer " + $cookieStore.get('access_token');
 
             $http.get("https://api-dev.car.ma:443/v2/users/SELF/trips?client_id=ext-adib-alwani&&tripFields=LOCATION_ADDRESSES%2CUSER_ROLE%2CDISTANCE%2CSCHEDULE")
             .success(function (response) {
@@ -51,7 +50,7 @@
     }
 
     /*Display existing Trips*/
-    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+    $http.defaults.headers.common.Authorization = "Bearer " + $cookieStore.get('access_token');
 
     $http.get("https://api-dev.car.ma:443/v2/users/SELF/trips?client_id=ext-adib-alwani&&tripFields=LOCATION_ADDRESSES%2CUSER_ROLE%2CDISTANCE%2CSCHEDULE")
     .success(function (response) {

@@ -1,4 +1,4 @@
-﻿var app = angular.module('CarpoolApp', ['ngRoute', 'ngAutocomplete', 'ui.bootstrap']);
+﻿var app = angular.module('CarpoolApp', ['ngRoute', 'ngAutocomplete', 'ui.bootstrap', 'ngCookies']);
 
 app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider.
@@ -25,6 +25,10 @@ app.config(["$routeProvider", function ($routeProvider) {
         when('/review', {
             templateUrl: 'partials/review.html',
             controller: 'ReviewController'
+        }).
+        when('/profile/:userId', {
+            templateUrl: 'partials/profile.html',
+            controller: 'ProfileController'
         }).
         otherwise({
             redirectTo: '/'

@@ -1,4 +1,4 @@
-﻿app.controller("SignUpController", function ($scope, $http, $location, $rootScope) {
+﻿app.controller("SignUpController", function ($scope, $http, $location) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Register Module*/

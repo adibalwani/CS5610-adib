@@ -1,4 +1,4 @@
-﻿app.controller("LoginController", function ($scope, $modalInstance, $http, $rootScope) {
+﻿app.controller("LoginController", function ($scope, $modalInstance, $http, $cookieStore) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Login Module*/
@@ -16,12 +16,13 @@
         };
 
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        delete $http.defaults.headers.common.Authorization;
 
         $http.post("https://api-dev.car.ma:443/security/oauth/token/pw", $.param(body))
         .success(function (response) {
-            $rootScope.access_token = response.access_token;
-            $rootScope.uid = response.uid;
-            $modalInstance.dismiss('cancel');
+            $cookieStore.put('access_token', response.access_token);
+            $cookieStore.put('uid', response.uid);
+            $modalInstance.close();
         })
         .error(function (response) {
             alert(response);

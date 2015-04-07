@@ -1,6 +1,7 @@
 ﻿<!-- Search Section -->
-<section id="search" class="bg-light-gray">
+<section id="search" style="padding-top: 50px">
     <div class="container">
+
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Search</h2>
@@ -9,62 +10,120 @@
             </div>
         </div>
 
-        <div ng-repeat="result in searchResults">
-            <div class="row">
-                <div class="col-md-3">
-                    <img ng-src="{{result.owner.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
-                </div>
+        <div class="row" style="padding-top:20px; padding-bottom: 30px">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-1"></div>
 
-                <div class="col-md-9">
-                    <div>
-                        {{result.owner.alias}}
-                        {{result.schedule.hours}}:{{result.schedule.minutes}} {{result.schedule.ampm}}
-                        {{result.userRole}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Commute from:" required>
+                                <div class="input-group-addon">
+                                    <img src="img/icons/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        From: {{result.origin.address}}
-                        {{result.estimatedCost.formattedAmount}}
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-autocomplete ng-model="destination" placeholder="Commute to:" required>
+                        </div>
                     </div>
-                    <div>
-                        To: {{result.destination.address}}
-                        {{result.distance}} Miles
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Date" datepicker-popup="{{format}}" ng-model="date" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                <div class="input-group-addon">
+                                    <span ng-click="open($event)" class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <span ng-show="{{result.schedule.daysOfOperation[0]}}"><b>S</b></span>
-                        <span ng-hide="{{result.schedule.daysOfOperation[0]}}">S</span>
-                        <span ng-show="{{result.schedule.daysOfOperation[1]}}"><b>M</b></span>
-                        <span ng-hide="{{result.schedule.daysOfOperation[1]}}">M</span>
-                        <span ng-show="{{result.schedule.daysOfOperation[2]}}"><b>T</b></span>
-                        <span ng-hide="{{result.schedule.daysOfOperation[3]}}">T</span>
-                        <span ng-show="{{result.schedule.daysOfOperation[3]}}"><b>W</b></span>
-                        <span ng-hide="{{result.schedule.daysOfOperation[3]}}">W</span>
-                        <span ng-show="{{result.schedule.daysOfOperation[4]}}"><b>T</b></span>
-                        <span ng-hide="{{result.schedule.daysOfOperation[4]}}">T</span>
-                        <span ng-show="{{result.schedule.daysOfOperation[5]}}"><b>F</b></span>
-                        <span ng-hide="{{result.schedule.daysOfOperation[5]}}">F</span>
-                        <span ng-show="{{result.schedule.daysOfOperation[6]}}"><b>S</b></span>
-                        <span ng-hide="{{result.schedule.daysOfOperation[6]}}">S</span>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary form-control" ng-click="search()">Search</button>
+                        </div>
                     </div>
+
+                    <div class="col-md-1"></div>
                 </div>
             </div>
+        </div>
 
+        <div class="row" ng-repeat="result in searchResults" style="padding-bottom: 30px">
             <div class="row">
-                <div class="col-md-3">
-                    <button ng-click="viewProfile($index)">Profile</button>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="row bg-light-gray" style="height: 120px">
+                        <div class="col-md-2" style="padding-top: 10px">
+                            <img ng-src="{{result.owner.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
+                        </div>
+                        <div class="col-md-5 text-muted" style="padding-top: 20px">
+                            <div style="color: black; font-size: 20px;">
+                                {{result.owner.alias}} <span class="text-muted" style="font-size: 12px">{{result.userRole}}</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="col-md-1" style="background-color: darkgrey"></div>
+                                </div>
+                                <div class="col-md-7" style="background-color: darkgrey"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div style="font-size: 15px; padding-top: 5px">{{result.origin.address}}</div>
+                            <div style="font-size: 15px"><span style="color: palevioletred">To:</span> {{result.destination.address}}</div>
+                        </div>
+                        <div class="col-md-5 text-muted" style="padding-top: 21px; text-align: right">
+                            <div>{{result.schedule.hours}}:{{result.schedule.minutes}} {{result.schedule.ampm}}</div>
+                            <div>
+                                <span ng-show="{{result.schedule.daysOfOperation[0]}}"><b>S</b></span>
+                                <span ng-hide="{{result.schedule.daysOfOperation[0]}}">S</span>
+                                <span ng-show="{{result.schedule.daysOfOperation[1]}}"><b>M</b></span>
+                                <span ng-hide="{{result.schedule.daysOfOperation[1]}}">M</span>
+                                <span ng-show="{{result.schedule.daysOfOperation[2]}}"><b>T</b></span>
+                                <span ng-hide="{{result.schedule.daysOfOperation[2]}}">T</span>
+                                <span ng-show="{{result.schedule.daysOfOperation[3]}}"><b>W</b></span>
+                                <span ng-hide="{{result.schedule.daysOfOperation[3]}}">W</span>
+                                <span ng-show="{{result.schedule.daysOfOperation[4]}}"><b>T</b></span>
+                                <span ng-hide="{{result.schedule.daysOfOperation[4]}}">T</span>
+                                <span ng-show="{{result.schedule.daysOfOperation[5]}}"><b>F</b></span>
+                                <span ng-hide="{{result.schedule.daysOfOperation[5]}}">F</span>
+                                <span ng-show="{{result.schedule.daysOfOperation[6]}}"><b>S</b></span>
+                                <span ng-hide="{{result.schedule.daysOfOperation[6]}}">S</span>
+                            </div>
+                            <div>{{result.estimatedCost.formattedAmount}}</div>
+                            <div>{{result.distance}} Miles</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <button ng-click="addReview($index)">Add Review</button>
-                    <button ng-click="removeReview($index)">Remove Review</button>
-                </div>
-                <div class="col-md-3">
-                    <button>View on Map</button>
-                </div>
-                <div class="col-md-3">
-                    <button ng-click="addFavorite($index)">Add to Favorite</button>
-                    <button ng-click="removeFavorite($index)">Remove from Favorite</button>
-                </div>
+                <div class="col-md-2"></div>
             </div>
-            <hr>
+
+            <div class="row text-center">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button class="hvr-sweep-to-top text-muted" ng-click="viewProfile($index)" style="background-color: lightgray; height: 100%; width: 100%">Profile</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="hvr-sweep-to-top text-muted" ng-click="viewReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Review</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button ng-hide="isLoggedIn" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Favorite</button>
+                            <span ng-show="isLoggedIn">
+                                <button ng-hide="result.isFavorite" class="hvr-sweep-to-top text-muted" ng-click="addFavorite($index)" style="background-color: lightgray; height: 100%; width: 100%">Add to Favorite</button>
+                                <button ng-show="result.isFavorite" class="hvr-sweep-to-top text-muted" ng-click="removeFavorite($index)" style="background-color: lightgray; height: 100%; width: 100%">Remove from Favorite</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
         </div>
     </div>
 </section>
