@@ -1,6 +1,16 @@
 ﻿app.controller("HomeController", function ($scope, $location, $http, $modal, $cookieStore, $window) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Download Module*/
+
+    $scope.download = function () {
+        $modal.open({
+            templateUrl: 'partials/download.html',
+            controller: 'DownloadController'
+        });
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Scroll Module*/
 
     $scope.scrollTo = function (id) {
