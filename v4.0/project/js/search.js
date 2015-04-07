@@ -1,4 +1,4 @@
-﻿app.controller("SearchController", function ($scope, $http, $location, $modal, $cookieStore) {
+﻿app.controller("SearchController", function ($scope, $http, $location, $modal, $cookieStore, $window) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Search-Bar Module*/
@@ -188,6 +188,7 @@
 
         modalInstance.result.then(function () {
             $scope.isLoggedIn = true;
+            $window.location.reload();
         });
     };
 

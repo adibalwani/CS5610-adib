@@ -1,4 +1,51 @@
-﻿app.controller("HomeController", function ($scope, $location, $http, $modal, $cookieStore) {
+﻿app.controller("HomeController", function ($scope, $location, $http, $modal, $cookieStore, $window) {
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Scroll Module*/
+
+    $scope.scrollTo = function (id) {
+        $('html, body').stop().animate({
+            scrollTop: $(id).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Contact us Module*/
+
+    $scope.sendEmail = function () {
+
+        var body = {
+            "client_id": "ext-adib-alwani",
+            "client_secret": "2EF3313BABACC399ED2618E437CF2",
+            "username": "adib.alwani@hotmail.com",
+            "password": "adibalwani",
+            "grant_type": "password",
+            "scope": "rtr"
+        };
+
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        delete $http.defaults.headers.common.Authorization;
+
+        $http.post("https://api-dev.car.ma:443/security/oauth/token/pw", $.param(body))
+        .success(function (response) {
+            $http.defaults.headers.post["Content-Type"] = "application/json";
+            $http.defaults.headers.common.Authorization = "Bearer " + response.access_token;
+
+            $http.post("https://api-dev.car.ma:443/v1/users/250110403/user-messages",
+                {
+                    "body": $scope.message + " " + $scope.email + " " + $scope.phone,
+                    "title": $scope.name,
+                    "messageType": "USER_TEXT"
+                })
+            .success(function (response) {
+                alert("Thank You for your feedback");
+            })
+        })
+        .error(function (response) {
+            console.log(response);
+        });
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module*/
@@ -36,6 +83,7 @@
         };
         
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        delete $http.defaults.headers.common.Authorization;
 
         $http.post("https://api-dev.car.ma:443/security/oauth/token/pw", $.param(body))
         .success(function (response) {
@@ -52,6 +100,7 @@
     /*Logout function*/
     $scope.logout = function () {
         $cookieStore.remove('access_token');
+        $cookieStore.remove('uid');
         $scope.access_token = $cookieStore.get('access_token');
     };
 
