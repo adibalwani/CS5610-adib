@@ -14,7 +14,7 @@
             "rating": $scope.rating
         };
 
-        $http.post("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/review/" + ownerUid + "/add", body)
+        $http.post("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/review/" + ownerUid + "/add", body)
         .success(function (response) {
             $modalInstance.close();
         })

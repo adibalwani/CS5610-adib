@@ -1,6 +1,56 @@
 ﻿app.controller("SearchController", function ($scope, $http, $location, $modal, $cookieStore, $window) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Navigation Module*/
+
+    /*If logged in*/
+    $scope.access_token = $cookieStore.get('access_token');
+
+    /*Closes the Responsive Menu on Menu Item Click*/
+    $('.navbar-collapse ul li a').click(function () {
+        $('.navbar-toggle:visible').click();
+    });
+
+    /*Signup click - Redirect to signup page*/
+    $scope.signUp = function () {
+        $location.path('/signup');
+    };
+
+    /*Logo Click*/
+    $scope.goToHome = function () {
+        $location.path('/');
+    }
+
+    /*Login click*/
+    $scope.login = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/login.html',
+            controller: 'LoginController'
+        });
+
+        modalInstance.result.then(function () {
+            $window.location.reload();
+        });
+    };
+
+    /*My Trips click*/
+    $scope.trip = function () {
+        $location.path('/trip');
+    }
+
+    /*Logout function*/
+    $scope.logout = function () {
+        $cookieStore.remove('access_token');
+        $cookieStore.remove('uid');
+        $window.location.reload();
+    };
+
+    /*View My Profile*/
+    $scope.viewMyProfile = function () {
+        $location.path('/profile/' + $cookieStore.get('uid'));
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Search-Bar Module*/
 
     $scope.origin = $location.search().origin;
@@ -116,15 +166,7 @@
 
                     $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($location.search().date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
                     .success(function (response) {
-
-                        /*Logged in*/
-                        if ($cookieStore.get('access_token')) {
-                            $scope.isLoggedIn = true;
-                        } else {
-                            $scope.isLoggedIn = false;
-                        }
-
-                        for (var i in response.trips) {
+                            for (var i in response.trips) {
                             /*Convert startMinutes to Hours and Minutes of Local Time*/
                             var hours = Math.floor(response.trips[i].schedule.startMinutes / 60);
                             var minutes = response.trips[i].schedule.startMinutes % 60;
@@ -149,18 +191,18 @@
                             response.trips[i].distance = Math.round(getMiles(response.trips[i].distance) * 10) / 10;
 
                             /*Favorite Logic*/
-                            if ($scope.isLoggedIn) {    /*Logged in*/
+                            if ($scope.access_token) {    /*Logged in*/
                                 checkFavorite(i);
                             }
 
                             /*Review Logic*/
-                            if ($scope.isLoggedIn) {    /*Logged in*/
+                            if ($scope.access_token) {    /*Logged in*/
                                 checkReview(i);
                             }
 
                             function checkFavorite(index) {
                                 /*Check if already favorited*/
-                                $http.get("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/favorite/" + response.trips[index].ownerUid)
+                                $http.get("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/favorite/" + response.trips[index].ownerUid)
                                 .success(function (res) {
                                     if (res.error) {
                                         response.trips[index].isFavorite = false;   /*Is not favorite*/
@@ -175,7 +217,7 @@
 
                             function checkReview(index) {
                                 /*Check if already reviewed*/
-                                $http.get("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/review/" + response.trips[index].ownerUid)
+                                $http.get("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/review/" + response.trips[index].ownerUid)
                                 .success(function (res) {
                                     if (res.error) {
                                         response.trips[index].hasReview = false;    /*Is not reviewed*/
@@ -197,27 +239,11 @@
     });
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-    /*User Module - Login*/
-
-    /*Login*/
-    $scope.login = function () {
-        var modalInstance = $modal.open({
-            templateUrl: 'partials/login.html',
-            controller: 'LoginController'
-        });
-
-        modalInstance.result.then(function () {
-            $scope.isLoggedIn = true;
-            $window.location.reload();
-        });
-    };
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Favorites Module*/
 
     /*Get Favorites*/
     $scope.getFavorite = function () {
-        $http.get("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/favorite")
+        $http.get("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/favorite")
         .success(function (response) {
             console.log(response);
         })
@@ -228,7 +254,7 @@
 
     /*Add to favorite click*/
     $scope.addFavorite = function (index) {
-        $http.post("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/favorite/" + $scope.searchResults[index].ownerUid + "/add")
+        $http.post("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/favorite/" + $scope.searchResults[index].ownerUid + "/add")
         .success(function (response) {
             $scope.searchResults[index].isFavorite = true;
         })
@@ -239,7 +265,7 @@
 
     /*Remove from favorite click*/
     $scope.removeFavorite = function (index) {
-        $http.post("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/favorite/" + $scope.searchResults[index].ownerUid + "/remove")
+        $http.post("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/favorite/" + $scope.searchResults[index].ownerUid + "/remove")
         .success(function (response) {
             $scope.searchResults[index].isFavorite = false;
         })
@@ -253,7 +279,7 @@
 
     /*Get Review*/
     $scope.getReview = function () {
-        $http.get("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/review")
+        $http.get("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/review")
         .success(function (response) {
             console.log(response);
         })
@@ -281,7 +307,7 @@
 
     /*Remove review click*/
     $scope.removeReview = function (index) {
-        $http.post("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/review/" + $scope.searchResults[index].ownerUid + "/remove")
+        $http.post("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/review/" + $scope.searchResults[index].ownerUid + "/remove")
         .success(function (response) {
             $scope.searchResults[index].hasReview = false;
         })

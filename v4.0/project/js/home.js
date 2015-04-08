@@ -65,7 +65,7 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module*/
 
-    /*CreateTrip click*/
+    /*Trip click*/
     $scope.trip = function () {
         $location.path('/trip');
     };
@@ -76,40 +76,21 @@
     /*Check if already logged in*/
     $scope.access_token = $cookieStore.get('access_token');
 
+    /*View My Profile*/
+    $scope.viewMyProfile = function () {
+        $location.path('/profile/' + $cookieStore.get('uid'));
+    };
+
     /*Login function*/
     $scope.login = function () {
-        //var modalInstance = $modal.open({
-        //    templateUrl: 'partials/login.html',
-        //    controller: 'LoginController'
-        //});
-
-        //modalInstance.result.then(function () {
-        //    $scope.access_token = $cookieStore.get('access_token');
-        //});
-
-        /*Temporary Login Bypass*/
-        var body = {
-            "client_id": "ext-adib-alwani",
-            "client_secret": "2EF3313BABACC399ED2618E437CF2",
-            "username": "alwani.a@husky.neu.edu",
-            "password": "#Gdmo0577",
-            "grant_type": "password",
-            "scope": "rtr"
-        };
-        
-        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-        delete $http.defaults.headers.common.Authorization;
-
-        $http.post("https://api-dev.car.ma:443/security/oauth/token/pw", $.param(body))
-        .success(function (response) {
-            $cookieStore.put('access_token', response.access_token);
-            $cookieStore.put('uid', response.uid);
-            $scope.access_token = $cookieStore.get('access_token');
-        })
-        .error(function (response) {
-            console.log(response);
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/login.html',
+            controller: 'LoginController'
         });
-        /*Temporary Login Bypass*/
+
+        modalInstance.result.then(function () {
+            $scope.access_token = $cookieStore.get('access_token');
+        });
     };
 
     /*Logout function*/

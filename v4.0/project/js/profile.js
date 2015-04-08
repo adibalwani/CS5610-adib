@@ -1,4 +1,67 @@
-﻿app.controller("ProfileController", function ($scope, $http, $routeParams, $modal, $location) {
+﻿app.controller("ProfileController", function ($scope, $http, $routeParams, $modal, $location, $cookieStore, $window) {
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Scroll Module*/
+
+    $scope.scrollTo = function (id) {
+        $('html, body').stop().animate({
+            scrollTop: $(id).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    }
+
+    // Closes the Responsive Menu on Menu Item Click
+    $('.navbar-collapse ul li a').click(function () {
+        $('.navbar-toggle:visible').click();
+    });
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Navigation Module*/
+
+    /*If logged in*/
+    $scope.access_token = $cookieStore.get('access_token');
+    if ($cookieStore.get('uid') == $routeParams.userId) {
+        $scope.myProfile = true;
+    }
+
+    /*Signup click - Redirect to signup page*/
+    $scope.signUp = function () {
+        $location.path('/signup');
+    };
+
+    /*Logo Click*/
+    $scope.goToHome = function () {
+        $location.path('/');
+    }
+
+    /*Login click*/
+    $scope.login = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/login.html',
+            controller: 'LoginController'
+        });
+
+        modalInstance.result.then(function () {
+            $window.location.reload();
+        });
+    };
+
+    /*My Trips click*/
+    $scope.trip = function () {
+        $location.path('/trip');
+    }
+
+    /*Logout function*/
+    $scope.logout = function () {
+        $cookieStore.remove('access_token');
+        $cookieStore.remove('uid');
+        $window.location.reload();
+    };
+
+    /*View My Profile*/
+    $scope.viewMyProfile = function () {
+        $location.path('/profile/' + $cookieStore.get('uid'));
+    };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Profile Module*/
@@ -90,7 +153,7 @@
     /*Review Module*/
 
     /*Get Review*/
-    $http.get("http://localhost:3000/v1/" + $routeParams.userId + "/review")
+    $http.get("http://carnet-adib.rhcloud.com/v1/" + $routeParams.userId + "/review")
     .success(function (response) {
 
         if (response.error) {
@@ -117,7 +180,7 @@
 
                 /*Get # of favorites for this reviewer*/
                 function getNumberOfFavorite(index) {
-                    $http.get("http://localhost:3000/v2/" + response[index].userId + "/favorite")
+                    $http.get("http://carnet-adib.rhcloud.com/v2/" + response[index].userId + "/favorite")
                     .success(function (res) {
                         if (res.error) {
                             response[index].reviewerNumberOfFavorite = "0";
@@ -132,7 +195,7 @@
 
                 /*Get # of reviews provided by this reviewer*/
                 function getNumberOfReview(index) {
-                    $http.get("http://localhost:3000/v2/" + response[index].userId + "/review")
+                    $http.get("http://carnet-adib.rhcloud.com/v2/" + response[index].userId + "/review")
                     .success(function (res) {
                         if (res.error) {
                             response[index].reviewerNumberOfReview = "0";
@@ -161,7 +224,7 @@
     /*Favorite Module*/
 
     /*Get this user's favorite*/
-    $http.get("http://localhost:3000/v1/" + $routeParams.userId + "/favorite")
+    $http.get("http://carnet-adib.rhcloud.com/v1/" + $routeParams.userId + "/favorite")
     .success(function (response) {
         console.log(response);
         if (response.error) {
@@ -175,7 +238,7 @@
     });
 
     /*Get who favors this user*/
-    $http.get("http://localhost:3000/v2/" + $routeParams.userId + "/favorite")
+    $http.get("http://carnet-adib.rhcloud.com/v2/" + $routeParams.userId + "/favorite")
     .success(function (response) {
         if (response.error) {
 

@@ -3,6 +3,11 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Login Module*/
 
+    /*Temporary login bypass*/
+    $scope.email = "adib.alwani@hotmail.com";
+    $scope.password = "adibalwani";
+    /*Temporary login bypass*/
+
     /*Login click*/
     $scope.login = function () {
         

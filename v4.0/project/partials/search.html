@@ -1,5 +1,47 @@
-﻿<!-- Search Section -->
-<section id="search" style="padding-top: 50px">
+﻿<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="" ng-click="goToHome()">CARNET</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="" ng-click="goToHome()"></a>
+                </li>
+                <li ng-hide="access_token">
+                    <a class="page-scroll" href="" ng-click="login()">Login</a>
+                </li>
+                <li ng-show="access_token">
+                    <a class="page-scroll" href="" ng-click="logout()">Logout</a>
+                </li>
+                <li ng-hide="access_token">
+                    <a class="page-scroll" href="" ng-click="signUp()">Sign Up</a>
+                </li>
+                <li ng-show="access_token">
+                    <a class="page-scroll" href="" ng-click="trip()">My Trips</a>
+                </li>
+                <li ng-show="access_token">
+                    <a class="page-scroll" href="" ng-click="viewMyProfile()">My Profile</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<!-- Search Section -->
+<section id="search">
     <div class="container">
 
         <div class="row">
@@ -110,15 +152,15 @@
                             <button class="hvr-sweep-to-top text-muted" ng-click="viewProfile($index)" style="background-color: lightgray; height: 100%; width: 100%">Profile</button>
                         </div>
                         <div class="col-md-4">
-                            <button ng-hide="isLoggedIn" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Review</button>
-                            <span ng-show="isLoggedIn">
+                            <button ng-hide="access_token" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Review</button>
+                            <span ng-show="access_token">
                                 <button ng-hide="result.hasReview" class="hvr-sweep-to-top text-muted" ng-click="addReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Add Review</button>
                                 <button ng-show="result.hasReview" class="hvr-sweep-to-top text-muted" ng-click="removeReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Remove Review</button>
                             </span>
                         </div>
                         <div class="col-md-4">
-                            <button ng-hide="isLoggedIn" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Favorite</button>
-                            <span ng-show="isLoggedIn">
+                            <button ng-hide="access_token" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Favorite</button>
+                            <span ng-show="access_token">
                                 <button ng-hide="result.isFavorite" class="hvr-sweep-to-top text-muted" ng-click="addFavorite($index)" style="background-color: lightgray; height: 100%; width: 100%">Add to Favorite</button>
                                 <button ng-show="result.isFavorite" class="hvr-sweep-to-top text-muted" ng-click="removeFavorite($index)" style="background-color: lightgray; height: 100%; width: 100%">Remove from Favorite</button>
                             </span>
