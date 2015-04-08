@@ -54,10 +54,10 @@ app.post('/v1/:userId/favorite/:userIdFavorite/add', function (req, res) {
     favoriteModel.find({ userId: req.params.userId, userIdFavorite: req.params.userIdFavorite }, function (err, data) {
         if (data.length == 0) {
             favorite.save(function () {
-                res.status(200).json(favorite);
+                res.json(favorite);
             });
         } else {
-            res.status(422).json({error: "User is already favorited"});
+            res.json({error: "User is already favorited"});
         }
     });
 });
@@ -66,9 +66,9 @@ app.post('/v1/:userId/favorite/:userIdFavorite/add', function (req, res) {
 app.post('/v1/:userId/favorite/:userIdFavorite/remove', function (req, res) {
     favoriteModel.remove({ userId: req.params.userId, userIdFavorite: req.params.userIdFavorite }, function (err, data) {
         if (data > 0) {
-            res.status(200).json({ message: "Successfully Removed" });
+            res.json({ message: "Successfully Removed" });
         } else {
-            res.status(404).json({ error: "No relationship found" });
+            res.json({ error: "No relationship found" });
         }
     });
 });
@@ -77,9 +77,9 @@ app.post('/v1/:userId/favorite/:userIdFavorite/remove', function (req, res) {
 app.get('/v1/:userId/favorite', function (req, res) {
     favoriteModel.find({ userId: req.params.userId }, function (err, data) {
         if (data.length > 0) {
-            res.status(200).json(data);
+            res.json(data);
         } else {
-            res.status(404).json({ error: "User has not favorited anyone" });
+            res.json({ error: "User has not favorited anyone" });
         }
     });
 });
@@ -88,9 +88,9 @@ app.get('/v1/:userId/favorite', function (req, res) {
 app.get('/v2/:userId/favorite', function (req, res) {
     favoriteModel.find({ userIdFavorite: req.params.userId }, function (err, data) {
         if (data.length > 0) {
-            res.status(200).json(data);
+            res.json(data);
         } else {
-            res.status(404).json({ error: "User has not been favorited by anyone" });
+            res.json({ error: "User has not been favorited by anyone" });
         }
     });
 });
@@ -99,9 +99,9 @@ app.get('/v2/:userId/favorite', function (req, res) {
 app.get('/v1/:userId/favorite/:userIdFavorite', function (req, res) {
     favoriteModel.find({ userId: req.params.userId, userIdFavorite: req.params.userIdFavorite }, function (err, data) {
         if (data.length > 0) {
-            res.status(200).json(data);
+            res.json(data);
         } else {
-            res.status(404).json({ error: "User has not favored the other user" });
+            res.json({ error: "User has not favored the other user" });
         }
     });
 });
@@ -120,10 +120,10 @@ app.post('/v1/:userId/review/:userIdReview/add', function (req, res) {
     reviewModel.find({ userId: req.params.userId, userIdReview: req.params.userIdReview }, function (err, data) {
         if (data.length == 0) {
             review.save(function () {
-                res.status(200).json(review);
+                res.json(review);
             });
         } else {
-            res.status(422).json({ error: "User has already reviewed" });
+            res.json({ error: "User has already reviewed" });
         }
     });
 });
@@ -132,9 +132,9 @@ app.post('/v1/:userId/review/:userIdReview/add', function (req, res) {
 app.post('/v1/:userId/review/:userIdReview/remove', function (req, res) {
     reviewModel.remove({ userId: req.params.userId, userIdReview: req.params.userIdReview }, function (err, data) {
         if (data > 0) {
-            res.status(200).json({ message: "Successfully Removed" });
+            res.json({ message: "Successfully Removed" });
         } else {
-            res.status(404).json({ error: "No relationship found" });
+            res.json({ error: "No relationship found" });
         }
     });
 });
@@ -143,9 +143,9 @@ app.post('/v1/:userId/review/:userIdReview/remove', function (req, res) {
 app.get('/v1/:userId/review', function (req, res) {
     reviewModel.find({ userIdReview: req.params.userId }, function (err, data) {
         if (data.length > 0) {
-            res.status(200).json(data);
+            res.json(data);
         } else {
-            res.status(404).json({ error: "User has not been reviewed" });
+            res.json({ error: "User has not been reviewed" });
         }
     });
 });
@@ -154,9 +154,20 @@ app.get('/v1/:userId/review', function (req, res) {
 app.get('/v2/:userId/review', function (req, res) {
     reviewModel.find({ userId: req.params.userId }, function (err, data) {
         if (data.length > 0) {
-            res.status(200).json(data);
+            res.json(data);
         } else {
-            res.status(404).json({ error: "User has not reviewed anyone" });
+            res.json({ error: "User has not reviewed anyone" });
+        }
+    });
+});
+
+/*Check if userId has favored userIdFavorite*/
+app.get('/v1/:userId/review/:userIdReview', function (req, res) {
+    reviewModel.find({ userId: req.params.userId, userIdReview: req.params.userIdReview }, function (err, data) {
+        if (data.length > 0) {
+            res.json(data);
+        } else {
+            res.json({ error: "User has not reviewed the other user" });
         }
     });
 });

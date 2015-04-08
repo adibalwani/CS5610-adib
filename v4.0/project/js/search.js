@@ -116,7 +116,14 @@
 
                     $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($location.search().date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
                     .success(function (response) {
-                        console.log(response);
+
+                        /*Logged in*/
+                        if ($cookieStore.get('access_token')) {
+                            $scope.isLoggedIn = true;
+                        } else {
+                            $scope.isLoggedIn = false;
+                        }
+
                         for (var i in response.trips) {
                             /*Convert startMinutes to Hours and Minutes of Local Time*/
                             var hours = Math.floor(response.trips[i].schedule.startMinutes / 60);
@@ -142,29 +149,42 @@
                             response.trips[i].distance = Math.round(getMiles(response.trips[i].distance) * 10) / 10;
 
                             /*Favorite Logic*/
-                            if ($cookieStore.get('access_token')) {
-                                /*Logged in*/
-                                $scope.isLoggedIn = true;
+                            if ($scope.isLoggedIn) {    /*Logged in*/
                                 checkFavorite(i);
-                            } else {
-                                $scope.isLoggedIn = false;
+                            }
+
+                            /*Review Logic*/
+                            if ($scope.isLoggedIn) {    /*Logged in*/
+                                checkReview(i);
                             }
 
                             function checkFavorite(index) {
                                 /*Check if already favorited*/
                                 $http.get("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/favorite/" + response.trips[index].ownerUid)
                                 .success(function (res) {
-                                    $scope.searchResults = response.trips;
-                                    /*Is favorite*/
-                                    response.trips[index].isFavorite = true;
+                                    if (res.error) {
+                                        response.trips[index].isFavorite = false;   /*Is not favorite*/
+                                    } else {
+                                        response.trips[index].isFavorite = true;    /*Is favorite*/
+                                    }
                                 })
                                 .error(function (res, status) {
-                                    if (status == 404) {
-                                        /*Is not favorite*/
-                                        response.trips[index].isFavorite = false;
+                                    console.log(res);
+                                });
+                            };
+
+                            function checkReview(index) {
+                                /*Check if already reviewed*/
+                                $http.get("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/review/" + response.trips[index].ownerUid)
+                                .success(function (res) {
+                                    if (res.error) {
+                                        response.trips[index].hasReview = false;    /*Is not reviewed*/
                                     } else {
-                                        console.log(res);
+                                        response.trips[index].hasReview = true;     /*Is reviewed*/
                                     }
+                                })
+                                .error(function (res, status) {
+                                    console.log(res);
                                 });
                             };
 
@@ -177,7 +197,7 @@
     });
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-    /*Favorites Module*/
+    /*User Module - Login*/
 
     /*Login*/
     $scope.login = function () {
@@ -191,6 +211,9 @@
             $window.location.reload();
         });
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Favorites Module*/
 
     /*Get Favorites*/
     $scope.getFavorite = function () {
@@ -240,8 +263,8 @@
     }
 
     /*Add review click*/
-    $scope.viewReview = function (index) {
-        $modal.open({
+    $scope.addReview = function (index) {
+        var modalInstance = $modal.open({
             templateUrl: 'partials/review.html',
             controller: 'ReviewController',
             resolve: {
@@ -249,6 +272,21 @@
                     return $scope.searchResults[index].ownerUid;
                 }
             }
+        });
+
+        modalInstance.result.then(function () {
+            $scope.searchResults[index].hasReview = true;
+        });
+    };
+
+    /*Remove review click*/
+    $scope.removeReview = function (index) {
+        $http.post("http://localhost:3000/v1/" + $cookieStore.get('uid') + "/review/" + $scope.searchResults[index].ownerUid + "/remove")
+        .success(function (response) {
+            $scope.searchResults[index].hasReview = false;
+        })
+        .error(function (response) {
+            console.log(response);
         });
     };
 
@@ -259,5 +297,7 @@
     $scope.viewProfile = function (index) {
         $location.path('/profile/' + $scope.searchResults[index].ownerUid);
     };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
 
 });

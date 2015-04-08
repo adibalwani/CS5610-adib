@@ -12,7 +12,12 @@
             <div class="form-group">
                 <label class="col-lg-3 control-label">Phone Number:</label>
                 <div class="col-lg-8">
-                    <input ng-model="phoneNumber" class="form-control" type="text">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="fa"><img src="img/icons/united_states_of_america.png"/></span>
+                        </div>
+                        <input ng-model="phoneNumber" placeholder="(xxx) xxx-xxxx" class="form-control" type="tel">
+                    </div>
                 </div>
             </div>
         </form>
@@ -20,5 +25,5 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="sendText()">Send Text</button>
-    <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" style="background-color: red" ng-click="cancel()">Cancel</button>
 </div>

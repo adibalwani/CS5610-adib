@@ -5,43 +5,13 @@
 
     $http.get("https://api.car.ma:443/v2/users/" + $routeParams.userId + "?userFields=ALIAS%2CHOME_CITY%2CPHOTO_URL%2CREGISTRATION_TIME&&&client_id=ext-adib-alwani")
     .success(function (response) {
-        //console.log(response);
-        $scope.photoUrl = response.photoUrl;
-        $scope.alias = response.alias;
-        $scope.firstName = response.firstName;
-        $scope.homeCity = response.homeCity.name;
-        $scope.country = response.homeCity.country.name;
-
-        /*Epoch to Weeks before today*/
-        var registrationDate = new Date(response.registrationTime);
-        var today = new Date();
-        var timeDiff = Math.abs(today.getTime() - registrationDate.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        diffDays = Math.floor(diffDays / 7);    //weeks
-        $scope.registrationTime = diffDays;
-
+        setProfile(response);
     })
     .error(function (response, status) {
         if (status == 404) {
             $http.get("https://api-dev.car.ma:443/v2/users/" + $routeParams.userId + "?userFields=ALIAS%2CHOME_CITY%2CPHOTO_URL%2CREGISTRATION_TIME&&&client_id=ext-adib-alwani")
             .success(function (response) {
-                //console.log(response);
-                $scope.photoUrl = response.photoUrl;
-                $scope.alias = response.alias;
-                $scope.firstName = response.firstName;
-                if (response.homeCity) {
-                    $scope.homeCity = response.homeCity.name;
-                    $scope.country = response.homeCity.country.name;
-                }
-                
-                /*Epoch to Weeks before today*/
-                var registrationDate = new Date(response.registrationTime);
-                var today = new Date();
-                var timeDiff = Math.abs(today.getTime() - registrationDate.getTime());
-                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                diffDays = Math.floor(diffDays / 7);    //weeks
-                $scope.registrationTime = diffDays;
-
+                setProfile(response);
             })
             .error(function (response, status) {
                 console.log(response);
@@ -50,6 +20,24 @@
             console.log(response);
         }
     });
+
+    function setProfile(response) {
+        $scope.photoUrl = response.photoUrl;
+        $scope.alias = response.alias;
+        $scope.firstName = response.firstName;
+        if (response.homeCity) {
+            $scope.homeCity = response.homeCity.name;
+            $scope.country = response.homeCity.country.name;
+        }
+
+        /*Epoch to Weeks before today*/
+        var registrationDate = new Date(response.registrationTime);
+        var today = new Date();
+        var timeDiff = Math.abs(today.getTime() - registrationDate.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        diffDays = Math.floor(diffDays / 7);    //weeks
+        $scope.registrationTime = diffDays;
+    };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module*/
@@ -104,56 +92,65 @@
     /*Get Review*/
     $http.get("http://localhost:3000/v1/" + $routeParams.userId + "/review")
     .success(function (response) {
-        for (var i in response) {
-            $scope.review = response[i].review;
-            $scope.rating = response[i].rating;
 
-            /*Get Reviewer details*/
-            $http.get("https://api-dev.car.ma:443/v2/users/" + response[i].userId + "?userFields=ALIAS%2CHOME_CITY%2CPHOTO_URL%2CREGISTRATION_TIME&&&client_id=ext-adib-alwani")
-            .success(function (res) {
-                response[i].reviewer = res;
-            })
-            .error(function (res) {
-                console.log(res);
-            });
-
-            /*Get # of favorites for this reviewer*/
-            $http.get("http://localhost:3000/v2/" + response[i].userId + "/favorite")
-            .success(function (res) {
-                response[i].reviewerNumberOfFavorite = res.length;
-            })
-            .error(function (res, status) {
-                if (status == 404) {
-                    response[i].reviewerNumberOfFavorite = "0";
-                } else {
-                    console.log(res);
-                }
-                
-            });
-
-            /*Get # of reviews provided by this reviewer*/
-            $http.get("http://localhost:3000/v2/" + response[i].userId + "/review")
-            .success(function (res) {
-                response[i].reviewerNumberOfReview = res.length;
-            })
-            .error(function (res, status) {
-                if (status == 404) {
-                    response[i].reviewerNumberOfReview = "0";
-                } else {
-                    console.log(res);
-                }
-                
-            });
-
-        };
-        $scope.reviewResults = response;
-    })
-    .error(function (response, status) {
-        if (status == 404) {
+        if (response.error) {
             $scope.noReview = true;
         } else {
-            console.log(response);
+            for (var i in response) {
+                $scope.review = response[i].review;
+                $scope.rating = response[i].rating;
+
+                getReviewer(i);
+                getNumberOfFavorite(i);
+                getNumberOfReview(i);
+
+                /*Get Reviewer details*/
+                function getReviewer(index) {
+                    $http.get("https://api-dev.car.ma:443/v2/users/" + response[index].userId + "?userFields=ALIAS%2CHOME_CITY%2CPHOTO_URL%2CREGISTRATION_TIME&&&client_id=ext-adib-alwani")
+                    .success(function (res) {
+                        response[index].reviewer = res;
+                    })
+                    .error(function (res) {
+                        console.log(res);
+                    });
+                }
+
+                /*Get # of favorites for this reviewer*/
+                function getNumberOfFavorite(index) {
+                    $http.get("http://localhost:3000/v2/" + response[index].userId + "/favorite")
+                    .success(function (res) {
+                        if (res.error) {
+                            response[index].reviewerNumberOfFavorite = "0";
+                        } else {
+                            response[index].reviewerNumberOfFavorite = res.length;
+                        }
+                    })
+                    .error(function (res, status) {
+                        console.log(res);
+                    });
+                }
+
+                /*Get # of reviews provided by this reviewer*/
+                function getNumberOfReview(index) {
+                    $http.get("http://localhost:3000/v2/" + response[index].userId + "/review")
+                    .success(function (res) {
+                        if (res.error) {
+                            response[index].reviewerNumberOfReview = "0";
+                        } else {
+                            response[index].reviewerNumberOfReview = res.length;
+                        }
+                    })
+                    .error(function (res, status) {
+                        console.log(res);
+                    });
+                }
+
+            };
+            $scope.reviewResults = response;
         }
+    })
+    .error(function (response, status) {
+        console.log(response);
     });
 
     $scope.viewProfile = function (index) {
@@ -167,39 +164,42 @@
     $http.get("http://localhost:3000/v1/" + $routeParams.userId + "/favorite")
     .success(function (response) {
         console.log(response);
-        $scope.favoriteResults = response;
-    })
-    .error(function (response, status) {
-        if (status == 404) {
+        if (response.error) {
             $scope.noFavorite = true;
         } else {
-            console.log(response);
+            $scope.favoriteResults = response;
         }
+    })
+    .error(function (response, status) {
+        console.log(response);
     });
 
     /*Get who favors this user*/
     $http.get("http://localhost:3000/v2/" + $routeParams.userId + "/favorite")
     .success(function (response) {
-        console.log(response);
-        for (var i in response) {
-            /*Get who favors this user details*/
-            $http.get("https://api-dev.car.ma:443/v2/users/" + response[i].userId + "?userFields=PHOTO_URL&client_id=ext-adib-alwani")
-            .success(function (res) {
-                response[i].favorite = res;
-                console.log(response[i], "mine");
-            })
-            .error(function (res) {
-                console.log(res);
-            });
-        }
-        $scope.favoredResults = response;
-    })
-    .error(function (response, status) {
-        if (status == 404) {
+        if (response.error) {
 
         } else {
             console.log(response);
+            for (var i in response) {
+                getFavors(i);
+
+                function getFavors(index) {
+                    /*Get who favors this user details*/
+                    $http.get("https://api-dev.car.ma:443/v2/users/" + response[index].userId + "?userFields=PHOTO_URL&client_id=ext-adib-alwani")
+                    .success(function (res) {
+                        response[index].favorite = res;
+                    })
+                    .error(function (res) {
+                        console.log(res);
+                    });
+                }
+            }
+            $scope.favoredResults = response;
         }
+    })
+    .error(function (response, status) {
+        console.log(response);
     })
 
     /////////////////////////////////////////////////////////////////////////////////////////////////

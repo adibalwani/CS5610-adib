@@ -19,8 +19,8 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Commute from:" required>
-                                <div class="input-group-addon">
-                                    <img src="img/icons/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="locate()"><img src="img/icons/findIcon.png" alt="findIcon" width="15" height="18" /></button>
                                 </div>
                             </div>
                         </div>
@@ -36,8 +36,8 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Date" datepicker-popup="{{format}}" ng-model="date" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                                <div class="input-group-addon">
-                                    <span ng-click="open($event)" class="glyphicon glyphicon-calendar"></span>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="row" ng-repeat="result in searchResults" style="padding-bottom: 30px">
+        <div ng-repeat="result in searchResults" style="padding-bottom: 30px">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
@@ -110,7 +110,11 @@
                             <button class="hvr-sweep-to-top text-muted" ng-click="viewProfile($index)" style="background-color: lightgray; height: 100%; width: 100%">Profile</button>
                         </div>
                         <div class="col-md-4">
-                            <button class="hvr-sweep-to-top text-muted" ng-click="viewReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Review</button>
+                            <button ng-hide="isLoggedIn" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Review</button>
+                            <span ng-show="isLoggedIn">
+                                <button ng-hide="result.hasReview" class="hvr-sweep-to-top text-muted" ng-click="addReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Add Review</button>
+                                <button ng-show="result.hasReview" class="hvr-sweep-to-top text-muted" ng-click="removeReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Remove Review</button>
+                            </span>
                         </div>
                         <div class="col-md-4">
                             <button ng-hide="isLoggedIn" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Favorite</button>

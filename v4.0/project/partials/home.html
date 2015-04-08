@@ -66,8 +66,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Commute from:" required>
-                                    <div class="input-group-addon">
-                                        <img src="img/icons/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="locate()"><img src="img/icons/findIcon.png" alt="findIcon" width="15" height="18" /></button>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +83,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Date" datepicker-popup="{{format}}" ng-model="date" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                                    <div class="input-group-addon">
-                                        <span ng-click="open($event)" class="glyphicon glyphicon-calendar"></span>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </div>
                                 </div>
                             </div>
