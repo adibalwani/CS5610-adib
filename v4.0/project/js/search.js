@@ -166,7 +166,8 @@
 
                     $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($location.search().date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
                     .success(function (response) {
-                            for (var i in response.trips) {
+                        console.log(response);
+                        for (var i in response.trips) {
                             /*Convert startMinutes to Hours and Minutes of Local Time*/
                             var hours = Math.floor(response.trips[i].schedule.startMinutes / 60);
                             var minutes = response.trips[i].schedule.startMinutes % 60;
@@ -241,17 +242,6 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Favorites Module*/
 
-    /*Get Favorites*/
-    $scope.getFavorite = function () {
-        $http.get("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/favorite")
-        .success(function (response) {
-            console.log(response);
-        })
-        .error(function (response) {
-            console.log(response);
-        });
-    }
-
     /*Add to favorite click*/
     $scope.addFavorite = function (index) {
         $http.post("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/favorite/" + $scope.searchResults[index].ownerUid + "/add")
@@ -276,17 +266,6 @@
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Review Module*/
-
-    /*Get Review*/
-    $scope.getReview = function () {
-        $http.get("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/review")
-        .success(function (response) {
-            console.log(response);
-        })
-        .error(function (response) {
-            console.log(response);
-        });
-    }
 
     /*Add review click*/
     $scope.addReview = function (index) {

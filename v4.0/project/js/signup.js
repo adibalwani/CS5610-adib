@@ -1,4 +1,29 @@
-﻿app.controller("SignUpController", function ($scope, $http, $location) {
+﻿app.controller("SignUpController", function ($scope, $http, $location, $modal) {
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Navigation Module*/
+
+    /*Closes the Responsive Menu on Menu Item Click*/
+    $('.navbar-collapse ul li a').click(function () {
+        $('.navbar-toggle:visible').click();
+    });
+
+    /*Logo Click*/
+    $scope.goToHome = function () {
+        $location.path('/');
+    }
+
+    /*Login click*/
+    $scope.login = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/login.html',
+            controller: 'LoginController'
+        });
+
+        modalInstance.result.then(function () {
+            $location.path('/');
+        });
+    };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Register Module*/
@@ -15,7 +40,8 @@
             "password": $scope.password,
             "email": $scope.email,
             "gender": $scope.gender,
-            "firstName": $scope.firstName
+            "firstName": $scope.firstName,
+            "country": $scope.country
         };
 
         console.log(body);
@@ -30,8 +56,7 @@
         $http.post("https://api-dev.car.ma/v2/users/create?client_id=ext-adib-alwani&sendPhoneVerification=false&signature=" + hash, body)
         .success(function (response) {
             console.log(response);
-            var index_page = "http://localhost:61854/project/index.html#/access_token/";
-            $location.path("https://api-dev.car.ma/security/oauth/authorize?client_id=ext-adib-alwani&response_type=token&redirect_uri=" + index_page);
+            $location.path('/');
         })
         .error(function (response) {
             console.log(response);

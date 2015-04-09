@@ -60,7 +60,8 @@
                 <img ng-src="{{photoUrl}}" width="200" height="200" class="avatar img-thumbnail img-circle" alt="avatar">
             </div>
             <div class="intro-heading" style="font-size: 30px; margin-bottom: 0px; height: 20px;">{{alias}}</div>
-            <div class="intro-heading" style="font-size: 15px; margin-bottom: 0px; height: 40px;">{{homeCity}}, {{country}}</div>
+            <div ng-show="homeCity" class="intro-heading" style="font-size: 15px; margin-bottom: 0px; height: 40px;">{{homeCity}}, {{country}}</div>
+            <div ng-hide="homeCity" class="intro-heading" style="font-size: 15px; margin-bottom: 0px; height: 40px;"></div>
             <div class="intro-heading" style="font-size: 20px">
                 Want to carpool with {{firstName}}?
                 <a class="page-scroll btn btn-xl" style="padding: 7px 10px;" ng-click="download()">Download</a>
@@ -78,8 +79,16 @@
     <div class="container">
         <div class="row" style="padding-bottom: 10px">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">{{firstName}}'s Trips</h2>
+                <h2 ng-hide="myProfile" class="section-heading">{{firstName}}'s Trips</h2>
+                <h2 ng-show="myProfile" class="section-heading">Your Trips</h2>
             </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px" ng-show="noTrip">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 bg-light-gray text-center text-muted" style="height: 80px; line-height: 80px;">
+                <span style="vertical-align: middle; display: inline-block;">{{firstName}} has no trips scheduled</span>
+            </div>
+            <div class="col-md-3"></div>
         </div>
         <div class="row" ng-repeat="result in tripResults" style="padding-bottom: 20px">
             <div class="col-md-3"></div>
@@ -121,14 +130,14 @@
     <div class="container">
         <div class="row" style="padding-bottom: 10px">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">{{firstName}}'s Reviews</h2>
+                <h2 ng-hide="myProfile" class="section-heading">{{firstName}}'s Reviews</h2>
+                <h2 ng-show="myProfile" class="section-heading">Your Reviews</h2>
             </div>
         </div>
         <div class="row" style="padding-bottom: 20px" ng-show="noReview">
-            <!-- Do when no review present -->
             <div class="col-md-3"></div>
-            <div class="col-md-6" style="height: 80px">
-                {{firstName}} has no reviews
+            <div class="col-md-6 text-center text-muted" style="height: 80px; line-height: 80px; background-color: white">
+                <span style="vertical-align: middle; display: inline-block;">{{firstName}} has no reviews</span>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -160,38 +169,47 @@
     <div class="container">
         <div class="row" style="padding-bottom: 10px">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">{{firstName}}'s Favorites</h2>
+                <h2 ng-hide="myProfile" class="section-heading">{{firstName}}'s Favorites</h2>
+                <h2 ng-show="myProfile" class="section-heading">Your Favorites</h2>
             </div>
         </div>
-        <div class="row" style="padding-bottom: 20px" ng-show="noReview">
-            <!-- Do when no favorite     present -->
-            <div class="col-md-3"></div>
-            <div class="col-md-6" style="height: 80px">
-                {{firstName}} has no reviews
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-        <div class="row" ng-repeat="result in reviewResults" style="padding-bottom: 20px">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 bg-light-gray">
-                <div class="row">
-                    <div class="col-md-6 text-muted text-center" ng-show="noFavorite">
-                        <div>No Favorite</div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 text-center bg-light-gray text-muted">
+                <div style="height: 80px; line-height: 80px; border-bottom: thin solid black; font-size: 20px">
+                    <span style="vertical-align: middle; display: inline-block">{{firstName}}'s Favorite</span>
+                </div>
+                <div class="row text-center bg-light-gray text-muted" ng-show="noFavorite" style="height: 60px; line-height: 60px">
+                    <span style="vertical-align: middle; display: inline-block">{{firstName}} has no favorite user</span>
+                </div>
+                <div class="row" ng-repeat="result in favoriteResults" style="padding-top: 10px">
+                    <div>
+                        <img ng-src="{{result.favorite.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
                     </div>
-                    <div class="col-md-6 text-muted text-center" ng-repeat="favorite in favoriteResults">
-                        <div>
-                            <img ng-src="{{favorite.reviewer.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-muted text-center" ng-repeat="favored in favoredResults">
-                        <div>Blah Print</div>
-                        <div>
-                            <img ng-src="{{favored.favorite.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
-                        </div>
-                    </div>
+                    <div><a href="" ng-click="viewFavoriteProfile($index)">{{result.favorite.alias}}</a></div>
+                    <div>Favored by {{result.favoriteNumberOfFavorite}} people</div>
+                    <div># of reviews: {{result.favoriteNumberOfReview}}</div>
                 </div>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4 text-center bg-light-gray text-muted">
+                <div style="height: 80px; line-height: 80px; border-bottom: thin solid black; font-size: 20px">
+                    <span style="vertical-align: middle; display: inline-block">Who favors {{firstName}}</span>
+                </div>
+                <div class="row text-center bg-light-gray text-muted" ng-show="noFavors" style="height: 60px; line-height: 60px">
+                    <span style="vertical-align: middle; display: inline-block">{{firstName}} is not favored by any user</span>
+                </div>
+                <div class="row" ng-repeat="result in favoredResults" style="padding-top: 10px">
+                    <div>
+                        <img ng-src="{{result.favorite.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
+                    </div>
+                    <div><a href="" ng-click="viewFavoredProfile($index)">{{result.favorite.alias}}</a></div>
+                    <div>Favored by {{result.favoriteNumberOfFavorite}} people</div>
+                    <div># of reviews: {{result.favoriteNumberOfReview}}</div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
     </div>
 </section>
