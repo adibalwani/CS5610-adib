@@ -30,7 +30,7 @@
             $modalInstance.close();
         })
         .error(function (response) {
-            alert(response);
+            console.log(response);
         });
     };
 

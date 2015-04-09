@@ -66,6 +66,14 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Profile Module*/
 
+    //$http.defaults.headers.post["Content-Type"] = "application/json";
+    //if ($scope.access_token) {
+    //    $http.defaults.headers.common.Authorization = "Bearer " + $scope.access_token;
+    //} else {
+    //    delete $http.defaults.headers.common.Authorization;
+    //}
+    
+
     $http.get("https://api.car.ma:443/v2/users/" + $routeParams.userId + "?userFields=ALIAS%2CHOME_CITY%2CPHOTO_URL%2CREGISTRATION_TIME&&&client_id=ext-adib-alwani")
     .success(function (response) {
         setProfile(response);

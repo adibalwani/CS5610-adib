@@ -1,4 +1,4 @@
-﻿app.controller("HomeController", function ($scope, $location, $http, $modal, $cookieStore, $window) {
+﻿app.controller("HomeController", function ($scope, $location, $http, $modal, $cookieStore, $window, toaster) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Download Module*/
@@ -65,9 +65,16 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module*/
 
-    /*Trip click*/
-    $scope.trip = function () {
-        $location.path('/trip');
+    /*Create New Trip click*/
+    $scope.createTrip = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/createTrip.html',
+            controller: 'CreateTripController'
+        });
+
+        modalInstance.result.then(function () {
+            toaster.pop('success', "Trip Successfully Created", "");
+        });
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////

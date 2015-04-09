@@ -1,4 +1,4 @@
-﻿var app = angular.module('CarpoolApp', ['ngRoute', 'ngAutocomplete', 'ui.bootstrap', 'ngCookies']);
+﻿var app = angular.module('CarpoolApp', ['ngRoute', 'ngAutocomplete', 'ui.bootstrap', 'ngCookies', 'toaster']);
 
 app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider.

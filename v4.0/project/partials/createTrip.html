@@ -9,98 +9,75 @@
         </div>
 
         <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-3 text-center">
-                    <a href="" class="page-scroll btn btn-xl" ng-click="setRoundTrip()">Round trip</a>
+            <div class="row" style="text-align: right">
+                <div class="col-md-12">
+                    <code>All fields are mandatory</code>
                 </div>
-                <div class="col-lg-3 text-center">
-                    <a href="" class="page-scroll btn btn-xl" ng-click="setOneWayTrip()">One way</a>
-                </div>
-                <div class="col-lg-5"></div>
-                </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Title:</label>
-                <div class="col-lg-9">
-                    <input ng-model="title" placeholder="Enter a title:" class="form-control" type="text">
-                </div>
-                <div class="col-lg-1"></div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">From?</label>
-                <div class="col-lg-9">
+                <label class="col-md-2 control-label">Title:</label>
+                <div class="col-md-9">
+                    <input ng-model="title" placeholder="Enter a title:" class="form-control" type="text">
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">From?</label>
+                <div class="col-md-9">
                     <div class="input-group">
                         <input type="text" class="form-control" ng-autocomplete ng-model="origin" placeholder="Enter origin:">
-                        <div class="input-group-addon">
-                            <img src="img/icons/findIcon.png" alt="findIcon" width="15" height="20" ng-click="locate()" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" ng-click="locate()"><img src="img/icons/findIcon.png" alt="findIcon" width="15" height="18" /></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1"></div>
+                <div class="col-md-1"></div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">Where to?</label>
-                <div class="col-lg-9">
+                <label class="col-md-2 control-label">Where to?</label>
+                <div class="col-md-9">
                     <input type="text" class="form-control" ng-autocomplete ng-model="destination" placeholder="Enter destination:">
                 </div>
-                <div class="col-lg-1"></div>
+                <div class="col-md-1"></div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">Time</label>
-                <div class="col-lg-4">
-                    <timepicker ng-model="originTime" hour-step="1" minute-step="5" show-meridian="true"></timepicker>
+                <label class="col-md-2 control-label">When?</label>
+                <div class="col-md-4">
+                    <timepicker ng-model="originTime" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
                 </div>
-                <label class="col-lg-3 control-label" ng-show="roundTrip">Return time</label>
-                <div class="col-lg-4" ng-show="roundTrip">
-                    <timepicker ng-model="destinationTime" hour-step="1" minute-step="5" show-meridian="true"></timepicker>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-3 text-center">
-                        <a href="" class="page-scroll btn btn-xl" ng-click="setDriver()">Driver</a>
-                    </div>
-                    <div class="col-lg-3 text-center">
-                        <a href="" class="page-scroll btn btn-xl" ng-click="setRider()">Rider</a>
-                    </div>
-                    <div class="col-lg-5"></div>
+                <label class="col-md-1 control-label">Role:</label>
+                <div class="col-md-5">
+                    <input type="radio" name="role" id="driver" />
+                    <label for="driver"><button id="driverButton" ng-click="setDriver()" class="highlight"><img src="img/icons/steering_wheel.png" height="50" width="50" /><br />Driver</button></label>
+                    <input type="radio" name="role" id="rider" />
+                    <label for="rider"><button id="riderButton" ng-click="setRider()" class="supress"><img src="img/icons/rider.png" height="50" width="50" /><br />Rider</button></label>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-group">
-                    <div class="col-lg-1">
-                        <button ng-click="setSunday()">Sunday</button>
+                    <label class="col-md-3 control-label">Recurring days:</label>
+                    <div class="col-md-9">
+                        <input type="checkbox" id="sunday" />
+                        <label for="sunday"><button id="sundayButton" ng-click="setSunday()" class="supress">S</button></label>
+                        <input type="checkbox" id="monday" />
+                        <label for="monday"><button id="mondayButton" ng-click="setMonday()" class="highlight">M</button></label>
+                        <input type="checkbox" id="tuesday" />
+                        <label for="tuesday"><button id="tuesdayButton" ng-click="setTuesday()" class="highlight">T</button></label>
+                        <input type="checkbox" id="wednesday" />
+                        <label for="wednesday"><button id="wednesdayButton" ng-click="setWednesday()" class="highlight">W</button></label>
+                        <input type="checkbox" id="thursday" />
+                        <label for="thursday"><button id="thursdayButton" ng-click="setThursday()" class="highlight">T</button></label>
+                        <input type="checkbox" id="friday" />
+                        <label for="friday"><button id="fridayButton" ng-click="setFriday()" class="highlight">F</button></label>
+                        <input type="checkbox" id="saturday" />
+                        <label for="saturday"><button id="saturdayButton" ng-click="setSaturday()" class="supress">S</button></label>
                     </div>
-                    <div class="col-lg-1">
-                        <button ng-click="setMonday()">Monday</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button ng-click="setTuesday()">Tuesday</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button ng-click="setWednesday()">Wednesday</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button ng-click="setThursday()">Thursday</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button ng-click="setFriday()">Friday</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button ng-click="setSaturday()">Saturday</button>
-                    </div>
-                    <div class="col-lg-5"></div>
                 </div>
-            </div>
-            <div>
-                {{daysOfOperation[0]}}{{daysOfOperation[1]}}{{daysOfOperation[2]}}{{daysOfOperation[3]}}
-                {{daysOfOperation[4]}}{{daysOfOperation[5]}}{{daysOfOperation[6]}}{{driver}}
             </div>
         </form>
     </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="createTrip()">Create</button>
-    <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" style="background-color: red" ng-click="cancel()">Cancel</button>
 </div>

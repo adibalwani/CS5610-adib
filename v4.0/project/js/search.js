@@ -51,6 +51,21 @@
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
+    /*Trip Module*/
+
+    /*Create New Trip click*/
+    $scope.createTrip = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/createTrip.html',
+            controller: 'CreateTripController'
+        });
+
+        modalInstance.result.then(function () {
+            toaster.pop('success', "Trip Successfully Created", "");
+        });
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Search-Bar Module*/
 
     $scope.origin = $location.search().origin;
