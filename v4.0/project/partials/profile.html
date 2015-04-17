@@ -33,6 +33,9 @@
                 <li ng-show="access_token && !myProfile">
                     <a class="page-scroll" href="" ng-click="viewMyProfile()">My Profile</a>
                 </li>
+                <li ng-show="access_token && myProfile">
+                    <a class="page-scroll" href="" ng-click="createTrip()">Create Trip</a>
+                </li>
                 <li>
                     <a ng-hide="myProfile" class="page-scroll" href="" ng-click="scrollTo('#trip')">{{firstName}}'s Trips</a>
                     <a ng-show="myProfile" class="page-scroll" href="" ng-click="scrollTo('#trip')">My Trips</a>

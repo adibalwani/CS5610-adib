@@ -96,10 +96,10 @@
 
         <div ng-repeat="result in searchResults" style="padding-bottom: 30px">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <div class="row bg-light-gray" style="height: 120px">
-                        <div class="col-md-2" style="padding-top: 10px">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="row bg-light-gray">
+                        <div class="col-md-2" style="padding-top: 10px; padding-bottom: 10px">
                             <img ng-src="{{result.owner.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
                         </div>
                         <div class="col-md-5 text-muted" style="padding-top: 20px">
@@ -139,12 +139,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
             </div>
 
             <div class="row text-center">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-4">
                             <button class="hvr-sweep-to-top text-muted" ng-click="viewProfile($index)" style="background-color: lightgray; height: 100%; width: 100%">Profile</button>
@@ -165,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
             </div>
 
         </div>

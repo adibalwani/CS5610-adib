@@ -1,4 +1,4 @@
-﻿app.controller("SearchController", function ($scope, $http, $location, $modal, $cookieStore, $window) {
+﻿app.controller("SearchController", function ($scope, $http, $location, $modal, $cookieStore, $window, toaster) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Navigation Module*/
@@ -74,6 +74,24 @@
 
     /*Search click - set parameters and redirect*/
     $scope.search = function () {
+
+        /* Form Validation */
+        if (!$scope.origin || !$scope.destination || !$scope.date) {
+            var error = 'Provide ';
+            if (!$scope.origin) {
+                error += 'Origin / ';
+            }
+            if (!$scope.destination) {
+                error += 'Destination / ';
+            }
+            if (!$scope.date) {
+                error += 'Date / ';
+            }
+            error = error.substring(0, error.length - 3);
+            toaster.pop('warning', error, "");
+            return;
+        }
+
         $location.search('origin', $scope.origin);
         $location.search('destination', $scope.destination);
         $location.search('date', $scope.date);

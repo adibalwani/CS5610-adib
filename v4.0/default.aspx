@@ -12,96 +12,80 @@
 
     <meta charset='utf-8' />
 
-    <title>Demo Home Page</title>
+    <title>Adib Alwani Home</title>
 
-    <style type="text/css">
-        ul.master_navigation {
-            font-size: 100%;
-            font-weight: bold;
-            text-align: center;
-            list-style: none;
-            margin: 0.5em 0;
-            padding: 0;
-        }
-
-            ul.master_navigation li {
-                display: inline-block;
-                padding: 0 0.5%;
-            }
-
-        a {
-            color: #08f;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-            a:visited {
-                color: #88f;
-            }
-
-            a:hover {
-                color: #f00;
-            }
-
-        p {
-            text-align: justify;
-        }
-    </style>
-
-    <style type="text/css" media="screen">
-        body {
-            width: 900px;
-            max-width: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: azure;
-        }
-
-        .pad {
-            padding: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/my-bootstrap.css" />
 
 </head>
 
 <body>
 
-    <div class="pad">
+    <form id="form1" runat="server">
+        <div class="pad">
+            <ul class="master_navigation">
+                <li><a href="sitestatistics/" target="_blank">SiteStatistics</a></li>
+                <li><a href="statistics/" target="_blank">Statistics</a></li>
+                <li><a href="source/" target="_blank">Source</a></li>
+                <li><a href="search/" target="_blank">Search</a></li>
+                <li><a href="searchtree/" target="_blank">SearchTree</a></li>
+                <li><a href="textview/" target="_blank">TextView</a></li>
+                <li><a href="filelist.aspx" target="_blank">FileList</a></li>
+                <li><a href="autofile.aspx" target="_blank">AutoFile</a></li>
+                <li><a href="images/autoimage.aspx" target="_blank">Images</a></li>
+                <li><a href="blog/" target="_blank">Blog</a></li>
+                <li><a href="story/index.htm?../experiments/story.txt" target="_blank">Experiments</a></li>
+                <li><a href="project/" target="_blank">Project</a></li>
+                <li><a href="project/" target="_blank">Project Documentation</a></li>
+                <li><a href="https://github.com/adibalwani/CS5610-adib" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </form>
 
-        <form id="form1" runat="server">
 
-            <div>
-
-                <ul class="master_navigation">
-                    <li><a href="sitestatistics/" target="_blank">SiteStatistics</a></li>
-                    <li><a href="statistics/" target="_blank">Statistics</a></li>
-                    <li><a href="source/" target="_blank">Source</a></li>
-                    <li><a href="search/" target="_blank">Search</a></li>
-                    <li><a href="searchtree/" target="_blank">SearchTree</a></li>
-                    <li><a href="textview/" target="_blank">TextView</a></li>
-                    <li><a href="filelist.aspx" target="_blank">FileList</a></li>
-                    <li><a href="autofile.aspx" target="_blank">AutoFile</a></li>
-                    <li><a href="images/autoimage.aspx" target="_blank">Images</a></li>
-                    <li><a href="blog/" target="_blank">Blog</a></li>
-                    <li><a href="story/index.htm?../experiments/story.txt" target="_blank">Experiments</a></li>
-                    <li><a href="project/" target="_blank">Project</a></li>
-                    <li><a href="project/" target="_blank">Project Documentation</a></li>
-                    <li><a href="https://github.com/adibalwani/CS5610-adib" target="_blank">GitHub</a></li>
-                </ul>
-
-                <hr />
-                <img src="images/myphoto.JPG" width="300px" height="300px" />
-                <p>
-                    <b>My name is Adib Alwani. I am looking forward to learn new technologies and
-                        enhance my progamming skills.
-                    </b>
-                </p>
-
-            </div>
-
-        </form>
-
+    <div class="reset">
+        <div class="col-4"><p class="inherit"></p></div>
+        <div class="col-4">
+            <h1>ADIB ALWANI</h1>
+            <h4>Northeastern University</h4>
+        </div>
     </div>
+
+    <div class="row reset">
+        <div class="col-4"><p class="inherit"></p></div>
+        <div class="col-4"><img src="images/myphoto.JPG" class="inherit" /></div>
+    </div>
+
+    <div class="row reset">
+        <div class="col-4"><p class="inherit"></p></div>
+        <div class="col-4">
+                Candidate for a Masters of Science in Computer Science at Northeastern University, Boston. 
+                This website is developed for the course CS5610 - Web Development under the guidance of 
+                Prof. Jose Annunziato. In this course, I got an indepth, hands-on experience on JavaScript 
+                frameworks especially frontend development framework - AngularJS
+        </div>
+    </div>
+
+    <div class="reset"></div>
+
+    <div class="footer">
+        <div class="col-5"><p class="inherit"></p></div>
+        <ul class="social-buttons col-2">
+            <li class="float">
+                <a href="https://www.facebook.com/adib.alwani" target="_blank"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li class="float">
+                <a href="https://github.com/adibalwani/CS5610-adib" target="_blank"><i class="fa fa-github"></i></a>
+            </li>
+            <li class="float">
+                <a href="https://www.linkedin.com/in/adibalwani" target="_blank"><i class="fa fa-linkedin"></i></a>
+            </li>
+        </ul>
+        <div class="copyright reset">&copy; Adib Alwani - Northeastern University</div>
+    </div>
+
+    <div class="reset"></div>
 
     <!-- hitwebcounter Code START -->
     <a href="http://www.hitwebcounter.com/htmltutorial.php" target="_blank">

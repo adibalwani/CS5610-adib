@@ -1,4 +1,4 @@
-﻿app.controller("CreateTripController", function ($scope, $http, $modalInstance, $location, $cookieStore) {
+﻿app.controller("CreateTripController", function ($scope, $http, $modalInstance, $location, $cookieStore, toaster) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Trip Module - create*/
@@ -96,6 +96,35 @@
     /*Create New Trip click*/
     $scope.createTrip = function () {
         
+        /* Validation */
+        if ($scope.title == null || $scope.title == "") {
+            $scope.fail = true;
+            $scope.failMessage = "Provide Title";
+            return;
+        } else if ($scope.origin == null || $scope.origin == "") {
+            $scope.fail = true;
+            $scope.failMessage = "Provide Origin Location";
+            return;
+        } else if ($scope.destination == null || $scope.destination == "") {
+            $scope.fail = true;
+            $scope.failMessage = "Provide Destination Location";
+            return;
+        } else {
+            var day = false;
+            for (var i in $scope.daysOfOperation) {
+                if ($scope.daysOfOperation[i]) {
+                    day = true;
+                }
+            }
+            if (!day) {
+                $scope.fail = true;
+                $scope.failMessage = "Provide a valid day";
+                return;
+            }
+        }
+
+        $scope.fail = false;
+
         new google.maps.Geocoder().geocode({ 'address': $scope.origin }, function (results, status) {
             /*Origin address to LatLon*/
             if (status == google.maps.GeocoderStatus.OK) {
@@ -132,7 +161,6 @@
                                 "latitude": dest_latitude
                             }
                         };
-                        console.log(body);
 
                         $http.defaults.headers.post["Content-Type"] = "application/json";
                         $http.defaults.headers.common.Authorization = "Bearer " + $cookieStore.get('access_token');
@@ -141,8 +169,19 @@
                         .success(function (response) {
                             $modalInstance.close();
                         })
-                        .error(function (response) {
-                            console.log(response);
+                        .error(function (response, status) {
+                            if (status == 400 && response.errorCode == "distance_too_long") {
+                                $scope.fail = true;
+                                $scope.failMessage = "Provide a distance of less than 500 miles";
+                            } else if (status == 400 && response.errorCode == "distance_too_short") {
+                                $scope.fail = true;
+                                $scope.failMessage = "Provide a distance of more than 0.5 miles";
+                            } else if (status == 400 && response.errorCode == "duplicate_trip") {
+                                $scope.fail = true;
+                                $scope.failMessage = "Trip already exists";
+                            } else {
+                                console.log(response);
+                            }
                         })
                     }
                 });

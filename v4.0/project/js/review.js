@@ -9,6 +9,13 @@
     /*Submit click*/
     $scope.submit = function () {
 
+        /* Validation */
+        if ($scope.review == null || $scope.review == "") {
+            $scope.fail = true;
+            $scope.failMessage = "Provide review";
+            return;
+        }
+
         var body = {
             "review": $scope.review,
             "rating": $scope.rating

@@ -30,6 +30,30 @@
 
     $scope.sendEmail = function () {
 
+        /* Validate */
+        var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+
+        if($scope.email == null || $scope.email == "" || !emailFilter.test($scope.email) || $scope.email.match(illegalChars)) {
+            $scope.failEmail = "Provide a valid email address";
+        } else {
+            $scope.failEmail = false;
+        }
+
+        if ($scope.message == null || $scope.message == "") {
+            $scope.failMessage = "Provide your feedback";
+        } else {
+            $scope.failMessage = false;
+        }
+
+        if ($scope.failMessage || $scope.failEmail) {
+            return
+        }
+
+        if ($scope.phoneNumber != null || $scope.phoneNumber != "") {
+            sendText();
+        }
+
         var body = {
             "client_id": "ext-adib-alwani",
             "client_secret": "2EF3313BABACC399ED2618E437CF2",
@@ -49,13 +73,30 @@
 
             $http.post("https://api-dev.car.ma:443/v1/users/250110403/user-messages",
                 {
-                    "body": $scope.message + " " + $scope.email + " " + $scope.phone,
-                    "title": $scope.name,
+                    "body": "Message: " + $scope.message + " Email: " + $scope.email + " Phone: " + $scope.phoneNumber,
+                    "title": "Message from: " + $scope.name,
                     "messageType": "USER_TEXT"
                 })
             .success(function (response) {
-                alert("Thank You for your feedback");
+                toaster.pop('success', "Thank You for your feedback", "");
             })
+        })
+        .error(function (response) {
+            console.log(response);
+        });
+    }
+
+    /*Download link*/
+    function sendText() {
+        var body = {
+            "phoneNumber": $scope.phoneNumber,
+            "locale": "en_US",
+            "clientId": "ext-adib-alwani",
+            "country": "USA"
+        };
+
+        $http.post("https://api-dev.car.ma:443/v1/users/smsAppDownloadLinks?client_id=ext-adib-alwani", body)
+        .success(function (response) {
         })
         .error(function (response) {
             console.log(response);
@@ -117,6 +158,24 @@
 
     /*Search click - set parameters and redirect*/
     $scope.search = function () {
+
+        /* Form Validation */
+        if (!$scope.origin || !$scope.destination || !$scope.date) {
+            var error = 'Provide ';
+            if (!$scope.origin) {
+                error += 'Origin / ';
+            }
+            if (!$scope.destination) {
+                error += 'Destination / ';
+            }
+            if (!$scope.date) {
+                error += 'Date / ';
+            }
+            error = error.substring(0, error.length - 3);
+            toaster.pop('warning', error, "");
+            return;
+        }
+
         $location.search('origin', $scope.origin);
         $location.search('destination', $scope.destination);
         $location.search('date', $scope.date);

@@ -4,16 +4,17 @@
 <div class="modal-body">
     <div class="row">
         <div ng-show="fail" class="alert alert-info alert-dismissable">
-            <i class="fa fa-coffee"></i>
-            {{fail_msg}}
+            <i class="fa fa-exclamation-triangle"></i>
+            {{failMessage}}
         </div>
 
         <form class="form-horizontal" role="form">
             <div class="form-group">
                 <label class="col-lg-3 control-label">Review:</label>
-                <div class="col-lg-9">
-                    <textarea ng-model="review" placeholder="Your Review *" class="form-control"></textarea>
+                <div class="col-lg-8">
+                    <textarea ng-model="review" placeholder="Your Review *" class="form-control" style="resize: vertical"></textarea>
                 </div>
+                <div class="col-lg-1"></div>
             </div>
             <div class="form-group">
                 <label class="col-md-3 control-label">Rating:</label>

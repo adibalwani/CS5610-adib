@@ -1,4 +1,4 @@
-﻿app.controller("ProfileController", function ($scope, $http, $routeParams, $modal, $location, $cookieStore, $window) {
+﻿app.controller("ProfileController", function ($scope, $http, $routeParams, $modal, $location, $cookieStore, $window, toaster) {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /*Scroll Module*/
@@ -10,7 +10,7 @@
         event.preventDefault();
     }
 
-    // Closes the Responsive Menu on Menu Item Click
+    /* Closes the Responsive Menu on Menu Item Click */
     $('.navbar-collapse ul li a').click(function () {
         $('.navbar-toggle:visible').click();
     });
@@ -61,6 +61,21 @@
     /*View My Profile*/
     $scope.viewMyProfile = function () {
         $location.path('/profile/' + $cookieStore.get('uid'));
+    };
+
+    /*Create New Trip click*/
+    $scope.createTrip = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/createTrip.html',
+            controller: 'CreateTripController'
+        });
+
+        modalInstance.result.then(function () {
+            toaster.pop('success', "Trip Successfully Created", "");
+            setTimeout(function () {
+                $window.location.reload();
+            }, 2000);
+        });
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////

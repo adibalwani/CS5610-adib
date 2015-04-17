@@ -11,6 +11,19 @@
     /*Login click*/
     $scope.login = function () {
         
+        /* Validation */
+        if ($scope.email == "" || $scope.email == null) {
+            $scope.fail = true;
+            $scope.failMessage = "Provide a valid email address";
+            return;
+        } else if ($scope.password == "" || $scope.password == null) {
+            $scope.fail = true;
+            $scope.failMessage = "Provide a valid password";
+            return;
+        }
+
+        $scope.fail = false;
+
         var body = {
             "client_id": "ext-adib-alwani",
             "client_secret": "2EF3313BABACC399ED2618E437CF2",
@@ -29,8 +42,13 @@
             $cookieStore.put('uid', response.uid);
             $modalInstance.close();
         })
-        .error(function (response) {
-            console.log(response);
+        .error(function (response, status) {
+            if (status == 400 && response.error == "invalid_grant") {
+                $scope.fail = true;
+                $scope.failMessage = "Provide valid credentials";
+            } else {
+                console.log(response);
+            }
         });
     };
 

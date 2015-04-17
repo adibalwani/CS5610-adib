@@ -1,0 +1,314 @@
+﻿.reset {
+    clear: both;
+}
+
+.inherit {
+    height: inherit;
+    width: inherit;
+    text-align: center;
+}
+
+@media(max-width:400px) {
+    .row {
+        width: 252px;
+    }
+
+    .col-1 {
+        width: 21px;
+        float: left;
+    }
+
+    .col-2 {
+        width: 42px;
+        float: left;
+    }
+
+    .col-3 {
+        width: 63px;
+        float: left;
+    }
+
+    .col-4 {
+        width: 84px;
+        float: left;
+    }
+
+    .col-5 {
+        width: 105px;
+        float: left;
+    }
+
+    .col-6 {
+        width: 126px;
+        float: left;
+    }
+
+    .col-7 {
+        width: 147px;
+        float: left;
+    }
+
+    .col-8 {
+        width: 168px;
+        float: left;
+    }
+
+    .col-9 {
+        width: 189px;
+        float: left;
+    }
+
+    .col-10 {
+        width: 210px;
+        float: left;
+    }
+
+    .col-11 {
+        width: 231px;
+        float: left;
+    }
+}
+
+@media(min-width:401px) {
+    .row {
+        width: 552px;
+    }
+
+    .col-1 {
+        width: 46px;
+        float: left;
+    }
+
+    .col-2 {
+        width: 92px;
+        float: left;
+    }
+
+    .col-3 {
+        width: 138px;
+        float: left;
+    }
+
+    .col-4 {
+        width: 184px;
+        float: left;
+    }
+
+    .col-5 {
+        width: 230px;
+        float: left;
+    }
+
+    .col-6 {
+        width: 276px;
+        float: left;
+    }
+
+    .col-7 {
+        width: 322px;
+        float: left;
+    }
+
+    .col-8 {
+        width: 368px;
+        float: left;
+    }
+
+    .col-9 {
+        width: 414px;
+        float: left;
+    }
+
+    .col-10 {
+        width: 460px;
+        float: left;
+    }
+
+    .col-11 {
+        width: 506px;
+        float: left;
+    }
+}
+
+@media(min-width:553px) {
+    .row {
+        width: 768px;
+    }
+
+    .col-1 {
+        width: 64px;
+        float: left;
+    }
+
+    .col-2 {
+        width: 128px;
+        float: left;
+    }
+
+    .col-3 {
+        width: 192px;
+        float: left;
+    }
+
+    .col-4 {
+        width: 256px;
+        float: left;
+    }
+
+    .col-5 {
+        width: 320px;
+        float: left;
+    }
+
+    .col-6 {
+        width: 384px;
+        float: left;
+    }
+
+    .col-7 {
+        width: 448px;
+        float: left;
+    }
+
+    .col-8 {
+        width: 512px;
+        float: left;
+    }
+
+    .col-9 {
+        width: 576px;
+        float: left;
+    }
+
+    .col-10 {
+        width: 640px;
+        float: left;
+    }
+
+    .col-11 {
+        width: 704px;
+        float: left;
+    }
+}
+
+@media(min-width:769px) {
+    .row {
+        width: 996px;
+    }
+
+    .col-1 {
+        width: 83px;
+        float: left;
+    }
+
+    .col-2 {
+        width: 166px;
+        float: left;
+    }
+
+    .col-3 {
+        width: 249px;
+        float: left;
+    }
+
+    .col-4 {
+        width: 332px;
+        float: left;
+    }
+
+    .col-5 {
+        width: 415px;
+        float: left;
+    }
+
+    .col-6 {
+        width: 498px;
+        float: left;
+    }
+
+    .col-7 {
+        width: 581px;
+        float: left;
+    }
+
+    .col-8 {
+        width: 664px;
+        float: left;
+    }
+
+    .col-9 {
+        width: 747px;
+        float: left;
+    }
+
+    .col-10 {
+        width: 830px;
+        float: left;
+    }
+
+    .col-11 {
+        width: 913px;
+        float: left;
+    }
+}
+
+@media(min-width:997px) {
+    .row {
+        width: 1200px;
+    }
+
+    .col-1 {
+        width: 100px;
+        float: left;
+    }
+
+    .col-2 {
+        width: 200px;
+        float: left;
+    }
+
+    .col-3 {
+        width: 300px;
+        float: left;
+    }
+
+    .col-4 {
+        width: 400px;
+        float: left;
+    }
+
+    .col-5 {
+        width: 500px;
+        float: left;
+    }
+
+    .col-6 {
+        width: 600px;
+        float: left;
+    }
+
+    .col-7 {
+        width: 700px;
+        float: left;
+    }
+
+    .col-8 {
+        width: 800px;
+        float: left;
+    }
+
+    .col-9 {
+        width: 900px;
+        float: left;
+    }
+
+    .col-10 {
+        width: 1000px;
+        float: left;
+    }
+
+    .col-11 {
+        width: 1100px;
+        float: left;
+    }
+}
