@@ -715,8 +715,20 @@
 		margin: 0 0 15px;
 	}
 }
-/*@media all and (max-width: 1024px){
-}*/
+@media all and (max-width: 1110px){
+    #header{
+		padding:2px 0 0;
+		height:90px;
+		overflow:hidden;
+		position:fixed;
+	}
+    #content{padding:0;}
+    .row{
+		width:100%;
+		background:#eaeaea;
+		padding:110px 0;
+	}
+}
 @media all and (max-width: 960px){
 	.center{
 		padding:0 10px;
