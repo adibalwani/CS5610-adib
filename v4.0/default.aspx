@@ -89,7 +89,7 @@
 								<div class="content">
 									<a class="imgHolder fullWidth"><img src="home_page/img/documentation.jpg" alt="" /></a>
 								</div>
-								<div class="readMore"><a target="_blank" href="story/index.htm?../project_documentation/story.txt" class="btn btnSmall"><span>Document?</span></a></div>
+								<div class="readMore"><a target="_blank" href="story/index.htm?../project_documentation/story.txt" class="btn btnSmall"><span>Document/Video?</span></a></div>
 							</div>
 						</article>
                         <article class="news oneThird">

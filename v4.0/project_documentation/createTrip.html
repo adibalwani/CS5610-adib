@@ -11,7 +11,34 @@
     <div class="container">
         <h1>Create Trip Page</h1>
         <p>
-            This creates a trip (schedule) using the supplied details.
+            This creates a trip (schedule) using the supplied details. The body portion for create Trip is as follows:
+            <span id="text">
+                <pre>
+            tripRegistrationDetails {
+            enabled (boolean): whether this trip is enabled or not. If disabled then the trip will not appear in searches or matches for other users.,
+            schedule (scheduleCreationDetails): the schedule for the trip which defines when the user goes on this trip.,
+            alias (string, optional): A trip alias that will be visible for the calling user (but nobody else).,
+            origin (tripLocation): the origin or start point of the trip.,
+            type (string) = ['DRIVE' or 'RIDE' or 'RIDE_OR_DRIVE' or 'CARMA']: the role the user plays in this trip, e.g. are they typically a driver a rider or are they willing to do both. The values for this can be RIDE, DRIVE or RIDE_OR_DRIVE.,
+            destination (tripLocation): the destination or end point of the trip.
+            }
+            boolean {
+            value (boolean, optional): the value
+            }
+            scheduleCreationDetails {
+            startTime (integer, optional): For ONE_OFF schedules, this is the time that the schedule is active (In milliseconds from the epoch). This field is only needed for ONE_OFF schedules.,
+            startMinutes (integer, optional): the start minutes of the trip in minutes past midnight in the local timezone. For example a start minutes of 480 would mean 8am. This field is only needed for REPEATING_WEEKLY schedules.,
+            daysOfOperation (boolean[]): A 7-element boolean array (Sun, Mon, ..., Sat) indicating whether the trip is active on that particular day. For example, a Mon-Fri work commute would have values [false, true, true, true, true, true, false]. This field is only needed for REPEATING_WEEKLY schedules.,
+            type (string) = ['REPEATING_WEEKLY' or 'ONE_OFF']: Type of the schedule, can be REPEATING_WEEKLY meaning it goes on the same days every week or ONE_OFF meaning it only goes on a single date.
+            }
+            tripLocation {
+            alias (string, optional): The alias of the location,
+            address (string, optional): The address,
+            longitude (number): The longitude,
+            latitude (number): The latitude
+            }
+                </pre>
+            </span>
         </p>
 
         <table class="table table-striped">

@@ -199,7 +199,12 @@
 
                     $http.get("https://api.car.ma:443/v2/trips/search?client_id=ext-adib-alwani&originLon=" + origin_longitude + "&originLat=" + origin_latitude + "&destinationLon=" + dest_longitude + "&destinationLat=" + dest_latitude + "&&&tripType=RIDE_OR_DRIVE&departureTimeStart=" + moment(new Date($location.search().date).getTime()).unix() + "&departureTimeEnd=-1&onlineSince=-1&originRadius=10000.0&destinationRadius=10000.0&searchBoxPaddingDistance=10000.0&&adherence=1.0&sortBy=START_TIME_ORIGIN_DISTANCE&pageNum=1&pageSize=20&tripFields=LOCATIONS%2CLOCATION_ADDRESSES%2CDISTANCE%2CSCHEDULE%2CESTIMATED_EARNINGCOST%2CUSER_ROLE&userFields=FULL_PUBLIC")
                     .success(function (response) {
-                        console.log(response);
+                        
+                        if (response.trips.length == 0) {
+                            $scope.noResults = true;
+                            return;
+                        }
+
                         for (var i in response.trips) {
                             /*Convert startMinutes to Hours and Minutes of Local Time*/
                             var hours = Math.floor(response.trips[i].schedule.startMinutes / 60);

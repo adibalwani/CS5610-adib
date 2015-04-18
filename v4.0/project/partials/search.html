@@ -94,6 +94,12 @@
             </div>
         </div>
 
+        <div class="row" ng-show="noResults">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 bg-light-gray text-center text-muted">No Search Results Found</div>
+            <div class="col-md-1"></div>
+        </div>
+
         <div ng-repeat="result in searchResults" style="padding-bottom: 30px">
             <div class="row">
                 <div class="col-md-1"></div>

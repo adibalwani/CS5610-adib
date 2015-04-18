@@ -16,12 +16,18 @@
 
             To create a new user account, the users/registerUser API endpoint must be used. Existing Carma app users may already have an account, and can skip this step, or create an account through the app.
 
-            A sample of user creation can be seen here.
-
             Following client authorization, a client that is looking to sign up new users should do so using 
             the “Register user” endpoint described here. As the endpoint perform registrations for new users and 
             we as a result do not have a user OAuth access token yet, client authentication is performed using 
             plain query parameters in the endpoint.
+        </p>
+        <p>
+            Some Carma API calls require a signature to be generated in order to identify the calling client. This is how to generate the signature:<br />
+
+            1. Hash the full url (the one matching the api documentation NOT one that may be rewritten), the portion of the body if applicable (e.g. for post/put) and your oauth client secret using SHA-256. The value to use for the body portion will vary per endpoint. For example on the create user endpoints it will be the email, whereas on the create user from facebook/vk.com endpoints it will be the external credentials e.g. the facebook/vk.com oauth token.<br />
+
+            2. Take the hex string representation of this hash and add it to the url as the signature query parameter e.g. url = url + ‘&signature=’ + hashSignature<br />
+            Note you should use the email address of the user being registered as the body portion when generating the signature.
         </p>
         <table class="table table-striped">
             <thead>

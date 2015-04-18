@@ -11,7 +11,18 @@
     <div class="container">
         <h1>Download App</h1>
         <p>
-            Request a text containing app download information to a telephone number.
+            Request a text containing app download information to a telephone number. The input format for 
+            body portion of the request is as follows:
+            <span id="text">
+                <pre>
+smsAppDownloadDetails {
+phoneNumber (string): The user's telephone number, without country code or leading zeroes.,
+locale (string, optional): the locale for the message e.g. en or en_US for use english, fr for french fr_CA for canadian french etc.,
+clientId (string, optional): the application ouath2 client id, This is not needed when requesting a download as it is part of the request path.,
+country (string): The user's country,in ISO2 OR ISO3 format e.g. USA for United States.
+} 
+                </pre>
+            </span>
         </p>
 
         <table class="table table-striped">
