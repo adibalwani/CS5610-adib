@@ -88,8 +88,13 @@
             toaster.pop('success', "Account Created Successfully", "");
             $location.path('/');
         })
-        .error(function (response) {
-            console.log(response);
+        .error(function (response, status) {
+            if (status == 406 && response.errorCode == "email_already_exists") {
+                $scope.fail = true;
+                $scope.failMessage = response.description;
+            } else {
+                console.log(response);
+            }
         });
 
     }

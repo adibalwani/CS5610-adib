@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Database Page</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Database Page</h1>
+        <p>
+            There are three databases at various domains I'm maintaining for my website. They are: <br />
+            1) Mongo Database hosted on http://carnet-adib.rhcloud.com that holds data for review and favorite. <br />
+            The schema for favorite collection is: <br />
+            <span id="text">
+                <pre>
+{
+    userId: String,
+    userIdFavorite: String
+}
+            </pre>
+            </span>
+            <br /> And the schema for review collection is: <br />
+            <span id="text">
+                <pre>
+{
+    userId: String,
+    userIdReview: String,
+    rating: String,
+    review: String
+}
+            </pre>
+            </span>
+            <br />
+            2) The second database is stored at https://api-dev.car.ma Thanks to carma for providing me the 
+            required space along with schema development support <br />
+            3) The third database is stored at https://api.car.ma This is the database I query for getting 
+            the search results<br />
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>OAUTH 2.0</h1>
+        <p>This is the Oauth 2.0 Password flow which allows to provide client application credentials 
+        and the user's login credentials and receive back an Oauth token for the user. This is only 
+        available to certain trusted clients. NOTE: Parameters with the type of form should be posted 
+        as part of the body in the application/x-www-form-urlencoded format.</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-lg-3">HTTP Status Code</th>
+                    <th class="col-lg-9">Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>Authentication was successful</td>
+                </tr>
+                <tr>
+                    <td>401</td>
+                    <td>Authentication failed</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            Carma APIs use OAuth 2.0 for authentication. Currently support the following 3 OAuth flows: <br />
+
+            1) Password (Resource Owner Password Credentials) <br />
+            2) Explicit (Authorization Code/Server Side Flow) <br />
+            3) Implicit (Client Side) <br />
+
+            The authentication page describes here how on the Carma development environment you can jump straight in and use the Password flow using an example application client to get access tokens and start calling the Carma APIs right away.
+
+            Each client application that is provided access by Carma will be given access to use one or more of the above 3 flows.
+
+            The Carma APIs currently support these scopes: <br />
+
+            1) rtr – This gives the permission to invoke the majority of the Carma Apis but excludes account creation <br />
+            2) rtr-restricted – This also gives permission to create user accounts <br />
+
+            For getting started this is the easiest one to use on development.
+
+            This allows you to obtain an access token directly for a user by providing both your client application credentials and the users credentials.
+
+            Your application will contain a login form which can then make a http request to the Carma Access token endpoint.
+
+            To do this you should make an x-www-form-urlencoded HTTP post request to https://api.car.ma/security/oauth/token
+        </p>
+        <h3>Snapshot</h3>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <img src="img/login.png" class="img-responsive" />
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <hr />
+        <br />
+        <p>The complete source of project is available at GitHub: <a href="https://github.com/adibalwani/CS5610-adib" target="_blank">Code</a></p>
+    </div>
+</body>
+</html>

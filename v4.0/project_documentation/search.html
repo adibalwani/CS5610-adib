@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Search Page</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Feature</h1>
+        <p>
+            This retrieves a list of trips according to the parameters that were supplied.
+
+            When a driver has set up a trip and is ready to carpool, and riders have similar travel requirements, the discovery API endpoints can be used to discover these matches.
+
+            The primary way to achieve this is through the /trip/tripMatches endpoint.
+
+            It is also possible to search for trips that match an origin and destination through trip/searchTrips.
+
+            Both of these search endpoints contain many filtering options including whether you want to find drivers, riders or both.
+
+            The driver can also use the Carma Crew endpoint to see other people they may want to take a trip with which includes nearby users, favourite users, and users the driver has booked with or messaged previously.
+        </p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-lg-3">HTTP Status Code</th>
+                    <th class="col-lg-9">Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>If the trip details were retrieved ok</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>invalid_location|The provided location was invalid</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Snapshot</h3>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <img src="img/search.png" class="img-responsive" />
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+        <hr />
+        <br />
+        <p>The complete source of project is available at GitHub: <a href="https://github.com/adibalwani/CS5610-adib" target="_blank">Code</a></p>
+    </div>
+</body>
+</html>

@@ -202,10 +202,6 @@
                 $scope.review = response[i].review;
                 $scope.rating = response[i].rating;
 
-                getReviewer(i);
-                getNumberOfFavorite(i);
-                getNumberOfReview(i);
-
                 /*Get Reviewer details*/
                 function getReviewer(index) {
                     $http.get("https://api-dev.car.ma:443/v2/users/" + response[index].userId + "?userFields=ALIAS%2CHOME_CITY%2CPHOTO_URL%2CREGISTRATION_TIME&&&client_id=ext-adib-alwani")
@@ -247,6 +243,9 @@
                     });
                 }
 
+                getReviewer(i);
+                getNumberOfFavorite(i);
+                getNumberOfReview(i);
             };
             $scope.reviewResults = response;
         }
@@ -269,9 +268,6 @@
             $scope.noFavorite = true;
         } else {
             for (var i in response) {
-                getFavorite(i);
-                getNumberOfFavorite(i);
-                getNumberOfReview(i);
 
                 /*Get this user's favorite details*/
                 function getFavorite(index) {
@@ -324,6 +320,9 @@
                     });
                 }
 
+                getFavorite(i);
+                getNumberOfFavorite(i);
+                getNumberOfReview(i);
             }
             $scope.favoriteResults = response;
         }
@@ -344,9 +343,6 @@
             $scope.noFavors = true;
         } else {
             for (var i in response) {
-                getFavors(i);
-                getNumberOfFavorite(i);
-                getNumberOfReview(i);
 
                 /*Get Details of favors*/
                 function getFavors(index) {
@@ -398,6 +394,10 @@
                         console.log(res);
                     });
                 }
+
+                getFavors(i);
+                getNumberOfFavorite(i);
+                getNumberOfReview(i);
             }
             $scope.favoredResults = response;
         }

@@ -224,16 +224,6 @@
                             /*Convert metres to miles*/
                             response.trips[i].distance = Math.round(getMiles(response.trips[i].distance) * 10) / 10;
 
-                            /*Favorite Logic*/
-                            if ($scope.access_token) {    /*Logged in*/
-                                checkFavorite(i);
-                            }
-
-                            /*Review Logic*/
-                            if ($scope.access_token) {    /*Logged in*/
-                                checkReview(i);
-                            }
-
                             function checkFavorite(index) {
                                 /*Check if already favorited*/
                                 $http.get("http://carnet-adib.rhcloud.com/v1/" + $cookieStore.get('uid') + "/favorite/" + response.trips[index].ownerUid)
@@ -263,6 +253,16 @@
                                     console.log(res);
                                 });
                             };
+
+                            /*Favorite Logic*/
+                            if ($scope.access_token) {    /*Logged in*/
+                                checkFavorite(i);
+                            }
+
+                            /*Review Logic*/
+                            if ($scope.access_token) {    /*Logged in*/
+                                checkReview(i);
+                            }
 
                         }
                         $scope.searchResults = response.trips;
