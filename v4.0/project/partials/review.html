@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label class="col-lg-3 control-label">Review:</label>
                 <div class="col-lg-8">
-                    <textarea ng-model="review" placeholder="Your Review *" class="form-control" style="resize: vertical"></textarea>
+                    <textarea ng-model="review" placeholder="Your Review *" class="form-control resize-vertical"></textarea>
                 </div>
                 <div class="col-lg-1"></div>
             </div>
@@ -27,5 +27,5 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="submit()">Submit</button>
-    <button class="btn btn-primary" style="background-color: red" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" id="cancel" ng-click="cancel()">Cancel</button>
 </div>

@@ -3,6 +3,235 @@
     z-index: 99999999;
 }
 
+/* Profile Background image */
+.profile-bg-image {
+    background-image: url(../img/profile_background.jpg);
+}
+
+/* Background Color */
+.bg-white {
+    background-color: white;
+}
+
+/* Rating */
+.rating {
+    text-align: right;
+    padding-top: 2px;
+}
+
+/* Review */
+.review {
+    text-align: left;
+}
+
+/* Favorite */
+.favorite {
+    height: 80px;
+    line-height: 80px;
+    border-bottom: thin solid black;
+    font-size: 20px;
+}
+
+.favorite span {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* Favors */
+.favor {
+    height: 60px;
+    line-height: 60px;
+}
+
+.favor span {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* Align Vertical */
+.align-vertical {
+    vertical-align: middle;
+}
+
+/* Disable resizing */
+.resize-none {
+    resize: none;
+}
+
+/* Disable resizing */
+.resize-vertical {
+    resize: vertical;
+}
+
+/* Add Padding - top, bottom */
+.padding-20-30 {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+/* Add Padding - top, bottom */
+.padding-120-none {
+    padding-top: 120px;
+}
+
+/* Add Padding - top, bottom */
+.padding-10-none {
+    padding-top: 10px;
+}
+
+/* Add Padding - top, bottom */
+.padding-17-none {
+    padding-top: 17px;
+}
+
+/* Add Padding - top, bottom */
+#padding-none-0 {
+    padding-bottom: 0px;
+}
+
+/* Add Padding - top, bottom */
+.padding-none-10 {
+    padding-bottom: 10px;
+}
+
+/* Add Padding - top, bottom */
+.padding-none-20 {
+    padding-bottom: 20px;
+}
+
+/* Add Padding - top, bottom */
+.padding-0-30 {
+    padding-top: 0px;
+    padding-bottom: 30px;
+}
+
+/* Add Padding - top, bottom */
+.padding-10-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Add Padding - top, bottom */
+.padding-20-0 {
+    padding-top: 20px;
+    padding-bottom: 0px;
+}
+
+/* Registration Time */
+.register-time {
+    height: 50px;
+    padding-top: 13px;
+}
+
+/* Alias Display */
+.alias {
+    color: black;
+    font-size: 20px;
+}
+
+/* Trip details */
+.trip-right-details {
+    padding-top: 10px;
+    text-align: right;
+}
+
+/* Profile Alias */
+#intro-heading-alias {
+    font-size: 30px;
+    margin-bottom: 0px;
+    height: 20px;
+}
+
+/* No Trip */
+.no-trip {
+    height: 80px;
+    line-height: 80px;
+}
+
+/* Add height */
+.add-height {
+    height: 80px;
+}
+
+/* No review */
+.no-review {
+    height: 80px;
+    line-height: 80px;
+    background-color: white
+}
+
+/* No Trip Username */
+.no-trip-username {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* Profile City */
+#intro-heading-city {
+    font-size: 15px;
+    margin-bottom: 0px;
+    height: 40px;
+}
+
+/* User role font */
+.userRole {
+    font-size: 12px;
+}
+
+/* Profile download */
+#intro-heading-download {
+    font-size: 20px;
+}
+
+/* Profile download Button */
+.profile-download-btn {
+    padding: 7px 10px;
+}
+
+/* HR line */
+.hr-line {
+    background-color: darkgrey;
+}
+
+/* Address */
+.origin-address {
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+/* Palevioletred color */
+.color-palevioletred {
+    color: palevioletred;
+}
+
+/* Red color */
+#cancel {
+    background-color: red;
+}
+
+/* Destination Address */
+.destination-address {
+    font-size: 15px;
+}
+
+/* Trip Details */
+.trip-details {
+    padding-top: 28px;
+    text-align: right;
+}
+
+/*  */
+.text-align-right {
+    text-align: right;
+}
+
+/* Sweep buttons */
+.sweep-button {
+    background-color: lightgray;
+    height: 100%;
+    width: 100%;
+}
+
 /* Sweep To Top Button*/
 .hvr-sweep-to-top {
     display: inline-block;

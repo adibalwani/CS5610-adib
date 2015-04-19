@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="row" style="padding-top:20px; padding-bottom: 30px">
+        <div class="row padding-20-30">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -100,29 +100,29 @@
             <div class="col-md-1"></div>
         </div>
 
-        <div ng-repeat="result in searchResults" style="padding-bottom: 30px">
+        <div ng-repeat="result in searchResults" class="padding-0-30">
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="row bg-light-gray">
-                        <div class="col-md-2" style="padding-top: 10px; padding-bottom: 10px">
+                        <div class="col-md-2 padding-10-10">
                             <img ng-src="{{result.owner.photoUrl}}" width="100" height="100" class="avatar img-circle" alt="avatar">
                         </div>
-                        <div class="col-md-5 text-muted" style="padding-top: 20px">
-                            <div style="color: black; font-size: 20px;">
-                                {{result.owner.alias}} <span class="text-muted" style="font-size: 12px">{{result.userRole}}</span>
+                        <div class="col-md-5 text-muted padding-20-0">
+                            <div class="alias">
+                                {{result.owner.alias}} <span class="text-muted userRole">{{result.userRole}}</span>
                             </div>
                             <div class="row">
                                 <div class="col-md-1">
-                                    <div class="col-md-1" style="background-color: darkgrey"></div>
+                                    <div class="col-md-1 hr-line"></div>
                                 </div>
-                                <div class="col-md-7" style="background-color: darkgrey"></div>
+                                <div class="col-md-7 hr-line"></div>
                                 <div class="col-md-4"></div>
                             </div>
-                            <div style="font-size: 15px; padding-top: 5px">{{result.origin.address}}</div>
-                            <div style="font-size: 15px"><span style="color: palevioletred">To:</span> {{result.destination.address}}</div>
+                            <div class="origin-address">{{result.origin.address}}</div>
+                            <div class="destination-address"><span class="color-palevioletred">To:</span> {{result.destination.address}}</div>
                         </div>
-                        <div class="col-md-5 text-muted" style="padding-top: 21px; text-align: right">
+                        <div class="col-md-5 text-muted trip-details">
                             <div>{{result.schedule.hours}}:{{result.schedule.minutes}} {{result.schedule.ampm}}</div>
                             <div>
                                 <span ng-show="{{result.schedule.daysOfOperation[0]}}"><b>S</b></span>
@@ -153,20 +153,20 @@
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-4">
-                            <button class="hvr-sweep-to-top text-muted" ng-click="viewProfile($index)" style="background-color: lightgray; height: 100%; width: 100%">Profile</button>
+                            <button class="hvr-sweep-to-top text-muted sweep-button" ng-click="viewProfile($index)">Profile</button>
                         </div>
                         <div class="col-md-4">
-                            <button ng-hide="access_token" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Review</button>
+                            <button ng-hide="access_token" class="hvr-sweep-to-top text-muted sweep-button" ng-click="login()">Review</button>
                             <span ng-show="access_token">
-                                <button ng-hide="result.hasReview" class="hvr-sweep-to-top text-muted" ng-click="addReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Add Review</button>
-                                <button ng-show="result.hasReview" class="hvr-sweep-to-top text-muted" ng-click="removeReview($index)" style="background-color: lightgray; height: 100%; width: 100%">Remove Review</button>
+                                <button ng-hide="result.hasReview" class="hvr-sweep-to-top text-muted sweep-button" ng-click="addReview($index)">Add Review</button>
+                                <button ng-show="result.hasReview" class="hvr-sweep-to-top text-muted sweep-button" ng-click="removeReview($index)">Remove Review</button>
                             </span>
                         </div>
                         <div class="col-md-4">
-                            <button ng-hide="access_token" class="hvr-sweep-to-top text-muted" ng-click="login()" style="background-color: lightgray; height: 100%; width: 100%">Favorite</button>
+                            <button ng-hide="access_token" class="hvr-sweep-to-top text-muted sweep-button" ng-click="login()">Favorite</button>
                             <span ng-show="access_token">
-                                <button ng-hide="result.isFavorite" class="hvr-sweep-to-top text-muted" ng-click="addFavorite($index)" style="background-color: lightgray; height: 100%; width: 100%">Add to Favorite</button>
-                                <button ng-show="result.isFavorite" class="hvr-sweep-to-top text-muted" ng-click="removeFavorite($index)" style="background-color: lightgray; height: 100%; width: 100%">Remove from Favorite</button>
+                                <button ng-hide="result.isFavorite" class="hvr-sweep-to-top text-muted sweep-button" ng-click="addFavorite($index)">Add to Favorite</button>
+                                <button ng-show="result.isFavorite" class="hvr-sweep-to-top text-muted sweep-button" ng-click="removeFavorite($index)">Remove from Favorite</button>
                             </span>
                         </div>
                     </div>
